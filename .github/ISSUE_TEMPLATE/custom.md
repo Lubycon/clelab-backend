@@ -1,5 +1,7 @@
 ---
-name: Custom issue template about: Custom issue template title: ''
+name: Custom issue template
+about: my custom issue template
+title: ''
 labels: ''
 assignees: ''
 
