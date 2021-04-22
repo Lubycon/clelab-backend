@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,9 @@ public class Curriculum extends BaseTimeEntity {
 
   @Column(name = "thumbnail", nullable = false)
   private String thumbnail;
+
+  @OneToOne(mappedBy = "curriculum", fetch = FetchType.LAZY)
+  private IntroSection introSection;
 
   @OneToMany(mappedBy = "curriculum", fetch = FetchType.LAZY)
   private List<Section> sections;
