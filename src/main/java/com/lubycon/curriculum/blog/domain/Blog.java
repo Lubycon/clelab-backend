@@ -1,6 +1,7 @@
-package com.lubycon.curriculum.curriculum.domain;
+package com.lubycon.curriculum.blog.domain;
 
 import com.lubycon.curriculum.base.domain.BaseTimeEntity;
+import com.lubycon.curriculum.curriculum.domain.Section;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class BlogLink extends BaseTimeEntity {
+public class Blog extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,7 @@ public class BlogLink extends BaseTimeEntity {
   private Section section;
 
   @Builder
-  public BlogLink(Long sectionId, String title, String link) {
+  public Blog(Long sectionId, String title, String link) {
     this.sectionId = sectionId;
     this.title = title;
     this.link = link;

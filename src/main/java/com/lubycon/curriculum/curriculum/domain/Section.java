@@ -1,6 +1,7 @@
 package com.lubycon.curriculum.curriculum.domain;
 
 import com.lubycon.curriculum.base.domain.BaseTimeEntity;
+import com.lubycon.curriculum.blog.domain.Blog;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Section extends BaseTimeEntity {
   private String description;
 
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
-  private List<BlogLink> links;
+  private List<Blog> links;
 
   @ManyToOne
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
