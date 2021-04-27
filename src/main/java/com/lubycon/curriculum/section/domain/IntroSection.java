@@ -1,6 +1,7 @@
-package com.lubycon.curriculum.curriculum.domain;
+package com.lubycon.curriculum.section.domain;
 
-import com.lubycon.curriculum.curriculum.model.IntroDescription;
+import com.lubycon.curriculum.curriculum.domain.Curriculum;
+import com.lubycon.curriculum.section.model.IntroDescription;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;

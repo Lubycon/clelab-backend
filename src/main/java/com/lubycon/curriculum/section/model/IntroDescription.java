@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.curriculum.model;
+package com.lubycon.curriculum.section.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

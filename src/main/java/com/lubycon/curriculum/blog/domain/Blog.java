@@ -1,7 +1,7 @@
 package com.lubycon.curriculum.blog.domain;
 
 import com.lubycon.curriculum.base.domain.BaseTimeEntity;
-import com.lubycon.curriculum.curriculum.domain.Section;
+import com.lubycon.curriculum.section.domain.Section;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
