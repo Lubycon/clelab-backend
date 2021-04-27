@@ -25,7 +25,7 @@ class CurriculumRepositoryTest extends RepositoryTest {
     assertThat(curriculum.getTitle()).isEqualTo("제목");
     assertThat(curriculum.getThumbnail()).isEqualTo("썸네일");
     assertThat(firstSection.getDescription()).isEqualTo("설명");
-    assertThat(introSection.getDescription().getPointDescription()).isEqualTo("핵심 설명");
+    assertThat(introSection.getDescription().getSummary()).isEqualTo("핵심 설명");
   }
 
 }

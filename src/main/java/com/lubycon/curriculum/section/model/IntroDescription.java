@@ -11,7 +11,7 @@ public class IntroDescription {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "point_description")
-  private String pointDescription;
+  @Column(name = "summary")
+  private String summary;
 
 }

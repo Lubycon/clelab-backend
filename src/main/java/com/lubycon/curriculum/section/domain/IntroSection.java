@@ -26,12 +26,9 @@ public class IntroSection {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "curriculum_id", updatable = false)
-  private Long curriculumId;
-
   @Embedded
   @AttributeOverrides({
-      @AttributeOverride(name = "pointDescription", column = @Column(name = "point_description")),
+      @AttributeOverride(name = "summary", column = @Column(name = "summary")),
       @AttributeOverride(name = "description", column = @Column(name = "description")),
   })
   private IntroDescription description;
