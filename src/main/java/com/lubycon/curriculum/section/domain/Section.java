@@ -23,16 +23,17 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Section extends BaseTimeEntity {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "curriculum_id", updatable = false)
-  private Long curriculumId;
-
   @Column(name = "description")
   private String description;
+
+  @Column(name = "order_by")
+  private Integer order;
 
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
   private List<Blog> links;
@@ -40,7 +41,6 @@ public class Section extends BaseTimeEntity {
   @ManyToOne
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
-
 
   @Builder
   public Section(String description) {
