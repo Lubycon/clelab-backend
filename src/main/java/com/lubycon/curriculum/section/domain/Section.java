@@ -35,6 +35,9 @@ public class Section extends BaseTimeEntity {
   @Column(name = "order_by")
   private Integer order;
 
+  @Column(name = "is_hide", nullable = false, columnDefinition = "boolean default false")
+  private boolean hide;
+
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
   private List<Blog> blogs;
 

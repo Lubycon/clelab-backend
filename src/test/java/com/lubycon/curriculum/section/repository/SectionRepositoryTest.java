@@ -19,7 +19,7 @@ class SectionRepositoryTest extends RepositoryTest {
   public void findById() {
     Section findSection = sectionRepository.findById(1L).get();
 
-    Blog findBlog = findSection.getLinks().get(0);
+    Blog findBlog = findSection.getBlogs().get(0);
     assertThat(findBlog.getTitle()).isEqualTo("제목");
     assertThat(findBlog.getLink()).isEqualTo("링크1");
   }
