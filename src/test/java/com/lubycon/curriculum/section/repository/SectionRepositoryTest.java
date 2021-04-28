@@ -1,10 +1,10 @@
-package com.lubycon.curriculum.curriculum.repository;
+package com.lubycon.curriculum.section.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.lubycon.curriculum.base.RepositoryTest;
-import com.lubycon.curriculum.curriculum.domain.BlogLink;
-import com.lubycon.curriculum.curriculum.domain.Section;
+import com.lubycon.curriculum.blog.domain.Blog;
+import com.lubycon.curriculum.section.domain.Section;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,9 @@ class SectionRepositoryTest extends RepositoryTest {
   public void findById() {
     Section findSection = sectionRepository.findById(1L).get();
 
-    BlogLink findBlogLink = findSection.getLinks().get(0);
-    assertThat(findBlogLink.getTitle()).isEqualTo("제목");
-    assertThat(findBlogLink.getLink()).isEqualTo("링크1");
+    Blog findBlog = findSection.getBlogs().get(0);
+    assertThat(findBlog.getTitle()).isEqualTo("제목");
+    assertThat(findBlog.getLink()).isEqualTo("링크1");
   }
 
 

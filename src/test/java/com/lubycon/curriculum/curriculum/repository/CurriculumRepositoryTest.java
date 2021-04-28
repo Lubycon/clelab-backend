@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.lubycon.curriculum.base.RepositoryTest;
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
-import com.lubycon.curriculum.curriculum.domain.IntroSection;
-import com.lubycon.curriculum.curriculum.domain.Section;
+import com.lubycon.curriculum.section.domain.IntroSection;
+import com.lubycon.curriculum.section.domain.Section;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class CurriculumRepositoryTest extends RepositoryTest {
     assertThat(curriculum.getTitle()).isEqualTo("제목");
     assertThat(curriculum.getThumbnail()).isEqualTo("썸네일");
     assertThat(firstSection.getDescription()).isEqualTo("설명");
-    assertThat(introSection.getDescription().getPointDescription()).isEqualTo("핵심 설명");
+    assertThat(introSection.getDescription().getSummary()).isEqualTo("핵심 설명");
   }
 
 }

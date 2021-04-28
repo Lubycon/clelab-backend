@@ -1,6 +1,8 @@
 package com.lubycon.curriculum.curriculum.domain;
 
 import com.lubycon.curriculum.base.domain.BaseTimeEntity;
+import com.lubycon.curriculum.section.domain.IntroSection;
+import com.lubycon.curriculum.section.domain.Section;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;

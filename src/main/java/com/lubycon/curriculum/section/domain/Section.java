@@ -1,6 +1,8 @@
-package com.lubycon.curriculum.curriculum.domain;
+package com.lubycon.curriculum.section.domain;
 
 import com.lubycon.curriculum.base.domain.BaseTimeEntity;
+import com.lubycon.curriculum.blog.domain.Blog;
+import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,24 +23,27 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Section extends BaseTimeEntity {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "curriculum_id", updatable = false)
-  private Long curriculumId;
-
   @Column(name = "description")
   private String description;
 
+  @Column(name = "order_by")
+  private Integer order;
+
+  @Column(name = "is_hide", nullable = false, columnDefinition = "boolean default false")
+  private boolean hide;
+
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
-  private List<BlogLink> links;
+  private List<Blog> blogs;
 
   @ManyToOne
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
-
 
   @Builder
   public Section(String description) {
