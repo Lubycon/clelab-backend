@@ -36,7 +36,7 @@ public class Section extends BaseTimeEntity {
   private Integer order;
 
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
-  private List<Blog> links;
+  private List<Blog> blogs;
 
   @ManyToOne
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
