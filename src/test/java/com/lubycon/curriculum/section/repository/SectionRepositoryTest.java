@@ -15,7 +15,6 @@ class SectionRepositoryTest extends RepositoryTest {
   @Autowired
   private SectionRepository sectionRepository;
 
-
   @Sql("/make-curriculum.sql")
   @DisplayName("findById() 테스트")
   @Test
@@ -27,5 +26,14 @@ class SectionRepositoryTest extends RepositoryTest {
     assertThat(findBlog.getLink()).isEqualTo("1번 섹션의 블로그 링크1");
   }
 
+  @Sql("/make-curriculum.sql")
+  @DisplayName("커리큘럼의 아이디와 순서로 해당하는 섹션을 찾을 수 있다.")
+  @Test
+  public void findByCurriculumIdAndOrderTest() {
+    Section findSection = sectionRepository.findByCurriculumIdAndOrder(1L, 1).get();
+
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 2번 섹션입니다.");
+  }
 
 }
