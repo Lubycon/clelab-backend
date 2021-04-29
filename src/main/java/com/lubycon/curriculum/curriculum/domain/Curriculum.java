@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,4 +41,13 @@ public class Curriculum extends BaseTimeEntity {
 
   @OneToMany(mappedBy = "curriculum", fetch = FetchType.LAZY)
   private List<Section> sections;
+
+  @Builder
+  public Curriculum(String title, String description, String thumbnail,
+      List<Section> sections) {
+    this.title = title;
+    this.description = description;
+    this.thumbnail = thumbnail;
+    this.sections = sections;
+  }
 }
