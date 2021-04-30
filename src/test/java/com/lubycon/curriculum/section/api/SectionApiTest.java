@@ -17,20 +17,20 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getSectionTest() throws Exception {
     // given
-    String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
 
     // when
-    final ResultActions resultActions = mockMvc.perform(get(url, 1, 1));
+    final ResultActions resultActions = mockMvc.perform(get(url, 1, 300));
 
     // then
     resultActions
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.title").value("1번 커리큘럼의 섹션2"))
-        .andExpect(jsonPath("$.order").value(1))
-        .andExpect(jsonPath("$.description").value("1번 커리큘럼의 2번 섹션입니다."))
-        .andExpect(jsonPath("$.blogs[0].title").value("2번 섹션의 블로그 제목1"))
-        .andExpect(jsonPath("$.nextSection").isEmpty())
-        .andExpect(jsonPath("$.prevSection.title").value("1번 커리큘럼의 섹션1"));
+        .andExpect(jsonPath("$.title").value("1번 커리큘럼의 섹션3"))
+        .andExpect(jsonPath("$.order").value(2))
+        .andExpect(jsonPath("$.description").value("1번 커리큘럼의 3번 섹션입니다."))
+        .andExpect(jsonPath("$.blogs[0].title").value("3번 섹션의 블로그 제목1"))
+        .andExpect(jsonPath("$.nextSection.title").value("1번 커리큘럼의 섹션4"))
+        .andExpect(jsonPath("$.prevSection.title").value("1번 커리큘럼의 섹션2"));
   }
 
 }
