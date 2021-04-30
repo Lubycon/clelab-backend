@@ -28,13 +28,13 @@ public class Section extends BaseTimeEntity {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "title")
+  @Column(name = "title", nullable = false)
   private String title;
 
   @Column(name = "description")
   private String description;
 
-  @Column(name = "order_by")
+  @Column(name = "order_by", nullable = false)
   private Integer order;
 
   @Column(name = "is_hide", nullable = false, columnDefinition = "boolean default false")

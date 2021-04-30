@@ -24,10 +24,10 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "title")
+  @Column(name = "title", nullable = false)
   private String title;
 
-  @Column(name = "link")
+  @Column(name = "link", nullable = false)
   private String link;
 
   @ManyToOne
