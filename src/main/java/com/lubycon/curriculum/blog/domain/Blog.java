@@ -24,13 +24,10 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "section_id")
-  private Long sectionId;
-
-  @Column(name = "title")
+  @Column(name = "title", nullable = false)
   private String title;
 
-  @Column(name = "link")
+  @Column(name = "link", nullable = false)
   private String link;
 
   @ManyToOne
@@ -38,9 +35,9 @@ public class Blog extends BaseTimeEntity {
   private Section section;
 
   @Builder
-  public Blog(Long sectionId, String title, String link) {
-    this.sectionId = sectionId;
+  public Blog(String title, String link, Section section) {
     this.title = title;
     this.link = link;
+    this.section = section;
   }
 }

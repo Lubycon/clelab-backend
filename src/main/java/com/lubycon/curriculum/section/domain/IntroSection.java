@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,4 +37,11 @@ public class IntroSection {
   @OneToOne
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
+
+  @Builder
+  public IntroSection(IntroDescription description,
+      Curriculum curriculum) {
+    this.description = description;
+    this.curriculum = curriculum;
+  }
 }

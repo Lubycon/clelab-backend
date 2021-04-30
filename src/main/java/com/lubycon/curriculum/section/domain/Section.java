@@ -23,16 +23,18 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Section extends BaseTimeEntity {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false)
   private Long id;
 
+  @Column(name = "title", nullable = false)
+  private String title;
+
   @Column(name = "description")
   private String description;
 
-  @Column(name = "order_by")
+  @Column(name = "order_by", nullable = false)
   private Integer order;
 
   @Column(name = "is_hide", nullable = false, columnDefinition = "boolean default false")
@@ -46,7 +48,11 @@ public class Section extends BaseTimeEntity {
   private Curriculum curriculum;
 
   @Builder
-  public Section(String description) {
+  public Section(String title, String description, Integer order,
+      Curriculum curriculum) {
+    this.title = title;
     this.description = description;
+    this.order = order;
+    this.curriculum = curriculum;
   }
 }
