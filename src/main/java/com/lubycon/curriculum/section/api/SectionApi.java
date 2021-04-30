@@ -14,11 +14,11 @@ public class SectionApi {
 
   private final SectionService sectionService;
 
-  @GetMapping("/curriculums/{curriculumId}/sections/{order}")
+  @GetMapping("/curriculums/{curriculumId}/sections/{sectionId}")
   public ResponseEntity<SectionResponse> getSection(
-      @PathVariable long curriculumId, @PathVariable int order) {
+      @PathVariable final long curriculumId, @PathVariable final long sectionId) {
 
     return ResponseEntity.ok()
-        .body(sectionService.findSection(curriculumId, order));
+        .body(sectionService.findSection(curriculumId, sectionId));
   }
 }
