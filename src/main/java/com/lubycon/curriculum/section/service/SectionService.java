@@ -18,10 +18,10 @@ public class SectionService {
   private final SectionRepository sectionRepository;
 
   @Transactional(readOnly = true)
-  public SectionResponse findSection(final long curriculumId, final int order) {
-    final Section section = findById(curriculumId, order);
-    final PrevSectionResponse prevSection = findPrevSection(curriculumId, order);
-    final NextSectionResponse nextSection = findNextSection(curriculumId, order);
+  public SectionResponse findSection(final long curriculumId, final long sectionId) {
+    final Section section = findById(curriculumId, sectionId);
+    final PrevSectionResponse prevSection = findPrevSection(curriculumId, section.getOrder());
+    final NextSectionResponse nextSection = findNextSection(curriculumId, section.getOrder());
 
     return SectionResponse.builder()
         .title(section.getTitle())
@@ -35,19 +35,19 @@ public class SectionService {
         .build();
   }
 
-  private Section findById(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndId(curriculumId, order)
+  private Section findById(final long curriculumId, final long sectionId) {
+    return sectionRepository.findByCurriculumIdAndId(curriculumId, sectionId)
         .orElseThrow(RuntimeException::new); // FIXME: 예외 바꾸기
   }
 
   private NextSectionResponse findNextSection(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndId(curriculumId, order + 1)
+    return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order + 1)
         .map(NextSectionResponse::fromEntity)
         .orElse(NextSectionResponse.empty());
   }
 
   private PrevSectionResponse findPrevSection(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndId(curriculumId, order - 1)
+    return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order - 1)
         .map(PrevSectionResponse::fromEntity)
         .orElse(PrevSectionResponse.empty());
   }
