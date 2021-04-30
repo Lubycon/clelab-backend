@@ -25,9 +25,10 @@ class SectionServiceTest {
     SectionResponse findSection = sectionService.findSection(1, 1);
 
     // then
-    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션1");
-    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 1번 섹션입니다.");
-    assertThat(findSection.getBlogs().get(0).getTitle()).isEqualTo("1번 섹션의 블로그 제목1");
-    assertThat(findSection.getNextSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 2번 섹션입니다.");
+    assertThat(findSection.getBlogs().get(0).getTitle()).isEqualTo("2번 섹션의 블로그 제목1");
+    assertThat(findSection.getPrevSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션1");
+    assertThat(findSection.getNextSection()).isNull();
   }
 }

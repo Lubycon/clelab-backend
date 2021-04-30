@@ -1,16 +1,26 @@
 package com.lubycon.curriculum.section.dto;
 
 import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class SectionResponse {
 
-  private String title;
-  private String description;
-  private List<BlogResponse> blogs;
-  private NextSectionResponse nextSection;
-  private PrevSectionResponse prevSection;
+  private final String title;
+  private final String description;
+  private final List<BlogResponse> blogs;
+  private final NextSectionResponse nextSection;
+  private final PrevSectionResponse prevSection;
+
+  @Builder
+  public SectionResponse(String title, String description,
+      List<BlogResponse> blogs, NextSectionResponse nextSection,
+      PrevSectionResponse prevSection) {
+    this.title = title;
+    this.description = description;
+    this.blogs = blogs;
+    this.nextSection = nextSection;
+    this.prevSection = prevSection;
+  }
 }
