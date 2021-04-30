@@ -26,6 +26,7 @@ public class SectionService {
     return SectionResponse.builder()
         .title(section.getTitle())
         .description(section.getDescription())
+        .order(section.getOrder())
         .blogs(section.getBlogs().stream()
             .map(BlogResponse::new)
             .collect(Collectors.toList()))
