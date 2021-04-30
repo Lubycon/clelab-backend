@@ -36,18 +36,18 @@ public class SectionService {
   }
 
   private Section findById(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order)
+    return sectionRepository.findByCurriculumIdAndId(curriculumId, order)
         .orElseThrow(RuntimeException::new); // FIXME: 예외 바꾸기
   }
 
   private NextSectionResponse findNextSection(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order + 1)
+    return sectionRepository.findByCurriculumIdAndId(curriculumId, order + 1)
         .map(NextSectionResponse::fromEntity)
         .orElse(NextSectionResponse.empty());
   }
 
   private PrevSectionResponse findPrevSection(final long curriculumId, final int order) {
-    return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order - 1)
+    return sectionRepository.findByCurriculumIdAndId(curriculumId, order - 1)
         .map(PrevSectionResponse::fromEntity)
         .orElse(PrevSectionResponse.empty());
   }
