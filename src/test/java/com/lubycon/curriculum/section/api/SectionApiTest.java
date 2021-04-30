@@ -26,6 +26,7 @@ class SectionApiTest extends ApiTest {
     resultActions
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.title").value("1번 커리큘럼의 섹션2"))
+        .andExpect(jsonPath("$.order").value(1))
         .andExpect(jsonPath("$.description").value("1번 커리큘럼의 2번 섹션입니다."))
         .andExpect(jsonPath("$.blogs[0].title").value("2번 섹션의 블로그 제목1"))
         .andExpect(jsonPath("$.nextSection").isEmpty())
