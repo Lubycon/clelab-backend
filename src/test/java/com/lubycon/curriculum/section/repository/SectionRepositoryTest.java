@@ -19,21 +19,31 @@ class SectionRepositoryTest extends RepositoryTest {
   @DisplayName("findById() 테스트")
   @Test
   public void findById() {
-    Section findSection = sectionRepository.findById(1L).get();
+    final Section findSection = sectionRepository.findById(1L).get();
 
-    Blog findBlog = findSection.getBlogs().get(0);
+    final Blog findBlog = findSection.getBlogs().get(0);
     assertThat(findBlog.getTitle()).isEqualTo("1번 섹션의 블로그 제목1");
     assertThat(findBlog.getLink()).isEqualTo("1번 섹션의 블로그 링크1");
   }
 
   @Sql("/make-curriculum.sql")
-  @DisplayName("커리큘럼의 아이디와 순서로 해당하는 섹션을 찾을 수 있다.")
+  @DisplayName("커리큘럼의 아이디와 섹션 아이디로 해당하는 섹션을 찾을 수 있다.")
+  @Test
+  public void findByCurriculumIdAndSectionIdTest() {
+    final Section findSection = sectionRepository.findByCurriculumIdAndId(1L, 300L).get();
+
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 3번 섹션입니다.");
+  }
+
+  @Sql("/make-curriculum.sql")
+  @DisplayName("커리큘럼의 아이디와 정렬 순서로 해당하는 섹션을 찾을 수 있다.")
   @Test
   public void findByCurriculumIdAndOrderTest() {
-    Section findSection = sectionRepository.findByCurriculumIdAndOrder(1L, 1).get();
+    final Section findSection = sectionRepository.findByCurriculumIdAndOrder(1L, 2).get();
 
-    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
-    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 2번 섹션입니다.");
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 3번 섹션입니다.");
   }
 
 }
