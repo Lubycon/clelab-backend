@@ -2,22 +2,27 @@ package com.lubycon.curriculum.section.dto;
 
 import com.lubycon.curriculum.section.domain.Section;
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public class NextSectionResponse {
 
-  private final long id;
+  @Nullable
+  private final Long id;
 
-  @NotNull
+  @Nullable
   private final String title;
 
-  private NextSectionResponse(long id, @NotNull String title) {
+  public NextSectionResponse(@Nullable final Long id, @Nullable final String title) {
     this.id = id;
     this.title = title;
   }
 
-  public static NextSectionResponse fromEntity(Section section) {
+  public static NextSectionResponse fromEntity(final Section section) {
     return new NextSectionResponse(section.getId(), section.getTitle());
+  }
+
+  public static NextSectionResponse empty() {
+    return new NextSectionResponse(null, null);
   }
 }
