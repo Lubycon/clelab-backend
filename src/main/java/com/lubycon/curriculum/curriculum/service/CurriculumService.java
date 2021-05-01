@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -14,6 +15,7 @@ public class CurriculumService {
 
   private final CurriculumRepository curriculumRepository;
 
+  @Transactional(readOnly = true)
   public List<CurriculumResponse> getCurriculums() {
     return findAll()
         .stream()
