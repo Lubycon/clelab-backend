@@ -43,12 +43,12 @@ public class SectionService {
   private NextSectionResponse findNextSection(final long curriculumId, final int order) {
     return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order + 1)
         .map(NextSectionResponse::fromEntity)
-        .orElse(NextSectionResponse.empty());
+        .orElse(null);
   }
 
   private PrevSectionResponse findPrevSection(final long curriculumId, final int order) {
     return sectionRepository.findByCurriculumIdAndOrder(curriculumId, order - 1)
         .map(PrevSectionResponse::fromEntity)
-        .orElse(PrevSectionResponse.empty());
+        .orElse(null);
   }
 }
