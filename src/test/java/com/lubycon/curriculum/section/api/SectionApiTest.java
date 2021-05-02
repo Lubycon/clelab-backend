@@ -33,4 +33,25 @@ class SectionApiTest extends ApiTest {
         .andExpect(jsonPath("$.prevSection.title").value("1번 커리큘럼의 섹션2"));
   }
 
+  @Sql("/make-curriculum.sql")
+  @DisplayName("특정 커리큘럼의 섹션들을 가져온다.")
+  @Test
+  public void getAllSections() throws Exception {
+    // given
+    final String url = "/curriculums/{curriculumId}/sections";
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(get(url, 1));
+
+    // then
+    resultActions
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.curriculum.title").value("1번 커리큘럼의 제목"))
+        .andExpect(jsonPath("$.intro.summary").value("1번 커리큘럼의 핵심 설명"))
+        .andExpect(jsonPath("$.intro.description").value("1번 커리큘럼의 설명"))
+        .andExpect(jsonPath("$.sections[2].order").value(2))
+        .andExpect(jsonPath("$.sections[2].id").value(300))
+        .andExpect(jsonPath("$.sections[2].title").value("1번 커리큘럼의 섹션3"));
+  }
+
 }
