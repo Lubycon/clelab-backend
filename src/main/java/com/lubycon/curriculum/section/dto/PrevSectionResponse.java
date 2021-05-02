@@ -12,12 +12,12 @@ public class PrevSectionResponse {
   @NotNull
   private final String title;
 
-  private PrevSectionResponse(long id, @NotNull String title) {
+  public PrevSectionResponse(final long id, @NotNull final String title) {
     this.id = id;
     this.title = title;
   }
 
-  public static PrevSectionResponse fromEntity(Section section) {
+  public static PrevSectionResponse fromEntity(final Section section) {
     return new PrevSectionResponse(section.getId(), section.getTitle());
   }
 }
