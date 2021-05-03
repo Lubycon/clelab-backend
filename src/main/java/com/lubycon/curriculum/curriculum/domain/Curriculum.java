@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,11 +41,12 @@ public class Curriculum extends BaseTimeEntity {
   private IntroSection introSection;
 
   @OneToMany(mappedBy = "curriculum", fetch = FetchType.LAZY)
+  @OrderBy("order asc")
   private List<Section> sections;
 
   @Builder
-  public Curriculum(String title, String description, String thumbnail,
-      List<Section> sections) {
+  public Curriculum(final String title, final String description, final String thumbnail,
+      final List<Section> sections) {
     this.title = title;
     this.description = description;
     this.thumbnail = thumbnail;
