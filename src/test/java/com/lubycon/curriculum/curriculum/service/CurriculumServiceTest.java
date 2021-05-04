@@ -1,12 +1,14 @@
 package com.lubycon.curriculum.curriculum.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.lubycon.curriculum.curriculum.dto.CurriculumInfoResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
 import com.lubycon.curriculum.curriculum.dto.IntroResponse;
 import com.lubycon.curriculum.curriculum.dto.SectionTitlesResponse;
+import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,6 +60,19 @@ class CurriculumServiceTest {
     assertThat(section.getOrder()).isEqualTo(2);
     assertThat(section.getId()).isEqualTo(300);
     assertThat(section.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
+  }
+
+  @Sql("/make-curriculum.sql")
+  @DisplayName("커리큘럼이 없으면 예외가 발생한다.")
+  @Test
+  public void curriculumNotFoundTest() {
+    // given
+    final long notExistId = 1222;
+
+    // when
+    assertThatThrownBy(() -> curriculumService.getCurriculumSections(notExistId))
+        .isInstanceOf(CurriculumNotFoundException.class)
+        .hasMessageContaining(notExistId + "에 해당하는 커리큘럼이 없습니다."); // then
   }
 
 }
