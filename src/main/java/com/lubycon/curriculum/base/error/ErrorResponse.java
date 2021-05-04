@@ -30,6 +30,11 @@ public class ErrorResponse {
     this.errors = new ArrayList<>();
   }
 
+  public ErrorResponse(final ErrorCode code, final String message) {
+    this.message = message;
+    this.code = code.getCode();
+    this.errors = new ArrayList<>();
+  }
 
   public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {
     return new ErrorResponse(code, FieldError.of(bindingResult));
@@ -39,11 +44,15 @@ public class ErrorResponse {
     return new ErrorResponse(code);
   }
 
+  public static ErrorResponse of(final ErrorCode code, final String message) {
+    return new ErrorResponse(code, message);
+  }
+
   public static ErrorResponse of(final ErrorCode code, final List<FieldError> errors) {
     return new ErrorResponse(code, errors);
   }
 
-  public static ErrorResponse of(MethodArgumentTypeMismatchException e) {
+  public static ErrorResponse of(final MethodArgumentTypeMismatchException e) {
     final String value = e.getValue() == null ? "" : e.getValue().toString();
     final List<ErrorResponse.FieldError> errors = ErrorResponse.FieldError
         .of(e.getName(), value, e.getErrorCode());
@@ -65,7 +74,7 @@ public class ErrorResponse {
     }
 
     public static List<FieldError> of(final String field, final String value, final String reason) {
-      List<FieldError> fieldErrors = new ArrayList<>();
+      final List<FieldError> fieldErrors = new ArrayList<>();
       fieldErrors.add(new FieldError(field, value, reason));
       return fieldErrors;
     }

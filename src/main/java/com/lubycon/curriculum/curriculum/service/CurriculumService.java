@@ -3,6 +3,7 @@ package com.lubycon.curriculum.curriculum.service;
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
+import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import com.lubycon.curriculum.curriculum.repository.CurriculumRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class CurriculumService {
 
   private Curriculum findById(final long id) {
     return curriculumRepository.findById(id)
-        .orElseThrow(RuntimeException::new); // FIXME: 예외 바꾸기
+        .orElseThrow(() -> new CurriculumNotFoundException(id + "에 해당하는 커리큘럼이 없습니다."));
   }
 
 }
