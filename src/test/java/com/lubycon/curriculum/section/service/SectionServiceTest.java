@@ -1,8 +1,10 @@
 package com.lubycon.curriculum.section.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.lubycon.curriculum.section.dto.SectionResponse;
+import com.lubycon.curriculum.section.exception.SectionNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +34,18 @@ class SectionServiceTest {
     assertThat(findSection.getPrevSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
     assertThat(findSection.getNextSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션4");
   }
+
+  @Sql("/make-curriculum.sql")
+  @DisplayName("섹션이 없으면 예외가 발생한다.")
+  @Test
+  public void curriculumNotFoundTest() {
+    // given
+    final long notExistId = 1222;
+
+    // when
+    assertThatThrownBy(() -> sectionService.findSection(1, notExistId))
+        .isInstanceOf(SectionNotFoundException.class)
+        .hasMessageContaining(notExistId + "에 해당하는 섹션이 없습니다."); // then
+  }
+
 }

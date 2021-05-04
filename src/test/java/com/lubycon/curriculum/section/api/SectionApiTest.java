@@ -72,4 +72,22 @@ class SectionApiTest extends ApiTest {
         .andExpect(jsonPath("$.code").value("C005"));
   }
 
+  @Sql("/make-curriculum.sql")
+  @DisplayName("특정 커리큘럼이 없다면 404가 발생한다.")
+  @Test
+  public void notFoundSectionTest() throws Exception {
+    // given
+    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final long notExistId = 1222;
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(get(url, 1, notExistId));
+
+    // then
+    resultActions
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.message").value(notExistId + "에 해당하는 섹션이 없습니다."))
+        .andExpect(jsonPath("$.code").value("C005"));
+  }
+
 }
