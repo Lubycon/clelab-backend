@@ -54,4 +54,40 @@ class SectionApiTest extends ApiTest {
         .andExpect(jsonPath("$.sections[2].title").value("1번 커리큘럼의 섹션3"));
   }
 
+  @Sql("/make-curriculum.sql")
+  @DisplayName("특정 커리큘럼이 없다면 404가 발생한다.")
+  @Test
+  public void notFoundCurriculumTest() throws Exception {
+    // given
+    final String url = "/curriculums/{curriculumId}/sections";
+    final long notExistId = 1222;
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(get(url, notExistId));
+
+    // then
+    resultActions
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.message").value(notExistId + "에 해당하는 커리큘럼이 없습니다."))
+        .andExpect(jsonPath("$.code").value("C005"));
+  }
+
+  @Sql("/make-curriculum.sql")
+  @DisplayName("특정 커리큘럼이 없다면 404가 발생한다.")
+  @Test
+  public void notFoundSectionTest() throws Exception {
+    // given
+    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final long notExistId = 1222;
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(get(url, 1, notExistId));
+
+    // then
+    resultActions
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.message").value(notExistId + "에 해당하는 섹션이 없습니다."))
+        .andExpect(jsonPath("$.code").value("C005"));
+  }
+
 }

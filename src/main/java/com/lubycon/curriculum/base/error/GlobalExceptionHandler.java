@@ -1,5 +1,6 @@
 package com.lubycon.curriculum.base.error;
 
+import com.lubycon.curriculum.base.error.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -52,6 +53,13 @@ public class GlobalExceptionHandler {
   protected ResponseEntity<ErrorResponse> handleException(final Exception e) {
     final ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
     final ErrorResponse response = ErrorResponse.of(errorCode);
+    return new ResponseEntity<>(response, errorCode.getStatus());
+  }
+
+  @ExceptionHandler(BusinessException.class)
+  protected ResponseEntity<ErrorResponse> handleBusinessException(final BusinessException e) {
+    final ErrorCode errorCode = e.getErrorCode();
+    final ErrorResponse response = ErrorResponse.of(errorCode, e.getMessage());
     return new ResponseEntity<>(response, errorCode.getStatus());
   }
 }

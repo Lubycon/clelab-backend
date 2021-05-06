@@ -4,6 +4,7 @@ import com.lubycon.curriculum.section.domain.Section;
 import com.lubycon.curriculum.section.dto.NextSectionResponse;
 import com.lubycon.curriculum.section.dto.PrevSectionResponse;
 import com.lubycon.curriculum.section.dto.SectionResponse;
+import com.lubycon.curriculum.section.exception.SectionNotFoundException;
 import com.lubycon.curriculum.section.repository.SectionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class SectionService {
 
   private Section findById(final long curriculumId, final long sectionId) {
     return sectionRepository.findByCurriculumIdAndId(curriculumId, sectionId)
-        .orElseThrow(RuntimeException::new); // FIXME: 예외 바꾸기
+        .orElseThrow(() -> new SectionNotFoundException(sectionId + "에 해당하는 섹션이 없습니다."));
   }
 
   private NextSectionResponse findNextSection(final long curriculumId, final int order) {
