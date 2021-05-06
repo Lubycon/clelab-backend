@@ -81,6 +81,12 @@ jacocoTestCoverageVerification {
                 minimum = 0.70
             }
 
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 100
+            }
+
             excludes = [
                     '*.domain.Q*',
                     '*.error.*'
