@@ -38,9 +38,14 @@ public class IntroSection {
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
 
+  @OneToOne
+  @JoinColumn(name = "major_company_frequency_id", insertable = false, updatable = false)
+  private MajorCompanyFrequency majorCompanyFrequency;
+
+
   @Builder
-  public IntroSection(IntroDescription description,
-      Curriculum curriculum) {
+  public IntroSection(final IntroDescription description,
+      final Curriculum curriculum) {
     this.description = description;
     this.curriculum = curriculum;
   }
