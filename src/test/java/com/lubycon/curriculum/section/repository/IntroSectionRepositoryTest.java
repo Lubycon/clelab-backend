@@ -7,6 +7,9 @@ import com.lubycon.curriculum.section.domain.GoogleTrend;
 import com.lubycon.curriculum.section.domain.IntroSection;
 import com.lubycon.curriculum.section.domain.MajorCompanyFrequency;
 import com.lubycon.curriculum.section.domain.StackOverflowTrend;
+import com.lubycon.curriculum.section.domain.StatisticsInfo;
+import com.lubycon.curriculum.section.domain.StatisticsValue;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +54,28 @@ class IntroSectionRepositoryTest extends RepositoryTest {
     assertThat(stackOverflowTrend.getTitle()).isEqualTo("스택오버플로우 트렌드");
     assertThat(stackOverflowTrend.getDescription()).isEqualTo("StackOverflow Trends");
     assertThat(stackOverflowTrend.getImagePath()).isEqualTo("스택오버플로우 이미지링크");
+  }
+
+
+  @Sql("/make-curriculum.sql")
+  @DisplayName("통계 정보 OneToMany() 테스트")
+  @Test
+  public void statisticsOneToManyTest() {
+    final IntroSection findIntroSection = introSectionRepository.findById(1L).get();
+    final StatisticsInfo statisticsInfo = findIntroSection.getStatisticsInfo().get(0);
+    assertThat(statisticsInfo.getTitle()).isEqualTo("관련 Github 레포지토리 수");
+    assertThat(statisticsInfo.getDescription()).isEqualTo("Github Public Repositories");
+
+    final List<StatisticsValue> statisticsValues = statisticsInfo.getStatisticsValues();
+    final StatisticsValue react = statisticsValues.get(0);
+    assertThat(react.getKeyword()).isEqualTo("React");
+    assertThat(react.getValue()).isEqualTo("220만");
+    assertThat(react.isCourseTopic()).isTrue();
+
+    final StatisticsValue vue = statisticsValues.get(2);
+    assertThat(vue.getKeyword()).isEqualTo("Vue");
+    assertThat(vue.getValue()).isEqualTo("55만");
+    assertThat(vue.isCourseTopic()).isFalse();
   }
 
 }

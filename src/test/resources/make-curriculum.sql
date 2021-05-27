@@ -18,3 +18,8 @@ INSERT INTO stack_overflow_trend (id, title, description, image_path) VALUES (0,
 
 INSERT INTO intro_section (id, curriculum_id, major_company_frequency_id, google_trend_id, stack_overflow_trend_id, summary, sub_summary, description, header, footer) VALUES (1, 1, 0, 0, 0, '1번 커리큘럼의 핵심 설명', '1번 커리큘럼의 핵심 설명2222', '1번 커리큘럼의 설명', '헤더', '푸터')
 
+INSERT INTO statistics_info (id, intro_section_id, title, description) VALUES (0, 1, '관련 Github 레포지토리 수', 'Github Public Repositories')
+
+INSERT INTO statistics_value (id, statisics_info_id, keyword, value, course_topic) VALUES (0, 0, 'React', '220만', true)
+INSERT INTO statistics_value (id, statisics_info_id, keyword, value, course_topic) VALUES (1, 0, 'Angular', '77만', false)
+INSERT INTO statistics_value (id, statisics_info_id, keyword, value, course_topic) VALUES (2, 0, 'Vue', '55만', false)
