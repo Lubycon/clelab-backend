@@ -7,8 +7,8 @@ import com.lubycon.curriculum.section.domain.GoogleTrend;
 import com.lubycon.curriculum.section.domain.IntroSection;
 import com.lubycon.curriculum.section.domain.MajorCompanyFrequency;
 import com.lubycon.curriculum.section.domain.StackOverflowTrend;
-import com.lubycon.curriculum.section.domain.StatisticsInfo;
-import com.lubycon.curriculum.section.domain.StatisticsValue;
+import com.lubycon.curriculum.section.domain.StatisticalInfo;
+import com.lubycon.curriculum.section.domain.StatisticalValue;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,17 +62,17 @@ class IntroSectionRepositoryTest extends RepositoryTest {
   @Test
   public void statisticsOneToManyTest() {
     final IntroSection findIntroSection = introSectionRepository.findById(1L).get();
-    final StatisticsInfo statisticsInfo = findIntroSection.getStatisticsInfo().get(0);
-    assertThat(statisticsInfo.getTitle()).isEqualTo("관련 Github 레포지토리 수");
-    assertThat(statisticsInfo.getDescription()).isEqualTo("Github Public Repositories");
+    final StatisticalInfo statisticalInfo = findIntroSection.getStatisticalInfo().get(0);
+    assertThat(statisticalInfo.getTitle()).isEqualTo("관련 Github 레포지토리 수");
+    assertThat(statisticalInfo.getDescription()).isEqualTo("Github Public Repositories");
 
-    final List<StatisticsValue> statisticsValues = statisticsInfo.getStatisticsValues();
-    final StatisticsValue react = statisticsValues.get(0);
+    final List<StatisticalValue> statisticalValues = statisticalInfo.getStatisticalValues();
+    final StatisticalValue react = statisticalValues.get(0);
     assertThat(react.getKeyword()).isEqualTo("React");
     assertThat(react.getValue()).isEqualTo("220만");
     assertThat(react.isCourseTopic()).isTrue();
 
-    final StatisticsValue vue = statisticsValues.get(2);
+    final StatisticalValue vue = statisticalValues.get(2);
     assertThat(vue.getKeyword()).isEqualTo("Vue");
     assertThat(vue.getValue()).isEqualTo("55만");
     assertThat(vue.isCourseTopic()).isFalse();

@@ -22,15 +22,15 @@ public class IntroResponse {
   private final StackOverflowTrendResponse stackOverflowTrend;
 
   @NotNull
-  private final List<StatisticsResponse> statistics;
+  private final List<StatisticalResponse> statistics;
 
   public IntroResponse(final IntroSection intro) {
     this.description = new IntroDescriptionResponse(intro.getDescription());
     this.majorCompany = new MajorCompanyFrequencyResponse(intro.getMajorCompanyFrequency());
     this.googleTrend = new GoogleTrendResponse(intro.getGoogleTrend());
     this.stackOverflowTrend = new StackOverflowTrendResponse(intro.getStackOverflowTrend());
-    this.statistics = intro.getStatisticsInfo().stream()
-        .map(StatisticsResponse::new)
+    this.statistics = intro.getStatisticalInfo().stream()
+        .map(StatisticalResponse::new)
         .collect(Collectors.toList());
   }
 

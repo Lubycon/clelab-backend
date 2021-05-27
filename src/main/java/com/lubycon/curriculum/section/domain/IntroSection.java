@@ -56,7 +56,7 @@ public class IntroSection {
   private StackOverflowTrend stackOverflowTrend;
 
   @OneToMany(mappedBy = "introSection", fetch = FetchType.LAZY)
-  private List<StatisticsInfo> statisticsInfo;
+  private List<StatisticalInfo> statisticalInfo;
 
   @Builder
   public IntroSection(final IntroDescription description,
