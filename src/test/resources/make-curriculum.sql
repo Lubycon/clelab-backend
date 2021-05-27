@@ -16,7 +16,7 @@ INSERT INTO google_trend (id, title, csv_html) VALUES (0, '구글 트렌드 지�
 
 INSERT INTO stack_overflow_trend (id, title, description, image_path) VALUES (0, '스택오버플로우 트렌드', 'StackOverflow Trends', '스택오버플로우 이미지링크')
 
-INSERT INTO intro_section (id, curriculum_id, major_company_frequency_id, google_trend_id, stack_overflow_trend_id, summary, sub_summary, description, header, footer) VALUES (1, 1, 0, 0, 0, '1번 커리큘럼의 핵심 설명', '1번 커리큘럼의 핵심 설명2222', '1번 커리큘럼의 설명', '헤더', '푸터')
+INSERT INTO intro_section (id, curriculum_id, major_company_frequency_id, google_trend_id, stack_overflow_trend_id, summary, sub_summary, header, footer) VALUES (1, 1, 0, 0, 0, '1번 커리큘럼의 핵심 설명', '1번 커리큘럼의 핵심 설명2222', '헤더', '푸터')
 
 INSERT INTO statistics_info (id, intro_section_id, title, description) VALUES (0, 1, '관련 Github 레포지토리 수', 'Github Public Repositories')
 

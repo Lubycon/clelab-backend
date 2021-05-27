@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class IntroDescription {
 
-  @Column(name = "description")
-  private String description; //FIXME: 삭제
-
   @Column(name = "sub_summary")
   private String subSummary;
 
@@ -28,9 +25,8 @@ public class IntroDescription {
   private String footer;
 
   @Builder
-  public IntroDescription(final String description, final String subSummary, final String summary,
+  public IntroDescription(final String subSummary, final String summary,
       final String header, final String footer) {
-    this.description = description;
     this.subSummary = subSummary;
     this.summary = summary;
     this.header = header;
