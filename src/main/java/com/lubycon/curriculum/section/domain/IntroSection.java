@@ -49,6 +49,9 @@ public class IntroSection {
   @JoinColumn(name = "google_trend_id", insertable = false, updatable = false)
   private GoogleTrend googleTrend;
 
+  @OneToOne
+  @JoinColumn(name = "stack_overflow_trend_id", insertable = false, updatable = false)
+  private StackOverflowTrend stackOverflowTrend;
 
   @Builder
   public IntroSection(final IntroDescription description,
