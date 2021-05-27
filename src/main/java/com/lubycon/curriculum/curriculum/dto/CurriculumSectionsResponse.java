@@ -2,7 +2,6 @@ package com.lubycon.curriculum.curriculum.dto;
 
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.section.domain.Section;
-import com.lubycon.curriculum.section.model.IntroDescription;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -33,11 +32,10 @@ public class CurriculumSectionsResponse {
   }
 
   public static CurriculumSectionsResponse toResponse(final Curriculum curriculum) {
-    final IntroDescription introDescription = curriculum.getIntroSection().getDescription();
     final List<Section> sections = curriculum.getSections();
 
     return CurriculumSectionsResponse.builder()
-        .intro(new IntroResponse(introDescription))
+        .intro(new IntroResponse(curriculum.getIntroSection()))
         .curriculum(new CurriculumInfoResponse(curriculum.getId(), curriculum.getTitle()))
         .sections(sections.stream()
             .map(SectionTitlesResponse::new)

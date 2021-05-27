@@ -53,8 +53,8 @@ class CurriculumServiceTest {
     assertThat(curriculum.getTitle()).isEqualTo("1번 커리큘럼의 제목");
 
     final IntroResponse intro = response.getIntro();
-    assertThat(intro.getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
-    assertThat(intro.getDescription()).isEqualTo("1번 커리큘럼의 설명");
+    assertThat(intro.getDescription().getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
+    assertThat(intro.getDescription().getFooter()).isEqualTo("푸터");
 
     final SectionTitlesResponse section = response.getSections().get(2);
     assertThat(section.getOrder()).isEqualTo(2);
