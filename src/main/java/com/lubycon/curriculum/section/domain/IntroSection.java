@@ -2,15 +2,18 @@ package com.lubycon.curriculum.section.domain;
 
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.section.model.IntroDescription;
+import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -52,6 +55,9 @@ public class IntroSection {
   @OneToOne
   @JoinColumn(name = "stack_overflow_trend_id", insertable = false, updatable = false)
   private StackOverflowTrend stackOverflowTrend;
+
+  @OneToMany(mappedBy = "introSection", fetch = FetchType.LAZY)
+  private List<StatisticsInfo> statisticsInfo;
 
   @Builder
   public IntroSection(final IntroDescription description,
