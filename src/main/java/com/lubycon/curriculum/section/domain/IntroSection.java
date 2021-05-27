@@ -31,7 +31,9 @@ public class IntroSection {
   @AttributeOverrides({
       @AttributeOverride(name = "summary", column = @Column(name = "summary")),
       @AttributeOverride(name = "subSummary", column = @Column(name = "sub_summary")),
-      @AttributeOverride(name = "description", column = @Column(name = "description")),
+      @AttributeOverride(name = "description", column = @Column(name = "description")), //FIXME: 삭제
+      @AttributeOverride(name = "header", column = @Column(name = "header")),
+      @AttributeOverride(name = "footer", column = @Column(name = "footer")),
   })
   private IntroDescription description;
 
