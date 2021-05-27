@@ -19,7 +19,7 @@ class CurriculumApiTest extends ApiTest {
   @ValueSource(ints = {0, 1, 2, 3})
   public void getCurriculumTest(final int index) throws Exception {
     // given
-    final String url = "/curriculums";
+    final String url = "/v1/curriculums";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url));

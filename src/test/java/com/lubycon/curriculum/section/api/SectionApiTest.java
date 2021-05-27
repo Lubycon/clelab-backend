@@ -17,7 +17,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getSectionTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final String url = "/v1/curriculums/{curriculumId}/sections/{sectionId}";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url, 1, 300));
@@ -38,7 +38,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getAllSections() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections";
+    final String url = "/v1/curriculums/{curriculumId}/sections";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url, 1));
@@ -59,7 +59,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void notFoundCurriculumTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections";
+    final String url = "/v1/curriculums/{curriculumId}/sections";
     final long notExistId = 1222;
 
     // when
@@ -77,7 +77,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void notFoundSectionTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final String url = "/v1/curriculums/{curriculumId}/sections/{sectionId}";
     final long notExistId = 1222;
 
     // when
