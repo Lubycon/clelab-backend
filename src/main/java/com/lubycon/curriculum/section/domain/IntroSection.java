@@ -45,11 +45,19 @@ public class IntroSection {
   @JoinColumn(name = "major_company_frequency_id", insertable = false, updatable = false)
   private MajorCompanyFrequency majorCompanyFrequency;
 
+  @OneToOne
+  @JoinColumn(name = "google_trend_id", insertable = false, updatable = false)
+  private GoogleTrend googleTrend;
+
 
   @Builder
   public IntroSection(final IntroDescription description,
-      final Curriculum curriculum) {
+      final Curriculum curriculum,
+      final MajorCompanyFrequency majorCompanyFrequency,
+      final GoogleTrend googleTrend) {
     this.description = description;
     this.curriculum = curriculum;
+    this.majorCompanyFrequency = majorCompanyFrequency;
+    this.googleTrend = googleTrend;
   }
 }
