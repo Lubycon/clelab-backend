@@ -30,6 +30,7 @@ public class IntroSection {
   @Embedded
   @AttributeOverrides({
       @AttributeOverride(name = "summary", column = @Column(name = "summary")),
+      @AttributeOverride(name = "subSummary", column = @Column(name = "sub_summary")),
       @AttributeOverride(name = "description", column = @Column(name = "description")),
   })
   private IntroDescription description;

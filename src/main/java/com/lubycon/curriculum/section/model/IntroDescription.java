@@ -15,12 +15,16 @@ public class IntroDescription {
   @Column(name = "description")
   private String description;
 
+  @Column(name = "sub_summary")
+  private String subSummary;
+
   @Column(name = "summary")
   private String summary;
 
   @Builder
-  public IntroDescription(String description, String summary) {
+  public IntroDescription(final String description, final String subSummary, final String summary) {
     this.description = description;
+    this.subSummary = subSummary;
     this.summary = summary;
   }
 }
