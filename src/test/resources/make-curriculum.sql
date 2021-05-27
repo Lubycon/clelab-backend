@@ -12,5 +12,7 @@ INSERT INTO blog (id, section_id, title, link) VALUES (4, 300, '3번 섹션의 �
 
 INSERT INTO major_company_frequency (id, title, naver, kakao, line, coupang, woowabros, toss, daangn, yanolja) VALUES (0, '메이저 회사는 React를 얼마나 사용하고 있을까요?', true, false, true, true, true, false, true, true)
 
-INSERT INTO intro_section (id, curriculum_id, major_company_frequency_id, summary, sub_summary, description, header, footer) VALUES (1, 1, 0, '1번 커리큘럼의 핵심 설명', '1번 커리큘럼의 핵심 설명2222', '1번 커리큘럼의 설명', '헤더', '푸터')
+INSERT INTO google_trend (id, title, csv_html) VALUES (0, '구글 트렌드 지표', '<p>안녕하세요</p>')
+
+INSERT INTO intro_section (id, curriculum_id, major_company_frequency_id, google_trend_id, summary, sub_summary, description, header, footer) VALUES (1, 1, 0, 0, '1번 커리큘럼의 핵심 설명', '1번 커리큘럼의 핵심 설명2222', '1번 커리큘럼의 설명', '헤더', '푸터')
 
