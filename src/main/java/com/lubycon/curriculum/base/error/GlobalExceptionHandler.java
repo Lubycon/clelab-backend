@@ -1,6 +1,7 @@
 package com.lubycon.curriculum.base.error;
 
 import com.lubycon.curriculum.base.error.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -16,6 +18,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
       final MethodArgumentNotValidException e) {
+    log.error("MethMethodArgumentNotValidException", e);
     final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
     final ErrorResponse response = ErrorResponse
         .of(errorCode, e.getBindingResult());
@@ -25,6 +28,7 @@ public class GlobalExceptionHandler {
   // @ModelAttribut으로 binding error 발생시 BindException 발생
   @ExceptionHandler(BindException.class)
   protected ResponseEntity<ErrorResponse> handleBindException(final BindException e) {
+    log.error("BindException", e);
     final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
     final ErrorResponse response = ErrorResponse
         .of(errorCode, e.getBindingResult());
@@ -35,6 +39,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentTypeMismatchException.class)
   protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(
       final MethodArgumentTypeMismatchException e) {
+    log.error("MethodArgumentTypeMismatchException", e);
     final ErrorCode errorCode = ErrorCode.FAIL_ENUM_BINDING;
     final ErrorResponse response = ErrorResponse.of(e);
     return new ResponseEntity<>(response, errorCode.getStatus());
@@ -44,6 +49,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
   protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(
       final HttpRequestMethodNotSupportedException e) {
+    log.error("HttpRequestMethodNotSupportedException", e);
     final ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED;
     final ErrorResponse response = ErrorResponse.of(errorCode);
     return new ResponseEntity<>(response, errorCode.getStatus());
@@ -51,6 +57,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   protected ResponseEntity<ErrorResponse> handleException(final Exception e) {
+    log.error("Exception", e);
     final ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
     final ErrorResponse response = ErrorResponse.of(errorCode);
     return new ResponseEntity<>(response, errorCode.getStatus());
@@ -58,6 +65,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(BusinessException.class)
   protected ResponseEntity<ErrorResponse> handleBusinessException(final BusinessException e) {
+    log.error("BusinessException", e);
     final ErrorCode errorCode = e.getErrorCode();
     final ErrorResponse response = ErrorResponse.of(errorCode, e.getMessage());
     return new ResponseEntity<>(response, errorCode.getStatus());
