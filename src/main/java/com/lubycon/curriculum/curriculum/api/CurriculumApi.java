@@ -14,7 +14,7 @@ public class CurriculumApi {
 
   private final CurriculumService curriculumService;
 
-  @GetMapping(value = {"/v1/curriculums", "/curriculums"})
+  @GetMapping(value = {"/v2/curriculums", "/v1/curriculums", "/curriculums"})
   public ResponseEntity<List<CurriculumResponse>> getAllCurriculums() {
 
     return ResponseEntity.ok()
