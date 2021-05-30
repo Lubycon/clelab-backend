@@ -38,7 +38,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getAllSections() throws Exception {
     // given
-    final String url = "/v1/curriculums/{curriculumId}/sections";
+    final String url = "/v2/curriculums/{curriculumId}/sections";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url, 1));

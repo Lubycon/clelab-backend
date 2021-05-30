@@ -15,6 +15,9 @@ public class IntroDescription {
   @Column(name = "sub_summary")
   private String subSummary;
 
+  @Column(name = "description")
+  private String description;
+
   @Column(name = "summary")
   private String summary;
 
