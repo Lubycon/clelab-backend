@@ -5,9 +5,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.lubycon.curriculum.curriculum.dto.CurriculumInfoResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
-import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
-import com.lubycon.curriculum.curriculum.dto.IntroResponse;
 import com.lubycon.curriculum.curriculum.dto.SectionTitlesResponse;
+import com.lubycon.curriculum.curriculum.dto.v2.CurriculumSectionsResponseV2;
+import com.lubycon.curriculum.curriculum.dto.v2.IntroResponseV2;
 import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -46,15 +46,15 @@ class CurriculumServiceTest {
   @Test
   public void getCurriculumsTest() {
     // when
-    final CurriculumSectionsResponse response = curriculumService.getCurriculumSections(1);
+    final CurriculumSectionsResponseV2 response = curriculumService.getCurriculumSectionsV2(1);
 
     // then
     final CurriculumInfoResponse curriculum = response.getCurriculum();
     assertThat(curriculum.getTitle()).isEqualTo("1번 커리큘럼의 제목");
 
-    final IntroResponse intro = response.getIntro();
-    assertThat(intro.getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
-    assertThat(intro.getDescription()).isEqualTo("1번 커리큘럼의 설명");
+    final IntroResponseV2 intro = response.getIntro();
+    assertThat(intro.getDescription().getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
+    assertThat(intro.getDescription().getFooter()).isEqualTo("푸터");
 
     final SectionTitlesResponse section = response.getSections().get(2);
     assertThat(section.getOrder()).isEqualTo(2);

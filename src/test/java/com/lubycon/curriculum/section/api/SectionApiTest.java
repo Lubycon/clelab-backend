@@ -17,7 +17,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getSectionTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final String url = "/v1/curriculums/{curriculumId}/sections/{sectionId}";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url, 1, 300));
@@ -38,7 +38,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void getAllSections() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections";
+    final String url = "/v2/curriculums/{curriculumId}/sections";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url, 1));
@@ -47,8 +47,17 @@ class SectionApiTest extends ApiTest {
     resultActions
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.curriculum.title").value("1번 커리큘럼의 제목"))
-        .andExpect(jsonPath("$.intro.summary").value("1번 커리큘럼의 핵심 설명"))
-        .andExpect(jsonPath("$.intro.description").value("1번 커리큘럼의 설명"))
+        .andExpect(jsonPath("$.intro.description.summary").value("1번 커리큘럼의 핵심 설명"))
+        .andExpect(jsonPath("$.intro.description.subSummary").value("1번 커리큘럼의 핵심 설명2222"))
+        .andExpect(jsonPath("$.intro.majorCompany.title").value("메이저 회사는 React를 얼마나 사용하고 있을까요?"))
+        .andExpect(jsonPath("$.intro.majorCompany.companies.naver").value(true))
+        .andExpect(jsonPath("$.intro.majorCompany.companies.kakao").value(false))
+        .andExpect(jsonPath("$.intro.googleTrend.csvHtml").value("<p>안녕하세요</p>"))
+        .andExpect(jsonPath("$.intro.stackOverflowTrend.title").value("스택오버플로우 트렌드"))
+        .andExpect(jsonPath("$.intro.stackOverflowTrend.imagePath").value("스택오버플로우 이미지링크"))
+        .andExpect(jsonPath("$.intro.statistics[0].title").value("관련 Github 레포지토리 수"))
+        .andExpect(jsonPath("$.intro.statistics[0].values[0].keyword").value("React"))
+        .andExpect(jsonPath("$.intro.statistics[0].values[0].value").value("220만"))
         .andExpect(jsonPath("$.sections[2].order").value(2))
         .andExpect(jsonPath("$.sections[2].id").value(300))
         .andExpect(jsonPath("$.sections[2].title").value("1번 커리큘럼의 섹션3"));
@@ -59,7 +68,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void notFoundCurriculumTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections";
+    final String url = "/v1/curriculums/{curriculumId}/sections";
     final long notExistId = 1222;
 
     // when
@@ -77,7 +86,7 @@ class SectionApiTest extends ApiTest {
   @Test
   public void notFoundSectionTest() throws Exception {
     // given
-    final String url = "/curriculums/{curriculumId}/sections/{sectionId}";
+    final String url = "/v1/curriculums/{curriculumId}/sections/{sectionId}";
     final long notExistId = 1222;
 
     // when

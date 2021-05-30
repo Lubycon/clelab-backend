@@ -18,5 +18,4 @@ public class IntroResponse {
     this.description = intro.getDescription();
   }
 
-
 }

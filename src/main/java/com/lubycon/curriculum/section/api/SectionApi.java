@@ -17,7 +17,8 @@ public class SectionApi {
   private final SectionService sectionService;
   private final CurriculumService curriculumService;
 
-  @GetMapping("/curriculums/{curriculumId}/sections/{sectionId}")
+  @GetMapping(value = {"/v1/curriculums/{curriculumId}/sections/{sectionId}",
+      "curriculums/{curriculumId}/sections/{sectionId}"})
   public ResponseEntity<SectionResponse> getSection(
       @PathVariable final long curriculumId, @PathVariable final long sectionId) {
 
@@ -25,7 +26,8 @@ public class SectionApi {
         .body(sectionService.findSection(curriculumId, sectionId));
   }
 
-  @GetMapping("/curriculums/{curriculumId}/sections")
+  @GetMapping(value = {"/v1/curriculums/{curriculumId}/sections",
+      "/curriculums/{curriculumId}/sections"})
   public ResponseEntity<CurriculumSectionsResponse> getAllSections(
       @PathVariable final long curriculumId) {
 

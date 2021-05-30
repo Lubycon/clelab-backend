@@ -1,8 +1,9 @@
-package com.lubycon.curriculum.curriculum.dto;
+package com.lubycon.curriculum.curriculum.dto.v2;
 
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
+import com.lubycon.curriculum.curriculum.dto.CurriculumInfoResponse;
+import com.lubycon.curriculum.curriculum.dto.SectionTitlesResponse;
 import com.lubycon.curriculum.section.domain.Section;
-import com.lubycon.curriculum.section.model.IntroDescription;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -10,39 +11,37 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class CurriculumSectionsResponse {
+public class CurriculumSectionsResponseV2 {
 
   @NotNull
   private final CurriculumInfoResponse curriculum;
 
   @NotNull
-  private final IntroResponse intro;
+  private final IntroResponseV2 intro;
 
   @NotNull
   private final List<SectionTitlesResponse> sections;
 
 
   @Builder
-  public CurriculumSectionsResponse(
+  public CurriculumSectionsResponseV2(
       @NotNull final CurriculumInfoResponse curriculum,
-      @NotNull final IntroResponse intro,
+      @NotNull final IntroResponseV2 intro,
       @NotNull final List<SectionTitlesResponse> sections) {
     this.curriculum = curriculum;
     this.intro = intro;
     this.sections = sections;
   }
 
-  public static CurriculumSectionsResponse toResponse(final Curriculum curriculum) {
-    final IntroDescription introDescription = curriculum.getIntroSection().getDescription();
+  public static CurriculumSectionsResponseV2 toResponse(final Curriculum curriculum) {
     final List<Section> sections = curriculum.getSections();
 
-    return CurriculumSectionsResponse.builder()
-        .intro(new IntroResponse(introDescription))
+    return CurriculumSectionsResponseV2.builder()
+        .intro(new IntroResponseV2(curriculum.getIntroSection()))
         .curriculum(new CurriculumInfoResponse(curriculum.getId(), curriculum.getTitle()))
         .sections(sections.stream()
             .map(SectionTitlesResponse::new)
             .collect(Collectors.toList()))
         .build();
   }
-
 }
