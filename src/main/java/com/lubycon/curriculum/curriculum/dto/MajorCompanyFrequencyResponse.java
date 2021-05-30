@@ -9,24 +9,12 @@ public class MajorCompanyFrequencyResponse {
 
   @NotNull
   private final String title;
-  private final boolean naver;
-  private final boolean kakao;
-  private final boolean line;
-  private final boolean coupang;
-  private final boolean woowabros;
-  private final boolean toss;
-  private final boolean daangn;
-  private final boolean yanolja;
+
+  @NotNull
+  private final MajorCompaniesResponse companies;
 
   public MajorCompanyFrequencyResponse(final MajorCompanyFrequency majorCompanyFrequency) {
     this.title = majorCompanyFrequency.getTitle();
-    this.naver = majorCompanyFrequency.isNaver();
-    this.kakao = majorCompanyFrequency.isKakao();
-    this.line = majorCompanyFrequency.isLine();
-    this.coupang = majorCompanyFrequency.isCoupang();
-    this.woowabros = majorCompanyFrequency.isWoowabros();
-    this.toss = majorCompanyFrequency.isToss();
-    this.daangn = majorCompanyFrequency.isDaangn();
-    this.yanolja = majorCompanyFrequency.isYanolja();
+    this.companies = new MajorCompaniesResponse(majorCompanyFrequency);
   }
 }
