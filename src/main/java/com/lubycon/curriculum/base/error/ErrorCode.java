@@ -11,7 +11,11 @@ public enum ErrorCode {
   INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C003", "Internal Server Error"),
   INVALID_TYPE_VALUE(HttpStatus.BAD_REQUEST, "C004", "Invalid Type Value"),
   ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "C005", "Entity Not Found"),
-  FAIL_ENUM_BINDING(HttpStatus.BAD_REQUEST, "C006", "Fail Enum Binding");
+  FAIL_ENUM_BINDING(HttpStatus.BAD_REQUEST, "C006", "Fail Enum Binding"),
+
+  // Subscribe
+  TYPEFORM_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S001", "Typeform secret not equals : ");
+
 
   private final String code;
   private final String message;
