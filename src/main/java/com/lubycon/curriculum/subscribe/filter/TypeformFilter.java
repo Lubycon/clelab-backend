@@ -17,7 +17,11 @@ import org.springframework.beans.factory.annotation.Value;
 public class TypeformFilter implements Filter {
 
   @Value("${typeform.secret}")
-  private String secretKey;
+  private final String secretKey;
+
+  public TypeformFilter(final String secretKey) {
+    this.secretKey = secretKey;
+  }
 
   @Override
   public void doFilter(
