@@ -19,11 +19,10 @@ public class Email {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "email", nullable = false)
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  public Email(final Long id, final String email) {
-    this.id = id;
+  public Email(final String email) {
     this.email = email;
   }
 }
