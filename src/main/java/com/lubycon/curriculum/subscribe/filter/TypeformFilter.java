@@ -17,9 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 public class TypeformFilter implements Filter {
 
   @Value("${typeform.secret}")
-  private final String secretKey;
+  private String secretKey;
 
-  public TypeformFilter(final String secretKey) {
+  public void setSecretKey(final String secretKey) {
     this.secretKey = secretKey;
   }
 
@@ -31,7 +31,7 @@ public class TypeformFilter implements Filter {
     final HttpServletRequest httpRequest = (HttpServletRequest) request;
     final String typeFormSignatureValue = httpRequest.getHeader("Typeform-Signature");
 
-    if (!secretKey.equals(typeFormSignatureValue)) {
+    if (!typeFormSignatureValue.contains(secretKey)) {
       throw new TypeFormSecretNotEquals(typeFormSignatureValue);
     }
 

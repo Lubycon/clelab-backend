@@ -42,8 +42,11 @@ public class ApiTest {
   }
 
   public void typeformFilterMockMvcSetUp() {
+    final TypeformFilter typeformFilter = new TypeformFilter();
+    typeformFilter.setSecretKey("local");
+
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-        .addFilters(new TypeformFilter("local"))
+        .addFilters(typeformFilter)
         .addFilters(new CharacterEncodingFilter("UTF-8", true))
         .alwaysDo(print())
         .build();
