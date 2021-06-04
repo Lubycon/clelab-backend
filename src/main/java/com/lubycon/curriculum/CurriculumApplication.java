@@ -2,11 +2,13 @@ package com.lubycon.curriculum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
+@ServletComponentScan
 @SpringBootApplication
 public class CurriculumApplication {
 
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     SpringApplication.run(CurriculumApplication.class, args);
   }
 

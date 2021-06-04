@@ -3,6 +3,7 @@ package com.lubycon.curriculum.base;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lubycon.curriculum.subscribe.filter.TypeformFilter;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +36,17 @@ public class ApiTest {
   @BeforeEach
   public void mockMvcSetUp() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+        .addFilters(new CharacterEncodingFilter("UTF-8", true))
+        .alwaysDo(print())
+        .build();
+  }
+
+  public void typeformFilterMockMvcSetUp() {
+    final TypeformFilter typeformFilter = new TypeformFilter();
+    typeformFilter.setSecretKey("local");
+
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+        .addFilters(typeformFilter)
         .addFilters(new CharacterEncodingFilter("UTF-8", true))
         .alwaysDo(print())
         .build();
