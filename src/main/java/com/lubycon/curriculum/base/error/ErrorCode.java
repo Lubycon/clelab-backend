@@ -14,7 +14,8 @@ public enum ErrorCode {
   FAIL_ENUM_BINDING(HttpStatus.BAD_REQUEST, "C006", "Fail Enum Binding"),
 
   // Subscribe
-  TYPEFORM_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S001", "Typeform secret not equals : ");
+  TYPEFORM_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S001", "Typeform secret not equals : "),
+  FAILED_SEND_MAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Send mail failed : ");
 
 
   private final String code;
