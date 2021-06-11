@@ -17,3 +17,4 @@ aws:
   ses:
     access-key: acesss-key
     secret-key: secret-key
+    custom-secret: secret

@@ -15,7 +15,8 @@ public enum ErrorCode {
 
   // Subscribe
   TYPEFORM_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S001", "Typeform secret not equals : "),
-  FAILED_SEND_MAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Send mail failed : ");
+  FAILED_SEND_MAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Send mail failed : "),
+  SES_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S003", "SES secret not equals : ");
 
 
   private final String code;

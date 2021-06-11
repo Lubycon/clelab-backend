@@ -94,7 +94,7 @@ jacocoTestCoverageVerification {
             excludes = [
                     '*.domain.Q*',
                     '*.error.*',
-                    '*.subscribe.Send*'
+                    '*.subscribe.*'
             ]
         }
     }
