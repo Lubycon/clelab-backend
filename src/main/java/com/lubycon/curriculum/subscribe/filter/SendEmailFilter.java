@@ -1,6 +1,6 @@
 package com.lubycon.curriculum.subscribe.filter;
 
-import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsException;
+import com.lubycon.curriculum.subscribe.exception.SesSecretNotEqualsException;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j
-@WebFilter(urlPatterns = "/subscribe/typeform")
-public class TypeformFilter implements Filter {
+@WebFilter(urlPatterns = "/mail/*")
+public class SendEmailFilter implements Filter {
 
-  @Value("${typeform.secret}")
+  @Value("${aws.ses.custom-secret}")
   private String secretKey;
 
   public void setSecretKey(final String secretKey) {
@@ -29,10 +29,10 @@ public class TypeformFilter implements Filter {
       throws IOException, ServletException {
 
     final HttpServletRequest httpRequest = (HttpServletRequest) request;
-    final String typeFormSignatureValue = httpRequest.getHeader("Typeform-Signature");
+    final String sesSecretHeader = httpRequest.getHeader("SES-Secret");
 
-    if (!typeFormSignatureValue.contains(secretKey)) {
-      throw new TypeFormSecretNotEqualsException(typeFormSignatureValue);
+    if (!sesSecretHeader.equals(secretKey)) {
+      throw new SesSecretNotEqualsException(sesSecretHeader);
     }
 
     chain.doFilter(request, response);
