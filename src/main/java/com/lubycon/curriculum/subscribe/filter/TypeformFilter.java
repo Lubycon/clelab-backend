@@ -1,6 +1,6 @@
 package com.lubycon.curriculum.subscribe.filter;
 
-import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEquals;
+import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsException;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -32,7 +32,7 @@ public class TypeformFilter implements Filter {
     final String typeFormSignatureValue = httpRequest.getHeader("Typeform-Signature");
 
     if (!typeFormSignatureValue.contains(secretKey)) {
-      throw new TypeFormSecretNotEquals(typeFormSignatureValue);
+      throw new TypeFormSecretNotEqualsException(typeFormSignatureValue);
     }
 
     chain.doFilter(request, response);
