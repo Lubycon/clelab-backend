@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.lubycon.curriculum.base.ApiTest;
 import com.lubycon.curriculum.base.error.ErrorCode;
-import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEquals;
+import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -56,7 +56,7 @@ class SubScribeApiTest extends ApiTest {
           .accept(MediaType.APPLICATION_JSON)
           .content(body));
     })
-        .isInstanceOf(TypeFormSecretNotEquals.class) // then
+        .isInstanceOf(TypeFormSecretNotEqualsException.class) // then
         .hasMessageContaining(ErrorCode.TYPEFORM_SECRET_NOT_EQUALS.getMessage() + wrongSecretKey);
   }
 
