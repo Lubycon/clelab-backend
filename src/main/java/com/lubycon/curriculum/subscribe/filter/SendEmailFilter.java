@@ -1,6 +1,6 @@
 package com.lubycon.curriculum.subscribe.filter;
 
-import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsException;
+import com.lubycon.curriculum.subscribe.exception.SesSecretNotEqualsException;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -32,7 +32,7 @@ public class SendEmailFilter implements Filter {
     final String sesSecretHeader = httpRequest.getHeader("SES-Secret");
 
     if (!sesSecretHeader.equals(secretKey)) {
-      throw new TypeFormSecretNotEqualsException(sesSecretHeader);
+      throw new SesSecretNotEqualsException(sesSecretHeader);
     }
 
     chain.doFilter(request, response);
