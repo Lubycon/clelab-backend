@@ -5,7 +5,6 @@ import com.amazonaws.services.simpleemail.model.Content;
 import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,12 +13,12 @@ public class EmailSenderDto {
 
   public static final String FROM_EMAIL = "Team Clelab<admin@clelab.io>";
 
-  private final List<String> to;
+  private final String to;
   private final String subject;
   private final String content;
 
   @Builder
-  public EmailSenderDto(final List<String> to, final String subject,
+  public EmailSenderDto(final String to, final String subject,
       final String content) {
     this.to = to;
     this.subject = subject;
