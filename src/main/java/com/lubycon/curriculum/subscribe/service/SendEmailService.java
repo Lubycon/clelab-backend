@@ -4,7 +4,6 @@ import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.SendEmailResult;
 import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.dto.EmailSenderDto;
-import com.lubycon.curriculum.subscribe.exception.FailedSendMailException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,22 +35,28 @@ public class SendEmailService {
 
   private void send(final String subject, final String content, final List<String> receivers) {
 
-    final EmailSenderDto senderDto = EmailSenderDto.builder()
-        .to(receivers)
-        .subject(subject)
-        .content(content)
-        .build();
+    for (final String receiver : receivers) {
+      final String name = receiver.substring(0, receiver.indexOf('@'));
 
-    final SendEmailResult sendEmailResult = amazonSimpleEmailService
-        .sendEmail(senderDto.toSendRequestDto());
+      final EmailSenderDto senderDto = EmailSenderDto.builder()
+          .to(receiver)
+          .subject(subject)
+          .content(content.replace("{name}", name))
+          .build();
 
-    sendingResultMustSuccess(sendEmailResult);
+      final SendEmailResult sendEmailResult = amazonSimpleEmailService
+          .sendEmail(senderDto.toSendRequestDto());
+
+      sendingResultMustSuccess(sendEmailResult, receiver);
+    }
+
   }
 
 
-  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult) {
+  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult, final String receiver) {
     if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
-      throw new FailedSendMailException(sendEmailResult.getSdkResponseMetadata().toString());
+      log.error("메일 전송 실패 : {}", receiver);
+      log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
     }
   }
 
