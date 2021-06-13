@@ -6,6 +6,7 @@ import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.dto.EmailSenderDto;
 import com.lubycon.curriculum.subscribe.exception.FailedSendMailException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -36,16 +37,19 @@ public class SendEmailService {
 
   private void send(final String subject, final String content, final List<String> receivers) {
 
-    final EmailSenderDto senderDto = EmailSenderDto.builder()
-        .to(receivers)
-        .subject(subject)
-        .content(content)
-        .build();
+    for (final String receiver : receivers) {
+      final EmailSenderDto senderDto = EmailSenderDto.builder()
+          .to(Arrays.asList(receiver))
+          .subject(subject)
+          .content(content.replace("{name}", receiver))
+          .build();
 
-    final SendEmailResult sendEmailResult = amazonSimpleEmailService
-        .sendEmail(senderDto.toSendRequestDto());
+      final SendEmailResult sendEmailResult = amazonSimpleEmailService
+          .sendEmail(senderDto.toSendRequestDto());
 
-    sendingResultMustSuccess(sendEmailResult);
+      sendingResultMustSuccess(sendEmailResult);
+    }
+
   }
 
 
