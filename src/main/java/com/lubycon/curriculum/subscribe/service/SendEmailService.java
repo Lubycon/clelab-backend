@@ -38,10 +38,12 @@ public class SendEmailService {
   private void send(final String subject, final String content, final List<String> receivers) {
 
     for (final String receiver : receivers) {
+      final String name = receiver.substring(0, receiver.indexOf('@'));
+
       final EmailSenderDto senderDto = EmailSenderDto.builder()
           .to(Arrays.asList(receiver))
           .subject(subject)
-          .content(content.replace("{name}", receiver))
+          .content(content.replace("{name}", name))
           .build();
 
       final SendEmailResult sendEmailResult = amazonSimpleEmailService
