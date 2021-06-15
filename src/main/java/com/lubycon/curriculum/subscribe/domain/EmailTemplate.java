@@ -20,7 +20,10 @@ public class EmailTemplate {
   @Column(name = "id", updatable = false)
   private Long id;
 
-  @Column(name = "file_name", nullable = false, unique = true)
+  @Column(name = "subject")
+  private String subject;
+
+  @Column(name = "file_name")
   private String fileName;
 
   @Column(name = "created_at", nullable = false)
