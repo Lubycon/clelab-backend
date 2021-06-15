@@ -21,7 +21,7 @@ class EmailTemplateRepositoryTest extends RepositoryTest {
     final EmailTemplate emailTemplate = emailTemplateRepository.findFirstByOrderByCreatedAtDesc()
         .get();
 
-    assertThat(emailTemplate.getFileName()).isEqualTo("url2");
+    assertThat(emailTemplate.getUrl()).isEqualTo("url2");
     assertThat(emailTemplate.getSubject()).isEqualTo("제목2");
   }
 
