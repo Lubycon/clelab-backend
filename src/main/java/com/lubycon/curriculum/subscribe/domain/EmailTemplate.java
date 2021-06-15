@@ -23,8 +23,8 @@ public class EmailTemplate {
   @Column(name = "subject")
   private String subject;
 
-  @Column(name = "file_name")
-  private String fileName;
+  @Column(name = "url")
+  private String url;
 
   @Column(name = "created_at", nullable = false)
   private LocalDateTime createdAt;
