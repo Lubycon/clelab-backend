@@ -1,0 +1,29 @@
+package com.lubycon.curriculum.subscribe.domain;
+
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Entity
+public class EmailTemplate {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false)
+  private Long id;
+
+  @Column(name = "file_name", nullable = false, unique = true)
+  private String fileName;
+
+  @Column(name = "created_at", nullable = false)
+  private LocalDateTime createdAt;
+
+}
