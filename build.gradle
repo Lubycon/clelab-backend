@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa'
     implementation "org.mariadb.jdbc:mariadb-java-client"
     implementation 'com.h2database:h2'
+    implementation 'com.mashape.unirest:unirest-java:1.4.9'
     compile 'com.amazonaws:aws-java-sdk-ses:1.12.3'
     compile 'io.sentry:sentry-logback:1.7.30'
     compile 'io.sentry:sentry-spring-boot-starter:1.7.30'
