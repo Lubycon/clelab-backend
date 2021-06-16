@@ -10,10 +10,12 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @RequiredArgsConstructor
 @Profile("qa")
 @Service
@@ -23,8 +25,10 @@ public class TestSubscribeScheduler {
   private final EmailTemplateRepository emailTemplateRepository;
   private final SendEmailService sendEmailService;
 
-  @Scheduled(cron = "0 0 23 * * *")
+  @Scheduled(cron = "0 0 14 * * SUN")
   public void sendEmailToTester() throws UnirestException {
+    log.info(">>>> Scheduled Start ...");
+
     final List<String> testers = getTesters();
     final EmailTemplate emailTemplate = getEmailTemplate();
 
