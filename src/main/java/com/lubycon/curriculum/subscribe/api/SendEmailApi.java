@@ -19,7 +19,7 @@ public class SendEmailApi {
   private final SendEmailService sendEmailService;
   private final EmailTesterService emailTesterService;
 
-  @PostMapping("/mail/template/{templateId}")
+  @PostMapping("/mail/testers/{templateId}")
   public ResponseEntity<Object> sendMailToTester(@PathVariable final long templateId) {
 
     emailTesterService.sendSpecificTemplateToTesters(templateId);
@@ -31,7 +31,7 @@ public class SendEmailApi {
   public ResponseEntity<Object> sendMailToSubscribers(
       @RequestBody @Valid final SendMailToSubscribersRequest request) {
 
-    sendEmailService.sendToAllSubscribers(request.getSubject(), request.getBody());
+    sendEmailService.sendToAllSubscribers(request.getTemplateId());
 
     return ResponseEntity.ok().build();
   }
