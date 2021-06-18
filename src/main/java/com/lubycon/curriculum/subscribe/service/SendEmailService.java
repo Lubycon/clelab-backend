@@ -29,25 +29,24 @@ public class SendEmailService {
         .map(Email::getEmail)
         .collect(Collectors.toList());
 
+    send(templateId, subscribers);
+  }
+
+  public void sendToReceivers(final long templateId, final List<String> receivers) {
+    send(templateId, receivers);
+  }
+
+  private void send(final long templateId, final List<String> receivers) {
+
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
-
-    send(emailTemplate.getSubject(), httpRequestService.getBody(emailTemplate.getUrl()),
-        subscribers);
-  }
-
-  public void sendToReceivers(final String subject, final String content,
-      final List<String> receivers) {
-    send(subject, content, receivers);
-  }
-
-  private void send(final String subject, final String content, final List<String> receivers) {
+    final String content = httpRequestService.getBody(emailTemplate.getUrl());
 
     for (final String receiver : receivers) {
       final String name = receiver.substring(0, receiver.indexOf('@'));
 
       final EmailSenderDto senderDto = EmailSenderDto.builder()
           .to(receiver)
-          .subject(subject)
+          .subject(emailTemplate.getSubject())
           .content(content.replace("{name}", name))
           .build();
 

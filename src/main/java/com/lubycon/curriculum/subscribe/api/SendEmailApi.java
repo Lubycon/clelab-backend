@@ -40,7 +40,7 @@ public class SendEmailApi {
   public ResponseEntity<Object> sendMail(
       @RequestBody @Valid final SendMailRequest request) {
 
-    sendEmailService.sendToReceivers(request.getSubject(), request.getBody(), request.getTo());
+    sendEmailService.sendToReceivers(request.getTemplateId(), request.getTo());
 
     return ResponseEntity.ok().build();
   }

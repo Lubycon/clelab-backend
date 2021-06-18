@@ -1,6 +1,5 @@
 package com.lubycon.curriculum.subscribe.service;
 
-import com.lubycon.curriculum.base.service.HttpRequestService;
 import com.lubycon.curriculum.subscribe.domain.EmailTemplate;
 import com.lubycon.curriculum.subscribe.domain.Tester;
 import com.lubycon.curriculum.subscribe.repository.TesterRepository;
@@ -16,7 +15,6 @@ public class EmailTesterService {
 
   private final TesterRepository testerRepository;
   private final SendEmailService sendEmailService;
-  private final HttpRequestService httpRequestService;
   private final EmailTemplateService emailTemplateService;
 
   @Transactional
@@ -25,8 +23,7 @@ public class EmailTesterService {
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplate();
 
     if (!emailTemplate.isAlreadySent()) {
-      sendEmailService.sendToReceivers(emailTemplate.getSubject(),
-          httpRequestService.getBody(emailTemplate.getUrl()), testers);
+      sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
       emailTemplate.sendComplete();
     }
   }
@@ -35,9 +32,7 @@ public class EmailTesterService {
     final List<String> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
 
-    sendEmailService.sendToReceivers(emailTemplate.getSubject(),
-        httpRequestService.getBody(emailTemplate.getUrl()),
-        testers);
+    sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
   }
 
   private List<String> getTesters() {
