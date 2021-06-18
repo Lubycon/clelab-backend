@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class TestSubscribeScheduler {
   private final EmailTemplateRepository emailTemplateRepository;
   private final SendEmailService sendEmailService;
 
+  @Transactional
   @Scheduled(cron = "0 0 14 * * SUN")
   public void sendEmailToTester() throws UnirestException {
     log.info(">>>> Scheduled Start ...");
@@ -32,9 +34,12 @@ public class TestSubscribeScheduler {
     final List<String> testers = getTesters();
     final EmailTemplate emailTemplate = getEmailTemplate();
 
-    sendEmailService.sendToReceivers(emailTemplate.getSubject(),
-        getBody(emailTemplate.getUrl()),
-        testers);
+    if (!emailTemplate.isAlreadySent()) {
+      sendEmailService.sendToReceivers(emailTemplate.getSubject(),
+          getBody(emailTemplate.getUrl()),
+          testers);
+      emailTemplate.sendComplete();
+    }
   }
 
   private String getBody(final String url) throws UnirestException {

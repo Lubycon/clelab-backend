@@ -26,7 +26,18 @@ public class EmailTemplate {
   @Column(name = "url")
   private String url;
 
+  @Column(name = "is_send")
+  private boolean send;
+
   @Column(name = "created_at", nullable = false)
   private LocalDateTime createdAt;
+
+  public boolean isAlreadySent() {
+    return send;
+  }
+  
+  public void sendComplete() {
+    this.send = true;
+  }
 
 }
