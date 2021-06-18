@@ -8,4 +8,6 @@ public interface EmailTemplateRepository extends JpaRepository<EmailTemplate, Lo
 
   Optional<EmailTemplate> findFirstByOrderByCreatedAtDesc();
 
+  Optional<EmailTemplate> findFirstByName();
+
 }
