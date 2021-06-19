@@ -14,7 +14,7 @@ public class TestSubscribeScheduler {
   private final EmailTesterService emailTesterService;
 
   @Transactional
-  @Scheduled(cron = "0 0 14 * * SUN")
+  @Scheduled(cron = "0 0 23 * * SUN")
   public void sendEmailToTester() {
     log.info(">>>> Scheduled Start ...");
     emailTesterService.sendToTesters();
