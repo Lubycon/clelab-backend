@@ -10,30 +10,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Getter
 public class IntroResponseV2 {
 
-  @NotNull
+  @Nullable
   private final IntroDescriptionResponse description;
 
-  @NotNull
+  @Nullable
   private final MajorCompanyFrequencyResponse majorCompany;
 
-  @NotNull
+  @Nullable
   private final GoogleTrendResponse googleTrend;
 
-  @NotNull
+  @Nullable
   private final StackOverflowTrendResponse stackOverflowTrend;
 
   @NotNull
   private final List<StatisticalResponse> statistics;
 
   public IntroResponseV2(final IntroSection intro) {
-    this.description = new IntroDescriptionResponse(intro.getDescription());
-    this.majorCompany = new MajorCompanyFrequencyResponse(intro.getMajorCompanyFrequency());
-    this.googleTrend = new GoogleTrendResponse(intro.getGoogleTrend());
-    this.stackOverflowTrend = new StackOverflowTrendResponse(intro.getStackOverflowTrend());
+    this.description = intro.getDescription() == null ? null : new IntroDescriptionResponse(intro.getDescription());
+    this.majorCompany = intro.getMajorCompanyFrequency() == null ? null : new MajorCompanyFrequencyResponse(intro.getMajorCompanyFrequency());
+    this.googleTrend = intro.getGoogleTrend() == null ? null : new GoogleTrendResponse(intro.getGoogleTrend());
+    this.stackOverflowTrend = intro.getStackOverflowTrend() == null ? null : new StackOverflowTrendResponse(intro.getStackOverflowTrend());
     this.statistics = intro.getStatisticalInfo().stream()
         .map(StatisticalResponse::new)
         .collect(Collectors.toList());
