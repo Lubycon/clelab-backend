@@ -86,7 +86,7 @@ class SubScribeApiTest extends ApiTest {
   }
 
   @Sql("/make-email.sql")
-  @DisplayName("이미 있는 이메일이라면 409가 발생한다.")
+  @DisplayName("구독 신청 시, 이미 있는 이메일이라면 409가 발생한다.")
   @Test
   public void subscribeApi409Test() throws Exception {
     // given
@@ -106,6 +106,30 @@ class SubScribeApiTest extends ApiTest {
     resultActions
         .andExpect(status().isConflict())
         .andExpect(jsonPath("$.message").value(ErrorCode.CONFLICT_EMAIL.getMessage()));
+  }
+
+  @DisplayName("구독 신청 시, 이메일 포맷이 아니라면 400이 발생한다.")
+  @Test
+  public void subscribeApi400Test() throws Exception {
+    // given
+    final String url = "/subscribe";
+    final String email = "hello hello";
+
+    final SubscribeRequest request = new SubscribeRequest();
+    request.setEmail(email);
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(post(url)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)));
+
+    // then
+    resultActions
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.message").value(ErrorCode.INVALID_INPUT_VALUE.getMessage()))
+        .andExpect(jsonPath("$.errors[0].reason").value("올바른 이메일을 입력해주세요"))
+        .andExpect(jsonPath("$.errors[0].value").value(email));
   }
 
 
