@@ -3,7 +3,6 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-    id 'jacoco'
 }
 
 group = 'com.lubycon'
@@ -28,6 +27,7 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa'
     implementation "org.mariadb.jdbc:mariadb-java-client"
     implementation 'com.h2database:h2'
+    implementation 'com.mashape.unirest:unirest-java:1.4.9'
     compile 'com.amazonaws:aws-java-sdk-ses:1.12.3'
     compile 'io.sentry:sentry-logback:1.7.30'
     compile 'io.sentry:sentry-spring-boot-starter:1.7.30'
@@ -59,46 +59,4 @@ compileQuerydsl {
 
 test {
     useJUnitPlatform()
-    finalizedBy 'jacocoTestReport'
-}
-
-
-jacoco {
-    toolVersion = '0.8.6'
-}
-
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-    }
-
-    finalizedBy 'jacocoTestCoverageVerification'
-}
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            enabled = true
-            element = 'CLASS'
-
-            limit {
-                counter = 'BRANCH'
-                value = 'COVEREDRATIO'
-                minimum = 0.70
-            }
-
-            limit {
-                counter = 'LINE'
-                value = 'TOTALCOUNT'
-                maximum = 100
-            }
-
-            excludes = [
-                    '*.domain.Q*',
-                    '*.base.*',
-                    '*.subscribe.*'
-            ]
-        }
-    }
 }

@@ -2,7 +2,9 @@ package com.lubycon.curriculum.subscribe.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.SendEmailResult;
+import com.lubycon.curriculum.base.service.HttpRequestService;
 import com.lubycon.curriculum.subscribe.domain.Email;
+import com.lubycon.curriculum.subscribe.domain.EmailTemplate;
 import com.lubycon.curriculum.subscribe.dto.EmailSenderDto;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
 import java.util.List;
@@ -16,31 +18,35 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SendEmailService {
 
+  private final EmailTemplateService emailTemplateService;
   private final AmazonSimpleEmailService amazonSimpleEmailService;
   private final EmailRepository emailRepository;
+  private final HttpRequestService httpRequestService;
 
-  public void sendToAllSubscribers(final String subject, final String content) {
+  public void sendToAllSubscribers(final long templateId) {
     final List<String> subscribers = emailRepository.findAll()
         .stream()
         .map(Email::getEmail)
         .collect(Collectors.toList());
 
-    send(subject, content, subscribers);
+    send(templateId, subscribers);
   }
 
-  public void sendToReceivers(final String subject, final String content,
-      final List<String> receivers) {
-    send(subject, content, receivers);
+  public void sendToReceivers(final long templateId, final List<String> receivers) {
+    send(templateId, receivers);
   }
 
-  private void send(final String subject, final String content, final List<String> receivers) {
+  private void send(final long templateId, final List<String> receivers) {
+
+    final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
+    final String content = httpRequestService.getBody(emailTemplate.getUrl());
 
     for (final String receiver : receivers) {
       final String name = receiver.substring(0, receiver.indexOf('@'));
 
       final EmailSenderDto senderDto = EmailSenderDto.builder()
           .to(receiver)
-          .subject(subject)
+          .subject(emailTemplate.getSubject())
           .content(content.replace("{name}", name))
           .build();
 
@@ -49,11 +55,11 @@ public class SendEmailService {
 
       sendingResultMustSuccess(sendEmailResult, receiver);
     }
-
   }
 
 
-  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult, final String receiver) {
+  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult,
+      final String receiver) {
     if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
       log.error("메일 전송 실패 : {}", receiver);
       log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
