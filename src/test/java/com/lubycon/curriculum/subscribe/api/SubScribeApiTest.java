@@ -91,7 +91,7 @@ class SubScribeApiTest extends ApiTest {
   public void subscribeApi409Test() throws Exception {
     // given
     final String url = "/subscribe";
-    final String existEmail = "exist@mail.com";
+    final String existEmail = "exist@email.com";
 
     final SubscribeRequest request = new SubscribeRequest();
     request.setEmail(existEmail);
@@ -105,7 +105,7 @@ class SubScribeApiTest extends ApiTest {
     // then
     resultActions
         .andExpect(status().isConflict())
-        .andExpect(jsonPath("$.message").value("이미 구독 신청하고 있는 이메일입니다"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.CONFLICT_EMAIL.getMessage()));
   }
 
 
