@@ -12,6 +12,7 @@ import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsExcepti
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.ResultActions;
 
 class SubScribeApiTest extends ApiTest {
@@ -82,6 +83,29 @@ class SubScribeApiTest extends ApiTest {
     resultActions
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.email").value(email));
+  }
+
+  @Sql("/make-email.sql")
+  @DisplayName("이미 있는 이메일이라면 409가 발생한다.")
+  @Test
+  public void subscribeApi409Test() throws Exception {
+    // given
+    final String url = "/subscribe";
+    final String existEmail = "exist@mail.com";
+
+    final SubscribeRequest request = new SubscribeRequest();
+    request.setEmail(existEmail);
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(post(url)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)));
+
+    // then
+    resultActions
+        .andExpect(status().isConflict())
+        .andExpect(jsonPath("$.message").value("이미 구독 신청하고 있는 이메일입니다"));
   }
 
 

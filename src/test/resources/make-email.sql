@@ -1,0 +1,1 @@
+INSERT INTO email (email) VALUES ('exist@email.com')
