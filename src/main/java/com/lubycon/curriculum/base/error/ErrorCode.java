@@ -18,7 +18,8 @@ public enum ErrorCode {
   TYPEFORM_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S001", "Typeform secret not equals : "),
   FAILED_SEND_MAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Send mail failed : "),
   SES_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S003", "SES secret not equals : "),
-  EMAIL_TEMPLATE_NOT_FOUND(HttpStatus.NOT_FOUND, "S004", "EmailTemplate Not Found");
+  EMAIL_TEMPLATE_NOT_FOUND(HttpStatus.NOT_FOUND, "S004", "EmailTemplate Not Found"),
+  CONFLICT_EMAIL(HttpStatus.CONFLICT, "S005", "이미 구독 신청하고 있는 이메일입니다.");
 
 
   private final String code;
