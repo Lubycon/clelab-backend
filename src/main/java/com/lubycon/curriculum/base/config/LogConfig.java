@@ -18,7 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class LogConfig {
 
-  @Around("within(com.lubycon.curriculum.*.api.*)")
+  @Around("within(com.lubycon.curriculum.*.api.*) && !@annotation(com.lubycon.curriculum.base.annotation.NoLogging)")
   public Object logging(final ProceedingJoinPoint pjp) throws Throwable {
     final String params = getRequestParams();
 
