@@ -1,9 +1,16 @@
 package com.lubycon.curriculum.subscribe.api;
 
+import com.lubycon.curriculum.subscribe.dto.SubscribeRequest;
+import com.lubycon.curriculum.subscribe.dto.SubscribeResponse;
 import com.lubycon.curriculum.subscribe.dto.TypeformSubscribeRequest;
 import com.lubycon.curriculum.subscribe.service.SubscribeService;
+import com.lubycon.curriculum.subscribe.validation.SubscribeValidator;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +21,8 @@ public class SubScribeApi {
 
   private final SubscribeService subscribeService;
 
+  private final SubscribeValidator signUpValidator;
+
   @PostMapping("/subscribe/typeform")
   public ResponseEntity<Object> typeformSubscribe(
       @RequestBody final TypeformSubscribeRequest request) {
@@ -22,5 +31,19 @@ public class SubScribeApi {
 
     return ResponseEntity.ok()
         .build();
+  }
+
+  @InitBinder("subscribeRequest")
+  public void initBinder(final WebDataBinder webDataBinder) {
+    webDataBinder.addValidators(signUpValidator);
+  }
+
+  @PostMapping("/subscribe")
+  public ResponseEntity<Object> subscribe(
+      @RequestBody @Valid final SubscribeRequest subscribeRequest) {
+    final SubscribeResponse response = subscribeService.subscribe(subscribeRequest.getEmail());
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(response);
   }
 }
