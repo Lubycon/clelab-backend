@@ -12,8 +12,6 @@ import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -28,17 +26,16 @@ class CurriculumServiceTest {
 
   @Sql("/make-four-curriculums-only.sql")
   @DisplayName("커리큘럼 리스트를 가져온다.")
-  @ParameterizedTest
-  @ValueSource(ints = {0, 1, 2, 3})
-  public void getCurriculumsTest(final int index) {
+  @Test
+  public void getCurriculumsOrderByIdDescTest() {
     // when
     final List<CurriculumResponse> curriculums = curriculumService.getCurriculums();
 
     // then
     assertThat(curriculums.size()).isEqualTo(4);
-    assertThat(curriculums.get(index).getTitle()).isEqualTo(index + "번 커리큘럼의 제목");
-    assertThat(curriculums.get(index).getDescription()).isEqualTo(index + "번 커리큘럼의 설명");
-    assertThat(curriculums.get(index).getThumbnail()).isEqualTo(index + "번 커리큘럼의 썸네일");
+    assertThat(curriculums.get(0).getTitle()).isEqualTo(3 + "번 커리큘럼의 제목");
+    assertThat(curriculums.get(0).getDescription()).isEqualTo(3 + "번 커리큘럼의 설명");
+    assertThat(curriculums.get(0).getThumbnail()).isEqualTo(3 + "번 커리큘럼의 썸네일");
   }
 
   @Sql("/make-curriculum.sql")
