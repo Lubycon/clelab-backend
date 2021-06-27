@@ -27,7 +27,7 @@ public class EmailSenderDto {
 
   public SendEmailRequest toSendRequestDto() {
     final Destination destination = new Destination()
-        .withBccAddresses(this.to);
+        .withToAddresses(this.to);
 
     final Message message = new Message()
         .withSubject(createContent(this.subject))
