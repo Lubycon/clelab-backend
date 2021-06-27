@@ -40,7 +40,7 @@ public class CurriculumService {
 
 
   private List<Curriculum> findAll() {
-    return curriculumRepository.findAll();
+    return curriculumRepository.findByOrderByIdDesc();
   }
 
   private Curriculum findById(final long id) {
