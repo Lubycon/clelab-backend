@@ -1,6 +1,8 @@
 package com.lubycon.curriculum.curriculum.dto;
 
+import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +23,16 @@ public class SaveCurriculums {
     this.description = description;
     this.thumbnail = thumbnail;
     this.sections = sections;
+  }
+
+  public Curriculum toEntity() {
+    return Curriculum.builder()
+        .title(title)
+        .description(description)
+        .thumbnail(thumbnail)
+        .sections(sections.stream()
+            .map(SaveSections::toEntity)
+            .collect(Collectors.toList()))
+        .build();
   }
 }

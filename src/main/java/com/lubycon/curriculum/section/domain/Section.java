@@ -48,11 +48,12 @@ public class Section extends BaseTimeEntity {
   private Curriculum curriculum;
 
   @Builder
-  public Section(String title, String description, Integer order,
-      Curriculum curriculum) {
+  public Section(final String title, final String description, final Integer order,
+      final Curriculum curriculum, final List<Blog> blogs) {
     this.title = title;
     this.description = description;
     this.order = order;
     this.curriculum = curriculum;
+    this.blogs = blogs;
   }
 }

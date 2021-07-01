@@ -28,7 +28,8 @@ public class CurriculumService {
   }
 
   public long saveCurriculum(final SaveCurriculums curriculums) {
-    return 0;
+    final Curriculum savedCurriculum = curriculumRepository.save(curriculums.toEntity());
+    return savedCurriculum.getId();
   }
 
   @Transactional(readOnly = true)
