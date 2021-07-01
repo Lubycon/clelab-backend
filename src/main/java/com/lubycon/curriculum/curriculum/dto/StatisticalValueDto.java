@@ -25,6 +25,7 @@ public class StatisticalValueDto {
     return StatisticalValue.builder()
         .keyword(keyword)
         .value(value)
+        .courseTopic(courseTopic)
         .build();
   }
 }
