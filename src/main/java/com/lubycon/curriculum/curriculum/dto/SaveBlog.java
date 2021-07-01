@@ -22,4 +22,5 @@ public class SaveBlog {
         .link(url)
         .build();
   }
+
 }
