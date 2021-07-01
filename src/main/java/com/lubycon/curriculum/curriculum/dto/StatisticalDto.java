@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class StatisticalResponse {
+public class StatisticalDto {
 
   @NotNull
   private final String title;
@@ -16,14 +16,25 @@ public class StatisticalResponse {
   private final String description;
 
   @NotNull
-  private final List<StatisticalValueResponse> values;
+  private final List<StatisticalValueDto> values;
 
-  public StatisticalResponse(final StatisticalInfo statisticalInfo) {
+  public StatisticalDto(final StatisticalInfo statisticalInfo) {
     this.title = statisticalInfo.getTitle();
     this.description = statisticalInfo.getDescription();
     this.values = statisticalInfo.getStatisticalValues()
         .stream()
-        .map(StatisticalValueResponse::new)
+        .map(StatisticalValueDto::new)
         .collect(Collectors.toList());
+  }
+
+  public StatisticalInfo toEntity() {
+    return StatisticalInfo.builder()
+        .title(title)
+        .description(description)
+        .statisticalValues(values
+            .stream()
+            .map(StatisticalValueDto::toEntity)
+            .collect(Collectors.toList()))
+        .build();
   }
 }

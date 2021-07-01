@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,5 +38,11 @@ public class StatisticalInfo {
   @JoinColumn(name = "intro_section_id", insertable = false, updatable = false)
   private IntroSection introSection;
 
-
+  @Builder
+  public StatisticalInfo(final String title, final String description,
+      final List<StatisticalValue> statisticalValues) {
+    this.title = title;
+    this.description = description;
+    this.statisticalValues = statisticalValues;
+  }
 }

@@ -46,10 +46,11 @@ public class Curriculum extends BaseTimeEntity {
 
   @Builder
   public Curriculum(final String title, final String description, final String thumbnail,
-      final List<Section> sections) {
+      final List<Section> sections, final IntroSection introSection) {
     this.title = title;
     this.description = description;
     this.thumbnail = thumbnail;
     this.sections = sections;
+    this.introSection = introSection;
   }
 }

@@ -15,6 +15,7 @@ public class SaveCurriculums {
   private String description;
   private String thumbnail;
   private List<SaveSections> sections;
+  private IntroSectionRequest intro;
 
   @Builder
   public SaveCurriculums(final String title, final String description, final String thumbnail,
@@ -30,6 +31,7 @@ public class SaveCurriculums {
         .title(title)
         .description(description)
         .thumbnail(thumbnail)
+        .introSection(intro.toEntity())
         .sections(sections.stream()
             .map(SaveSections::toEntity)
             .collect(Collectors.toList()))

@@ -62,10 +62,14 @@ public class IntroSection {
   public IntroSection(final IntroDescription description,
       final Curriculum curriculum,
       final MajorCompanyFrequency majorCompanyFrequency,
-      final GoogleTrend googleTrend) {
+      final GoogleTrend googleTrend,
+      final StackOverflowTrend stackOverflowTrend,
+      final List<StatisticalInfo> statisticalInfo) {
     this.description = description;
     this.curriculum = curriculum;
     this.majorCompanyFrequency = majorCompanyFrequency;
     this.googleTrend = googleTrend;
+    this.stackOverflowTrend = stackOverflowTrend;
+    this.statisticalInfo = statisticalInfo;
   }
 }

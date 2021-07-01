@@ -19,6 +19,9 @@ public class AddCurriculumsRequest {
 
   @NotBlank(message = "커리큘럼 썸네일은 필수사항입니다.")
   private String thumbnail;
+
+  private IntroSectionRequest intro;
+
   private List<SectionsRequest> sections;
 
   public SaveCurriculums toServiceDto() {

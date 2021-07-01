@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class StatisticalValueResponse {
+public class StatisticalValueDto {
 
   @NotNull
   private final String keyword;
@@ -15,9 +15,16 @@ public class StatisticalValueResponse {
 
   private final boolean courseTopic;
 
-  public StatisticalValueResponse(final StatisticalValue statisticalValue) {
+  public StatisticalValueDto(final StatisticalValue statisticalValue) {
     this.keyword = statisticalValue.getKeyword();
     this.value = statisticalValue.getValue();
     this.courseTopic = statisticalValue.isCourseTopic();
+  }
+
+  public StatisticalValue toEntity() {
+    return StatisticalValue.builder()
+        .keyword(keyword)
+        .value(value)
+        .build();
   }
 }

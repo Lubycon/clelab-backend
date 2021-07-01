@@ -1,10 +1,10 @@
 package com.lubycon.curriculum.curriculum.dto.v2;
 
-import com.lubycon.curriculum.curriculum.dto.GoogleTrendResponse;
-import com.lubycon.curriculum.curriculum.dto.IntroDescriptionResponse;
-import com.lubycon.curriculum.curriculum.dto.MajorCompanyFrequencyResponse;
-import com.lubycon.curriculum.curriculum.dto.StackOverflowTrendResponse;
-import com.lubycon.curriculum.curriculum.dto.StatisticalResponse;
+import com.lubycon.curriculum.curriculum.dto.GoogleTrendDto;
+import com.lubycon.curriculum.curriculum.dto.IntroDescriptionDto;
+import com.lubycon.curriculum.curriculum.dto.MajorCompanyFrequencyDto;
+import com.lubycon.curriculum.curriculum.dto.StackOverflowTrendDto;
+import com.lubycon.curriculum.curriculum.dto.StatisticalDto;
 import com.lubycon.curriculum.section.domain.IntroSection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,27 +16,27 @@ import org.jetbrains.annotations.Nullable;
 public class IntroResponseV2 {
 
   @Nullable
-  private final IntroDescriptionResponse description;
+  private final IntroDescriptionDto description;
 
   @Nullable
-  private final MajorCompanyFrequencyResponse majorCompany;
+  private final MajorCompanyFrequencyDto majorCompany;
 
   @Nullable
-  private final GoogleTrendResponse googleTrend;
+  private final GoogleTrendDto googleTrend;
 
   @Nullable
-  private final StackOverflowTrendResponse stackOverflowTrend;
+  private final StackOverflowTrendDto stackOverflowTrend;
 
   @NotNull
-  private final List<StatisticalResponse> statistics;
+  private final List<StatisticalDto> statistics;
 
   public IntroResponseV2(final IntroSection intro) {
-    this.description = intro.getDescription() == null ? null : new IntroDescriptionResponse(intro.getDescription());
-    this.majorCompany = intro.getMajorCompanyFrequency() == null ? null : new MajorCompanyFrequencyResponse(intro.getMajorCompanyFrequency());
-    this.googleTrend = intro.getGoogleTrend() == null ? null : new GoogleTrendResponse(intro.getGoogleTrend());
-    this.stackOverflowTrend = intro.getStackOverflowTrend() == null ? null : new StackOverflowTrendResponse(intro.getStackOverflowTrend());
+    this.description = intro.getDescription() == null ? null : new IntroDescriptionDto(intro.getDescription());
+    this.majorCompany = intro.getMajorCompanyFrequency() == null ? null : new MajorCompanyFrequencyDto(intro.getMajorCompanyFrequency());
+    this.googleTrend = intro.getGoogleTrend() == null ? null : new GoogleTrendDto(intro.getGoogleTrend());
+    this.stackOverflowTrend = intro.getStackOverflowTrend() == null ? null : new StackOverflowTrendDto(intro.getStackOverflowTrend());
     this.statistics = intro.getStatisticalInfo().stream()
-        .map(StatisticalResponse::new)
+        .map(StatisticalDto::new)
         .collect(Collectors.toList());
   }
 

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,4 +34,11 @@ public class StatisticalValue {
   @ManyToOne
   @JoinColumn(name = "statistical_info_id", referencedColumnName = "id", insertable = false, updatable = false)
   private StatisticalInfo statisticalInfo;
+
+  @Builder
+  public StatisticalValue(final String keyword, final String value, final boolean courseTopic) {
+    this.keyword = keyword;
+    this.value = value;
+    this.courseTopic = courseTopic;
+  }
 }

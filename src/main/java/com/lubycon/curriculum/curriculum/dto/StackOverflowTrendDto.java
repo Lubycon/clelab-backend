@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class StackOverflowTrendResponse {
+public class StackOverflowTrendDto {
 
   @NotNull
   private final String title;
@@ -16,9 +16,17 @@ public class StackOverflowTrendResponse {
   @NotNull
   private final String imagePath;
 
-  public StackOverflowTrendResponse(final StackOverflowTrend stackOverflowTrend) {
+  public StackOverflowTrendDto(final StackOverflowTrend stackOverflowTrend) {
     this.title = stackOverflowTrend.getTitle();
     this.description = stackOverflowTrend.getDescription();
     this.imagePath = stackOverflowTrend.getImagePath();
+  }
+
+  public StackOverflowTrend toEntity() {
+    return StackOverflowTrend.builder()
+        .title(title)
+        .description(description)
+        .imagePath(imagePath)
+        .build();
   }
 }
