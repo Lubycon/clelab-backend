@@ -4,6 +4,7 @@ import com.lubycon.curriculum.curriculum.dto.AddCurriculumsRequest;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
 import com.lubycon.curriculum.curriculum.service.CurriculumService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class CurriculumApi {
 
   @PostMapping(value = {"/v2/curriculums", "/v1/curriculums", "/curriculums"})
   public ResponseEntity<Long> addCurriculums(
-      @RequestBody final AddCurriculumsRequest curriculumsRequest) {
+      @RequestBody @Valid final AddCurriculumsRequest curriculumsRequest) {
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(curriculumService.saveCurriculum(curriculumsRequest.toServiceDto()));
   }

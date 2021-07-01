@@ -2,6 +2,7 @@ package com.lubycon.curriculum.curriculum.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,13 @@ import lombok.Setter;
 @Getter
 public class AddCurriculumsRequest {
 
+  @NotBlank(message = "커리큘럼 제목은 필수사항입니다.")
   private String title;
+
+  @NotBlank(message = "커리큘럼 설명은 필수사항입니다.")
   private String description;
+
+  @NotBlank(message = "커리큘럼 썸네일은 필수사항입니다.")
   private String thumbnail;
   private List<SectionsRequest> sections;
 

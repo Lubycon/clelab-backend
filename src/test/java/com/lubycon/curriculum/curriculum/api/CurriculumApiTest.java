@@ -74,4 +74,37 @@ class CurriculumApiTest extends ApiTest {
         .andExpect(status().isCreated());
   }
 
+  @DisplayName("커리큘럼을 저장할 때, 유효성 제목이 없으면 400 에러가 난다.")
+  @Test
+  public void saveCurriculum400Test() throws Exception {
+    // given
+    final String url = "/v2/curriculums";
+
+    final List<BlogRequest> blogs = Arrays.asList(new BlogRequest("제목1", "url1"));
+
+    final List<SectionsRequest> sections = Arrays.asList(SectionsRequest.builder()
+        .title("제목")
+        .description("설명설명설명")
+        .orderBy(1)
+        .blogs(blogs)
+        .build());
+
+    final AddCurriculumsRequest curriculums = AddCurriculumsRequest.builder()
+        .title(null)
+        .description("설명")
+        .thumbnail("썸네일")
+        .sections(sections)
+        .build();
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(post(url)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(curriculums)));
+
+    // then
+    resultActions
+        .andExpect(status().isBadRequest());
+  }
+
 }
