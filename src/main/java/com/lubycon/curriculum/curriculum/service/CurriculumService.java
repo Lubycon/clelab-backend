@@ -3,6 +3,7 @@ package com.lubycon.curriculum.curriculum.service;
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
+import com.lubycon.curriculum.curriculum.dto.SaveCurriculums;
 import com.lubycon.curriculum.curriculum.dto.v2.CurriculumSectionsResponseV2;
 import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import com.lubycon.curriculum.curriculum.repository.CurriculumRepository;
@@ -24,6 +25,10 @@ public class CurriculumService {
         .stream()
         .map(CurriculumResponse::new)
         .collect(Collectors.toList());
+  }
+
+  public long saveCurriculum(final SaveCurriculums curriculums) {
+    return 0;
   }
 
   @Transactional(readOnly = true)
