@@ -53,6 +53,5 @@ public class Curriculum extends BaseTimeEntity {
     this.thumbnail = thumbnail;
     this.sections = sections;
     this.introSection = introSection;
-    introSection.setCurriculum(this);
   }
 }

@@ -33,7 +33,7 @@ public class SaveCurriculums {
         .title(title)
         .description(description)
         .thumbnail(thumbnail)
-        .introSection(intro.toEntity())
+        .introSection(intro == null ? null : intro.toEntity())
         .sections(sections.stream()
             .map(SaveSections::toEntity)
             .collect(Collectors.toList()))
