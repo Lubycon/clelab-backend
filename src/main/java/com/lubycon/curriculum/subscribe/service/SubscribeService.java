@@ -17,4 +17,12 @@ public class SubscribeService {
     return new SubscribeResponse(savedEmail);
   }
 
+  public void cancelSubscribe(final String email, final Long id) {
+    final Email findEmail = emailRepository.findByEmail(email);
+
+    if (findEmail.getId().equals(id)) {
+      emailRepository.delete(findEmail);
+    }
+  }
+
 }

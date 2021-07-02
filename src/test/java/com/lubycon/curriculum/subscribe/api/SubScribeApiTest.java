@@ -1,6 +1,7 @@
 package com.lubycon.curriculum.subscribe.api;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -186,5 +187,21 @@ class SubScribeApiTest extends ApiTest {
         + "}";
   }
 
+  @Sql("/make-email.sql")
+  @DisplayName("구독 신청 취소가 가능하다.")
+  @Test
+  public void cancelSubscribeTest() throws Exception {
+    // given
+    final String email = "exist@email.com";
+    final String id = "1";
 
+    final String url = "/subscribe/cancel/" + email + "/" + id;
+
+    // when
+    final ResultActions resultActions = mockMvc.perform(get(url));
+
+    // then
+    resultActions
+        .andExpect(status().isOk());
+  }
 }
