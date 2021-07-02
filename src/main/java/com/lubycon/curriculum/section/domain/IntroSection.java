@@ -5,6 +5,7 @@ import com.lubycon.curriculum.section.model.IntroDescription;
 import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -39,11 +40,11 @@ public class IntroSection {
   })
   private IntroDescription description;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "major_company_frequency_id", insertable = false, updatable = false)
   private MajorCompanyFrequency majorCompanyFrequency;
 
@@ -51,21 +52,29 @@ public class IntroSection {
   @JoinColumn(name = "google_trend_id", insertable = false, updatable = false)
   private GoogleTrend googleTrend;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "stack_overflow_trend_id", insertable = false, updatable = false)
   private StackOverflowTrend stackOverflowTrend;
 
-  @OneToMany(mappedBy = "introSection", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "introSection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<StatisticalInfo> statisticalInfo;
 
   @Builder
   public IntroSection(final IntroDescription description,
       final Curriculum curriculum,
       final MajorCompanyFrequency majorCompanyFrequency,
-      final GoogleTrend googleTrend) {
+      final GoogleTrend googleTrend,
+      final StackOverflowTrend stackOverflowTrend,
+      final List<StatisticalInfo> statisticalInfo) {
     this.description = description;
     this.curriculum = curriculum;
     this.majorCompanyFrequency = majorCompanyFrequency;
     this.googleTrend = googleTrend;
+    this.stackOverflowTrend = stackOverflowTrend;
+    this.statisticalInfo = statisticalInfo;
+  }
+
+  public void setCurriculum(final Curriculum curriculum) {
+    this.curriculum = curriculum;
   }
 }

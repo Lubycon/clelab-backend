@@ -5,16 +5,16 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class MajorCompanyFrequencyResponse {
+public class MajorCompanyFrequencyDto {
 
   @NotNull
   private final String title;
 
   @NotNull
-  private final MajorCompaniesResponse companies;
+  private final MajorCompaniesDto companies;
 
-  public MajorCompanyFrequencyResponse(final MajorCompanyFrequency majorCompanyFrequency) {
+  public MajorCompanyFrequencyDto(final MajorCompanyFrequency majorCompanyFrequency) {
     this.title = majorCompanyFrequency.getTitle();
-    this.companies = new MajorCompaniesResponse(majorCompanyFrequency);
+    this.companies = new MajorCompaniesDto(majorCompanyFrequency);
   }
 }

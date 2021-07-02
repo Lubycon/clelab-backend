@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class GoogleTrendResponse {
+public class GoogleTrendDto {
 
   @NotNull
   private final String title;
@@ -13,7 +13,7 @@ public class GoogleTrendResponse {
   @NotNull
   private final String csvHtml;
 
-  public GoogleTrendResponse(final GoogleTrend googleTrend) {
+  public GoogleTrendDto(final GoogleTrend googleTrend) {
     this.title = googleTrend.getTitle();
     this.csvHtml = googleTrend.getCsvHtml();
   }

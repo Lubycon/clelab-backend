@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 @Getter
-public class IntroDescriptionResponse {
+public class IntroDescriptionDto {
 
   @Nullable
   private final String summary;
@@ -20,7 +20,7 @@ public class IntroDescriptionResponse {
   private final String footer;
 
 
-  public IntroDescriptionResponse(final IntroDescription intro) {
+  public IntroDescriptionDto(final IntroDescription intro) {
     this.summary = intro.getSummary();
     this.subSummary = intro.getSubSummary();
     this.header = intro.getHeader();

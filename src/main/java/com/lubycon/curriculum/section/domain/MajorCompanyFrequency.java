@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,4 +47,18 @@ public class MajorCompanyFrequency {
   @Column(name = "yanolja", nullable = false)
   private boolean yanolja;
 
+  @Builder
+  public MajorCompanyFrequency(
+      final String title, final boolean naver, final boolean kakao, final boolean line,
+      final boolean coupang, final boolean woowabros, final boolean toss, final boolean daangn, final boolean yanolja) {
+    this.title = title;
+    this.naver = naver;
+    this.kakao = kakao;
+    this.line = line;
+    this.coupang = coupang;
+    this.woowabros = woowabros;
+    this.toss = toss;
+    this.daangn = daangn;
+    this.yanolja = yanolja;
+  }
 }
