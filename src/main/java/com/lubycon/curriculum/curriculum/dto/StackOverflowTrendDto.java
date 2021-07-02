@@ -2,19 +2,23 @@ package com.lubycon.curriculum.curriculum.dto;
 
 import com.lubycon.curriculum.section.domain.StackOverflowTrend;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+@NoArgsConstructor
+@Setter
 @Getter
 public class StackOverflowTrendDto {
 
   @NotNull
-  private final String title;
+  private String title;
 
   @NotNull
-  private final String description;
+  private String description;
 
   @NotNull
-  private final String imagePath;
+  private String imagePath;
 
   public StackOverflowTrendDto(final StackOverflowTrend stackOverflowTrend) {
     this.title = stackOverflowTrend.getTitle();

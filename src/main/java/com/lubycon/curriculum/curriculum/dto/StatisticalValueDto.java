@@ -2,18 +2,22 @@ package com.lubycon.curriculum.curriculum.dto;
 
 import com.lubycon.curriculum.section.domain.StatisticalValue;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+@NoArgsConstructor
+@Setter
 @Getter
 public class StatisticalValueDto {
 
   @NotNull
-  private final String keyword;
+  private String keyword;
 
   @NotNull
-  private final String value;
+  private String value;
 
-  private final boolean courseTopic;
+  private boolean courseTopic;
 
   public StatisticalValueDto(final StatisticalValue statisticalValue) {
     this.keyword = statisticalValue.getKeyword();

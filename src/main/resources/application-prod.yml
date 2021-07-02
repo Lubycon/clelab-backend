@@ -3,3 +3,4 @@ spring:
     properties:
       hibernate:
         ddl_auto: none
+    open-in-view: false

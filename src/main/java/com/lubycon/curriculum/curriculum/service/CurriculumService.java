@@ -7,6 +7,7 @@ import com.lubycon.curriculum.curriculum.dto.SaveCurriculums;
 import com.lubycon.curriculum.curriculum.dto.v2.CurriculumSectionsResponseV2;
 import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import com.lubycon.curriculum.curriculum.repository.CurriculumRepository;
+import com.lubycon.curriculum.section.repository.IntroSectionRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CurriculumService {
 
   private final CurriculumRepository curriculumRepository;
+  private final IntroSectionRepository introSectionRepository;
 
   @Transactional(readOnly = true)
   public List<CurriculumResponse> getCurriculums() {
@@ -27,8 +29,12 @@ public class CurriculumService {
         .collect(Collectors.toList());
   }
 
+  @Transactional
   public long saveCurriculum(final SaveCurriculums curriculums) {
-    final Curriculum savedCurriculum = curriculumRepository.save(curriculums.toEntity());
+    final Curriculum curriculum = curriculums.toEntity();
+
+    final Curriculum savedCurriculum = curriculumRepository.save(curriculum);
+
     return savedCurriculum.getId();
   }
 

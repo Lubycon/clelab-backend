@@ -20,7 +20,7 @@ public class AddCurriculumsRequest {
   @NotBlank(message = "커리큘럼 썸네일은 필수사항입니다.")
   private String thumbnail;
 
-  private IntroSectionRequest intro;
+  private IntroSectionDto intro;
 
   private List<SectionsRequest> sections;
 
@@ -32,15 +32,17 @@ public class AddCurriculumsRequest {
         .sections(sections.stream()
             .map(SectionsRequest::toServiceDto)
             .collect(Collectors.toList()))
+        .intro(intro)
         .build();
   }
 
   @Builder
   public AddCurriculumsRequest(final String title, final String description, final String thumbnail,
-      final List<SectionsRequest> sections) {
+      final List<SectionsRequest> sections, final IntroSectionDto intro) {
     this.title = title;
     this.description = description;
     this.thumbnail = thumbnail;
     this.sections = sections;
+    this.intro = intro;
   }
 }

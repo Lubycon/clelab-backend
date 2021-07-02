@@ -5,12 +5,14 @@ import com.lubycon.curriculum.section.model.IntroDescription;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+@NoArgsConstructor
 @Setter
 @Getter
-public class IntroSectionRequest {
+public class IntroSectionDto {
 
   @NotNull
   private String summary;

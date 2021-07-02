@@ -15,16 +15,18 @@ public class SaveCurriculums {
   private String description;
   private String thumbnail;
   private List<SaveSections> sections;
-  private IntroSectionRequest intro;
+  private IntroSectionDto intro;
 
   @Builder
   public SaveCurriculums(final String title, final String description, final String thumbnail,
-      final List<SaveSections> sections) {
+      final List<SaveSections> sections, final IntroSectionDto intro) {
     this.title = title;
     this.description = description;
     this.thumbnail = thumbnail;
     this.sections = sections;
+    this.intro = intro;
   }
+
 
   public Curriculum toEntity() {
     return Curriculum.builder()

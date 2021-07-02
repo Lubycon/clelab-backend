@@ -4,6 +4,7 @@ import com.lubycon.curriculum.base.domain.BaseTimeEntity;
 import com.lubycon.curriculum.section.domain.IntroSection;
 import com.lubycon.curriculum.section.domain.Section;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,7 +38,7 @@ public class Curriculum extends BaseTimeEntity {
   @Column(name = "thumbnail", nullable = false)
   private String thumbnail;
 
-  @OneToOne(mappedBy = "curriculum", fetch = FetchType.LAZY)
+  @OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
   private IntroSection introSection;
 
   @OneToMany(mappedBy = "curriculum", fetch = FetchType.LAZY)
@@ -52,5 +53,6 @@ public class Curriculum extends BaseTimeEntity {
     this.thumbnail = thumbnail;
     this.sections = sections;
     this.introSection = introSection;
+    introSection.setCurriculum(this);
   }
 }

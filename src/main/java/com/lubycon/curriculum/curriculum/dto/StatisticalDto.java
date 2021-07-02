@@ -4,19 +4,23 @@ import com.lubycon.curriculum.section.domain.StatisticalInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+@NoArgsConstructor
+@Setter
 @Getter
 public class StatisticalDto {
 
   @NotNull
-  private final String title;
+  private String title;
 
   @NotNull
-  private final String description;
+  private String description;
 
   @NotNull
-  private final List<StatisticalValueDto> values;
+  private List<StatisticalValueDto> values;
 
   public StatisticalDto(final StatisticalInfo statisticalInfo) {
     this.title = statisticalInfo.getTitle();
