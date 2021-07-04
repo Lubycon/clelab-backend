@@ -19,7 +19,9 @@ public enum ErrorCode {
   FAILED_SEND_MAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Send mail failed : "),
   SES_SECRET_NOT_EQUALS(HttpStatus.UNAUTHORIZED, "S003", "SES secret not equals : "),
   EMAIL_TEMPLATE_NOT_FOUND(HttpStatus.NOT_FOUND, "S004", "EmailTemplate Not Found"),
-  CONFLICT_EMAIL(HttpStatus.CONFLICT, "S005", "이미 구독 신청하고 있는 이메일입니다.");
+  CONFLICT_EMAIL(HttpStatus.CONFLICT, "S005", "이미 구독 신청하고 있는 이메일입니다."),
+  FAILED_CANCEL_SUBSCRIBE(HttpStatus.BAD_REQUEST, "S006",
+      "해지에 실패했습니다. 관리자(admin@clelab.io)에게 문의해주세요.");
 
 
   private final String code;
