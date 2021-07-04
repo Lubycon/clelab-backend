@@ -1,6 +1,10 @@
 package com.lubycon.curriculum.base.error;
 
+import static com.lubycon.curriculum.base.util.HtmlResponseUtil.alertAndMove;
+
 import com.lubycon.curriculum.base.error.exception.BusinessException;
+import com.lubycon.curriculum.base.error.exception.HtmlBusinessException;
+import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -53,6 +57,14 @@ public class GlobalExceptionHandler {
     final ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED;
     final ErrorResponse response = ErrorResponse.of(errorCode);
     return new ResponseEntity<>(response, errorCode.getStatus());
+  }
+
+  @ExceptionHandler(HtmlBusinessException.class)
+  protected void htmlBusinessException(final BusinessException e) throws IOException {
+    log.error("HtmlBusinessException", e);
+    final ErrorCode errorCode = e.getErrorCode();
+
+    alertAndMove(errorCode.getMessage(), "https://clelab.io");
   }
 
   @ExceptionHandler(Exception.class)
