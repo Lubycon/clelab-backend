@@ -1,12 +1,13 @@
 package com.lubycon.curriculum.subscribe.api;
 
+import static com.lubycon.curriculum.base.util.HtmlResponseUtil.alertAndMove;
+
 import com.lubycon.curriculum.subscribe.dto.SubscribeRequest;
 import com.lubycon.curriculum.subscribe.dto.SubscribeResponse;
 import com.lubycon.curriculum.subscribe.dto.TypeformSubscribeRequest;
 import com.lubycon.curriculum.subscribe.service.SubscribeService;
 import com.lubycon.curriculum.subscribe.validation.SubscribeValidator;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -56,10 +57,7 @@ public class SubScribeApi {
   public void cancelSubscribe(@PathVariable final String email, @PathVariable final Long id,
       final HttpServletResponse response) throws IOException {
     subscribeService.cancelSubscribe(email, id);
+    alertAndMove("구독이 해지되었습니다.", "https://clelab.io");
 
-    response.setContentType("text/html; charset=UTF-8");
-    final PrintWriter out = response.getWriter();
-    out.println("<script>alert('구독이 해지되었습니다.'); location.replace('https://clelab.io');</script>");
-    out.flush();
   }
 }
