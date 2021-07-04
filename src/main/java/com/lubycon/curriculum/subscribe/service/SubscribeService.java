@@ -2,6 +2,7 @@ package com.lubycon.curriculum.subscribe.service;
 
 import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.dto.SubscribeResponse;
+import com.lubycon.curriculum.subscribe.exception.FailedCancelSubscribeException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,13 @@ public class SubscribeService {
   public void cancelSubscribe(final String email, final Long id) {
     final Email findEmail = emailRepository.findByEmail(email);
 
-    if (findEmail.getId().equals(id)) {
-      emailRepository.delete(findEmail);
+    idMustBeSame(id, findEmail);
+    emailRepository.delete(findEmail);
+  }
+
+  private void idMustBeSame(final Long id, final Email findEmail) {
+    if (findEmail == null || !findEmail.getId().equals(id)) {
+      throw new FailedCancelSubscribeException();
     }
   }
 
