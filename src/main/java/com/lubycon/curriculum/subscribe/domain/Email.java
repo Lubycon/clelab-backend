@@ -22,6 +22,12 @@ public class Email {
   @Column(name = "email", nullable = false, unique = true)
   private String email;
 
+  @Column(name = "is_subscribe", nullable = false, columnDefinition = "boolean default false")
+  private boolean subscribe;
+
+  @Column(name = "auth_code", nullable = false)
+  private String authCode;
+
   public Email(final String email) {
     this.email = email;
   }
