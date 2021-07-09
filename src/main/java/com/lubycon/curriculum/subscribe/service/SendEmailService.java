@@ -31,7 +31,7 @@ public class SendEmailService {
   private final HttpRequestService httpRequestService;
 
   public void sendToAllSubscribers(final long templateId) {
-    final List<String> subscribers = emailRepository.findAll()
+    final List<String> subscribers = emailRepository.findAllBySubscribe(true)
         .stream()
         .map(Email::getEmail)
         .collect(Collectors.toList());
