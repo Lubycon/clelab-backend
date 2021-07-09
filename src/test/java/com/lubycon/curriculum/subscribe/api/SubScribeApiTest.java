@@ -1,6 +1,5 @@
 package com.lubycon.curriculum.subscribe.api;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -9,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.lubycon.curriculum.base.ApiTest;
 import com.lubycon.curriculum.base.error.ErrorCode;
 import com.lubycon.curriculum.subscribe.dto.SubscribeRequest;
-import com.lubycon.curriculum.subscribe.exception.TypeFormSecretNotEqualsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -17,52 +15,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.ResultActions;
 
 class SubScribeApiTest extends ApiTest {
-
-  @DisplayName("Typeform 웹훅을 통해 이메일을 저장할 수 있다.")
-  @Test
-  public void typeformWebHookTest() throws Exception {
-    // given
-    typeformFilterMockMvcSetUp();
-
-    final String url = "/subscribe/typeform";
-    final String email = "test@mail.com";
-    final String body = getRequestBody(email);
-
-    // when
-    final ResultActions resultActions = mockMvc.perform(post(url)
-        .header("Typeform-Signature", "local")
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .accept(MediaType.APPLICATION_JSON)
-        .content(body));
-
-    // then
-    resultActions
-        .andExpect(status().isOk());
-  }
-
-
-  @DisplayName("Typeform 비밀키가 다르면 401이 발생한다.")
-  @Test
-  public void typeformWebHook401Test() throws Exception {
-    // given
-    typeformFilterMockMvcSetUp();
-
-    final String url = "/subscribe/typeform";
-    final String email = "test@mail.com";
-    final String wrongSecretKey = "wrong_secret_key";
-    final String body = getRequestBody(email);
-
-    // when
-    assertThatThrownBy(() -> {
-      mockMvc.perform(post(url)
-          .header("Typeform-Signature", wrongSecretKey)
-          .contentType(MediaType.APPLICATION_JSON_VALUE)
-          .accept(MediaType.APPLICATION_JSON)
-          .content(body));
-    })
-        .isInstanceOf(TypeFormSecretNotEqualsException.class) // then
-        .hasMessageContaining(ErrorCode.TYPEFORM_SECRET_NOT_EQUALS.getMessage() + wrongSecretKey);
-  }
 
   @DisplayName("이메일을 통해 구독 신청을 할 수 있다.")
   @Test

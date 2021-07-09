@@ -8,5 +8,3 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-typeform:
-  secret: local
