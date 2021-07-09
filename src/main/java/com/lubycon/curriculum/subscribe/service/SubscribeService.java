@@ -6,6 +6,7 @@ import com.lubycon.curriculum.subscribe.exception.EmailNotFoundException;
 import com.lubycon.curriculum.subscribe.exception.FailedCancelSubscribeException;
 import com.lubycon.curriculum.subscribe.exception.FailedSubscribeException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,17 @@ public class SubscribeService {
   private final EmailRepository emailRepository;
   private final SendEmailService sendEmailService;
 
+  @Transactional
   public SubscribeResponse sendSubscribeMail(final String email) {
-    final String authCode = RandomStringUtils.randomAlphabetic(6);
-    final Email savedEmail = emailRepository.save(new Email(email, authCode));
-    sendEmailService.sendSubscribeMail(email, authCode);
-    return new SubscribeResponse(savedEmail);
+    final Optional<Email> findEmail = emailRepository.findByEmail(email);
+
+    if (findEmail.isPresent()) {
+      sendMail(email, findEmail.get().getAuthCode());
+    } else {
+      createEmailAndSendMail(email);
+    }
+
+    return new SubscribeResponse(email);
   }
 
   @Transactional
@@ -37,6 +44,16 @@ public class SubscribeService {
 
     idMustBeSame(id, findEmail);
     emailRepository.delete(findEmail);
+  }
+
+  private void createEmailAndSendMail(final String email) {
+    final String authCode = RandomStringUtils.randomAlphabetic(6);
+    emailRepository.save(new Email(email, authCode));
+    sendMail(email, authCode);
+  }
+
+  private void sendMail(final String email, final String authCode) {
+    sendEmailService.sendSubscribeMail(email, authCode);
   }
 
   private void idMustBeSame(final Long id, final Email findEmail) {
