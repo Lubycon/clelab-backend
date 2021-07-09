@@ -11,12 +11,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class SendEmailService {
+
+  @Value("${aws.ses.greeting-url}")
+  private String greetingUrl;
+
+  @Value("${domain}")
+  private String domain;
 
   private final EmailTemplateService emailTemplateService;
   private final AmazonSimpleEmailService amazonSimpleEmailService;
@@ -29,14 +36,28 @@ public class SendEmailService {
         .map(Email::getEmail)
         .collect(Collectors.toList());
 
-    send(templateId, subscribers);
+    sendToAllReceivers(templateId, subscribers);
   }
 
   public void sendToReceivers(final long templateId, final List<String> receivers) {
-    send(templateId, receivers);
+    sendToAllReceivers(templateId, receivers);
   }
 
-  private void send(final long templateId, final List<String> receivers) {
+  public void sendSubscribeMail(final String email, final String authCode) {
+    final String content = httpRequestService.getBody(greetingUrl);
+
+    final EmailSenderDto senderDto = EmailSenderDto.builder()
+        .to(email)
+        .subject("인증을 완료해주세요!")
+        .content(content.replace("{name}", email)
+            .replace("{url}", domain + "/subscribe/regist/" + email + "/" + authCode))
+        .build();
+
+    sendMail(email, senderDto);
+  }
+
+
+  private void sendToAllReceivers(final long templateId, final List<String> receivers) {
 
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
     final String content = httpRequestService.getBody(emailTemplate.getUrl());
@@ -50,11 +71,15 @@ public class SendEmailService {
           .content(content.replace("{name}", name))
           .build();
 
-      final SendEmailResult sendEmailResult = amazonSimpleEmailService
-          .sendEmail(senderDto.toSendRequestDto());
-
-      sendingResultMustSuccess(sendEmailResult, receiver);
+      sendMail(receiver, senderDto);
     }
+  }
+
+  private void sendMail(final String receiver, final EmailSenderDto senderDto) {
+    final SendEmailResult sendEmailResult = amazonSimpleEmailService
+        .sendEmail(senderDto.toSendRequestDto());
+
+    sendingResultMustSuccess(sendEmailResult, receiver);
   }
 
 
