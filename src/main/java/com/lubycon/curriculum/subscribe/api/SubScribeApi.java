@@ -46,7 +46,7 @@ public class SubScribeApi {
   public void subscribe(@PathVariable final String email,
       @PathVariable final String authCode) throws IOException {
     subscribeService.subscribe(email, authCode);
-    alertAndMove("구독이 완료되었습니다. <br> 앞으로 코스가 열릴 때 마다 메일 발송이 될 예정입니다.", "https://clelab.io");
+    alertAndMove("구독이 완료되었습니다. \n 앞으로 코스가 열릴 때 마다 메일 발송이 될 예정입니다.", "https://clelab.io");
   }
 
 
