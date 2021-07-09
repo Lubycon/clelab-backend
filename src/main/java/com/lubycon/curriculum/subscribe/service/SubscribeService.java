@@ -46,7 +46,7 @@ public class SubscribeService {
   }
 
   private void authCodeMustBeSame(final String authCode, final Email findEmail) {
-    if (findEmail.authCodeIsSame(authCode)) {
+    if (!findEmail.authCodeIsSame(authCode)) {
       throw new FailedSubscribeException();
     }
   }
