@@ -1,4 +1,4 @@
-domain: https://api.dev.clelab.io/
+domain: https://api.clelab.io
 spring:
   jpa:
     properties:
