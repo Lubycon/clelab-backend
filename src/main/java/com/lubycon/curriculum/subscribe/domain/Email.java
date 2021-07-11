@@ -22,7 +22,22 @@ public class Email {
   @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  public Email(final String email) {
+  @Column(name = "is_subscribe", nullable = false, columnDefinition = "boolean default false")
+  private boolean subscribe;
+
+  @Column(name = "auth_code", nullable = false)
+  private String authCode;
+
+  public Email(final String email, final String authCode) {
     this.email = email;
+    this.authCode = authCode;
+  }
+
+  public boolean authCodeIsSame(final String authCode) {
+    return this.authCode.equals(authCode);
+  }
+
+  public void subscribe() {
+    this.subscribe = true;
   }
 }

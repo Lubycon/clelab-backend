@@ -4,11 +4,9 @@ import static com.lubycon.curriculum.base.util.HtmlResponseUtil.alertAndMove;
 
 import com.lubycon.curriculum.subscribe.dto.SubscribeRequest;
 import com.lubycon.curriculum.subscribe.dto.SubscribeResponse;
-import com.lubycon.curriculum.subscribe.dto.TypeformSubscribeRequest;
 import com.lubycon.curriculum.subscribe.service.SubscribeService;
 import com.lubycon.curriculum.subscribe.validation.SubscribeValidator;
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,33 +27,32 @@ public class SubScribeApi {
 
   private final SubscribeValidator signUpValidator;
 
-  @PostMapping("/subscribe/typeform")
-  public ResponseEntity<Object> typeformSubscribe(
-      @RequestBody final TypeformSubscribeRequest request) {
-
-    subscribeService.subscribe(request.getEmail());
-
-    return ResponseEntity.ok()
-        .build();
-  }
-
   @InitBinder("subscribeRequest")
   public void initBinder(final WebDataBinder webDataBinder) {
     webDataBinder.addValidators(signUpValidator);
   }
 
   @PostMapping("/subscribe")
-  public ResponseEntity<Object> subscribe(
+  public ResponseEntity<Object> sendSubscribeMail(
       @RequestBody @Valid final SubscribeRequest subscribeRequest) {
-    final SubscribeResponse response = subscribeService.subscribe(subscribeRequest.getEmail());
+    final SubscribeResponse response = subscribeService
+        .sendSubscribeMail(subscribeRequest.getEmail());
 
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(response);
   }
 
+  @GetMapping("/subscribe/regist/{email}/{authCode}")
+  public void subscribe(@PathVariable final String email,
+      @PathVariable final String authCode) throws IOException {
+    subscribeService.subscribe(email, authCode);
+    alertAndMove("구독이 완료되었습니다.\\n앞으로 코스가 열릴 때 마다 메일 발송이 될 예정입니다.", "https://clelab.io");
+  }
+
+
   @GetMapping("/subscribe/cancel/{email}/{id}")
-  public void cancelSubscribe(@PathVariable final String email, @PathVariable final Long id,
-      final HttpServletResponse response) throws IOException {
+  public void cancelSubscribe(@PathVariable final String email, @PathVariable final Long id)
+      throws IOException {
     subscribeService.cancelSubscribe(email, id);
     alertAndMove("구독이 해지되었습니다.", "https://clelab.io");
 

@@ -1,8 +1,10 @@
 package com.lubycon.curriculum.subscribe.validation;
 
+import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.dto.SubscribeRequest;
 import com.lubycon.curriculum.subscribe.exception.ConflictEmailException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -26,7 +28,9 @@ public class SubscribeValidator implements Validator {
   }
 
   private void emailMustUnique(final String email) {
-    if (emailRepository.existsByEmail(email)) {
+    final Optional<Email> subscriber = emailRepository.findByEmail(email);
+
+    if (subscriber.isPresent() && subscriber.get().isSubscribe()) {
       throw new ConflictEmailException();
     }
   }
