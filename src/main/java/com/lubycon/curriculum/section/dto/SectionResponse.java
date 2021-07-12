@@ -20,6 +20,9 @@ public class SectionResponse {
   private final int order;
 
   @NotNull
+  private final String thumbnail;
+
+  @NotNull
   private final List<BlogResponse> blogs;
 
   @Nullable
@@ -29,18 +32,21 @@ public class SectionResponse {
   private final PrevSectionResponse prevSection;
 
   @Builder
-  public SectionResponse(@NotNull final String title, @Nullable final String description, final int order,
+  public SectionResponse(@NotNull final String title, @Nullable final String description,
+      final int order,
       @NotNull final List<BlogResponse> blogs, @Nullable final NextSectionResponse nextSection,
-      @Nullable final PrevSectionResponse prevSection) {
+      @Nullable final PrevSectionResponse prevSection, @NotNull final String thumbnail) {
     this.title = title;
     this.description = description;
     this.order = order;
     this.blogs = blogs;
     this.nextSection = nextSection;
     this.prevSection = prevSection;
+    this.thumbnail = thumbnail;
   }
 
-  public static SectionResponse toResponse(final Section section, final PrevSectionResponse prevSection,
+  public static SectionResponse toResponse(final Section section,
+      final PrevSectionResponse prevSection,
       final NextSectionResponse nextSection) {
     return SectionResponse.builder()
         .title(section.getTitle())
@@ -51,6 +57,7 @@ public class SectionResponse {
             .collect(Collectors.toList()))
         .prevSection(prevSection)
         .nextSection(nextSection)
+        .thumbnail(section.getCurriculum().getThumbnail())
         .build();
   }
 }
