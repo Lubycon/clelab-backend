@@ -31,7 +31,7 @@ public class SendEmailFilter implements Filter {
     final HttpServletRequest httpRequest = (HttpServletRequest) request;
     final String sesSecretHeader = httpRequest.getHeader("SES-Secret");
 
-    if (!sesSecretHeader.equals(secretKey)) {
+    if (sesSecretHeader == null || !sesSecretHeader.equals(secretKey)) {
       throw new SesSecretNotEqualsException(sesSecretHeader);
     }
 
