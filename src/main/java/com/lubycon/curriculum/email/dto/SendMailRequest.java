@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.subscribe.dto;
+package com.lubycon.curriculum.email.dto;
 
 import java.util.List;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 public class SendMailRequest {
 
   private long templateId;
-  
+
   private List<String> to;
 }

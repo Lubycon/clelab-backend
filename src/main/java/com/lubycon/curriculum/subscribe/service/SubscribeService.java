@@ -1,8 +1,9 @@
 package com.lubycon.curriculum.subscribe.service;
 
+import com.lubycon.curriculum.email.exception.EmailNotFoundException;
+import com.lubycon.curriculum.email.service.SubscribeAuthEmailService;
 import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.dto.SubscribeResponse;
-import com.lubycon.curriculum.subscribe.exception.EmailNotFoundException;
 import com.lubycon.curriculum.subscribe.exception.FailedCancelSubscribeException;
 import com.lubycon.curriculum.subscribe.exception.FailedSubscribeException;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
@@ -17,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class SubscribeService {
 
   private final EmailRepository emailRepository;
-  private final SendEmailService sendEmailService;
+
+  private final SubscribeAuthEmailService subscribeAuthEmailService;
 
   @Transactional
   public SubscribeResponse sendSubscribeMail(final String email) {
@@ -53,7 +55,7 @@ public class SubscribeService {
   }
 
   private void sendMail(final String email, final String authCode) {
-    sendEmailService.sendSubscribeMail(email, authCode);
+    subscribeAuthEmailService.sendSubscribeMail(email, authCode);
   }
 
   private void idMustBeSame(final Long id, final Email findEmail) {

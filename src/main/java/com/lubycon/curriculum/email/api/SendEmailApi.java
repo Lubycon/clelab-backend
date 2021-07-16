@@ -1,9 +1,8 @@
-package com.lubycon.curriculum.subscribe.api;
+package com.lubycon.curriculum.email.api;
 
-import com.lubycon.curriculum.subscribe.dto.SendMailRequest;
-import com.lubycon.curriculum.subscribe.dto.SendMailToSubscribersRequest;
-import com.lubycon.curriculum.subscribe.service.EmailTesterService;
-import com.lubycon.curriculum.subscribe.service.SendEmailService;
+import com.lubycon.curriculum.email.dto.SendMailToSubscribersRequest;
+import com.lubycon.curriculum.email.service.CourseEmailService;
+import com.lubycon.curriculum.email.service.EmailTesterService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SendEmailApi {
 
-  private final SendEmailService sendEmailService;
+  private final CourseEmailService courseEmailService;
   private final EmailTesterService emailTesterService;
 
   @PostMapping("/mail/testers/{templateId}")
@@ -31,16 +30,7 @@ public class SendEmailApi {
   public ResponseEntity<Object> sendMailToSubscribers(
       @RequestBody @Valid final SendMailToSubscribersRequest request) {
 
-    sendEmailService.sendToAllSubscribers(request.getTemplateId());
-
-    return ResponseEntity.ok().build();
-  }
-
-  @PostMapping("/mail")
-  public ResponseEntity<Object> sendMail(
-      @RequestBody @Valid final SendMailRequest request) {
-
-    sendEmailService.sendToReceivers(request.getTemplateId(), request.getTo());
+    courseEmailService.sendToAllSubscribers(request.getTemplateId());
 
     return ResponseEntity.ok().build();
   }

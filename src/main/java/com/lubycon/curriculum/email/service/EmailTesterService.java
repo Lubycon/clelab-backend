@@ -1,10 +1,9 @@
-package com.lubycon.curriculum.subscribe.service;
+package com.lubycon.curriculum.email.service;
 
-import com.lubycon.curriculum.subscribe.domain.EmailTemplate;
-import com.lubycon.curriculum.subscribe.domain.Tester;
-import com.lubycon.curriculum.subscribe.repository.TesterRepository;
+import com.lubycon.curriculum.email.domain.EmailTemplate;
+import com.lubycon.curriculum.email.domain.Tester;
+import com.lubycon.curriculum.email.repository.TesterRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,32 +13,29 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmailTesterService {
 
   private final TesterRepository testerRepository;
-  private final SendEmailService sendEmailService;
+  private final CourseEmailService sendEmailService;
   private final EmailTemplateService emailTemplateService;
 
   @Transactional
   public void sendToTesters() {
-    final List<String> testers = getTesters();
+    final List<Tester> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplate();
 
     if (!emailTemplate.isAlreadySent()) {
-      sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
+      sendEmailService.sendToTesters(emailTemplate.getId(), testers);
       emailTemplate.sendComplete();
     }
   }
 
   public void sendSpecificTemplateToTesters(final long templateId) {
-    final List<String> testers = getTesters();
+    final List<Tester> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
 
-    sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
+    sendEmailService.sendToTesters(emailTemplate.getId(), testers);
   }
 
-  private List<String> getTesters() {
+  private List<Tester> getTesters() {
     return testerRepository
-        .findAll()
-        .stream()
-        .map(Tester::getEmail)
-        .collect(Collectors.toList());
+        .findAll();
   }
 }
