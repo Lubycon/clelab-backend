@@ -2,9 +2,11 @@ package com.lubycon.curriculum.email.service;
 
 import com.lubycon.curriculum.base.service.HttpRequestService;
 import com.lubycon.curriculum.email.domain.EmailTemplate;
+import com.lubycon.curriculum.email.domain.Tester;
 import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,15 @@ public class CourseEmailService {
 
     sendToAllReceivers(templateId, subscribers);
   }
+
+  public void sendToTesters(final long templateId, final List<Tester> testers) {
+    final List<Email> subscribers = testers.stream()
+        .map(e -> new Email(e.getEmail(), "test"))
+        .collect(Collectors.toList());
+
+    sendToAllReceivers(templateId, subscribers);
+  }
+
 
   private void sendToAllReceivers(final long templateId, final List<Email> receivers) {
 

@@ -4,7 +4,6 @@ import com.lubycon.curriculum.email.domain.EmailTemplate;
 import com.lubycon.curriculum.email.domain.Tester;
 import com.lubycon.curriculum.email.repository.TesterRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,27 +18,24 @@ public class EmailTesterService {
 
   @Transactional
   public void sendToTesters() {
-    final List<String> testers = getTesters();
+    final List<Tester> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplate();
 
     if (!emailTemplate.isAlreadySent()) {
-      sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
+      sendEmailService.sendToTesters(emailTemplate.getId(), testers);
       emailTemplate.sendComplete();
     }
   }
 
   public void sendSpecificTemplateToTesters(final long templateId) {
-    final List<String> testers = getTesters();
+    final List<Tester> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
 
-    sendEmailService.sendToReceivers(emailTemplate.getId(), testers);
+    sendEmailService.sendToTesters(emailTemplate.getId(), testers);
   }
 
-  private List<String> getTesters() {
+  private List<Tester> getTesters() {
     return testerRepository
-        .findAll()
-        .stream()
-        .map(Tester::getEmail)
-        .collect(Collectors.toList());
+        .findAll();
   }
 }
