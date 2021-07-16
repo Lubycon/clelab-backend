@@ -49,7 +49,7 @@ public class CourseEmailService {
       final String content = body.replace("{name}", name)
           .replace("{cancel_url}", domain + "/subscribe/cancel/" + email + "/" + receiver.getId());
 
-      emailSender.sendMail(name, emailTemplate.getSubject(), content);
+      emailSender.sendMail(email, emailTemplate.getSubject(), content);
     }
   }
 
