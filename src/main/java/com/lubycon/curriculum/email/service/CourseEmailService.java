@@ -5,14 +5,16 @@ import com.lubycon.curriculum.email.domain.EmailTemplate;
 import com.lubycon.curriculum.subscribe.domain.Email;
 import com.lubycon.curriculum.subscribe.repository.EmailRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class CourseEmailService {
 
+  @Value("${domain}")
+  private String domain;
 
   private final EmailSender emailSender;
   private final EmailTemplateService emailTemplateService;
@@ -20,27 +22,23 @@ public class CourseEmailService {
   private final EmailRepository emailRepository;
 
   public void sendToAllSubscribers(final long templateId) {
-    final List<String> subscribers = emailRepository.findAllBySubscribe(true)
-        .stream()
-        .map(Email::getEmail)
-        .collect(Collectors.toList());
+    final List<Email> subscribers = emailRepository.findAllBySubscribe(true);
 
     sendToAllReceivers(templateId, subscribers);
   }
 
-  public void sendToReceivers(final long templateId, final List<String> receivers) {
-    sendToAllReceivers(templateId, receivers);
-  }
-
-
-  private void sendToAllReceivers(final long templateId, final List<String> receivers) {
+  private void sendToAllReceivers(final long templateId, final List<Email> receivers) {
 
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
-    final String content = httpRequestService.getBody(emailTemplate.getUrl());
+    final String body = httpRequestService.getBody(emailTemplate.getUrl());
 
-    for (final String receiver : receivers) {
-      final String name = receiver.substring(0, receiver.indexOf('@'));
-      emailSender.sendMail(receiver, emailTemplate.getSubject(), content.replace("{name}", name));
+    for (final Email receiver : receivers) {
+      final String email = receiver.getEmail();
+      final String name = email.substring(0, email.indexOf('@'));
+      final String content = body.replace("{name}", name)
+          .replace("{cancel_url}", domain + "/subscribe/cancel/" + email + "/" + receiver.getId());
+
+      emailSender.sendMail(name, emailTemplate.getSubject(), content);
     }
   }
 

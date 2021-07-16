@@ -1,6 +1,5 @@
 package com.lubycon.curriculum.email.api;
 
-import com.lubycon.curriculum.email.dto.SendMailRequest;
 import com.lubycon.curriculum.email.dto.SendMailToSubscribersRequest;
 import com.lubycon.curriculum.email.service.CourseEmailService;
 import com.lubycon.curriculum.email.service.EmailTesterService;
@@ -32,15 +31,6 @@ public class SendEmailApi {
       @RequestBody @Valid final SendMailToSubscribersRequest request) {
 
     courseEmailService.sendToAllSubscribers(request.getTemplateId());
-
-    return ResponseEntity.ok().build();
-  }
-
-  @PostMapping("/mail")
-  public ResponseEntity<Object> sendMail(
-      @RequestBody @Valid final SendMailRequest request) {
-
-    courseEmailService.sendToReceivers(request.getTemplateId(), request.getTo());
 
     return ResponseEntity.ok().build();
   }
