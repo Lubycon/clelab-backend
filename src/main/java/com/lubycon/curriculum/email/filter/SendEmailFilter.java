@@ -1,6 +1,6 @@
-package com.lubycon.curriculum.subscribe.filter;
+package com.lubycon.curriculum.email.filter;
 
-import com.lubycon.curriculum.subscribe.exception.SesSecretNotEqualsException;
+import com.lubycon.curriculum.email.exception.SesSecretNotEqualsException;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

@@ -1,8 +1,8 @@
-package com.lubycon.curriculum.subscribe.service;
+package com.lubycon.curriculum.email.service;
 
-import com.lubycon.curriculum.subscribe.domain.EmailTemplate;
-import com.lubycon.curriculum.subscribe.exception.EmailTemplateNotFoundException;
-import com.lubycon.curriculum.subscribe.repository.EmailTemplateRepository;
+import com.lubycon.curriculum.email.domain.EmailTemplate;
+import com.lubycon.curriculum.email.exception.EmailTemplateNotFoundException;
+import com.lubycon.curriculum.email.repository.EmailTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.subscribe.exception;
+package com.lubycon.curriculum.email.exception;
 
 import com.lubycon.curriculum.base.error.ErrorCode;
 import com.lubycon.curriculum.base.error.exception.EntityNotFoundException;

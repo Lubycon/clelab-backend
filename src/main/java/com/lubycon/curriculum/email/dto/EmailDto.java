@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.subscribe.dto;
+package com.lubycon.curriculum.email.dto;
 
 import lombok.Getter;
 

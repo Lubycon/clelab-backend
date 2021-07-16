@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.subscribe.service;
+package com.lubycon.curriculum.email.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

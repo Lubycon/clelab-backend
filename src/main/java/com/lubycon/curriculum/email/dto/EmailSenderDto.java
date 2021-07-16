@@ -1,4 +1,4 @@
-package com.lubycon.curriculum.subscribe.dto;
+package com.lubycon.curriculum.email.dto;
 
 import com.amazonaws.services.simpleemail.model.Body;
 import com.amazonaws.services.simpleemail.model.Content;
