@@ -43,10 +43,10 @@ class CurriculumServiceTest {
     final List<CurriculumResponse> curriculums = curriculumService.getCurriculums();
 
     // then
-    assertThat(curriculums.size()).isEqualTo(4);
-    assertThat(curriculums.get(0).getTitle()).isEqualTo(3 + "번 커리큘럼의 제목");
-    assertThat(curriculums.get(0).getDescription()).isEqualTo(3 + "번 커리큘럼의 설명");
-    assertThat(curriculums.get(0).getThumbnail()).isEqualTo(3 + "번 커리큘럼의 썸네일");
+    assertThat(curriculums.size()).isEqualTo(3);
+    assertThat(curriculums.get(0).getTitle()).isEqualTo("3번 커리큘럼의 제목");
+    assertThat(curriculums.get(0).getDescription()).isEqualTo("3번 커리큘럼의 설명");
+    assertThat(curriculums.get(0).getThumbnail()).isEqualTo("3번 커리큘럼의 썸네일");
   }
 
   @Sql("/make-curriculum.sql")
