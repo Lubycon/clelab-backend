@@ -38,6 +38,9 @@ public class Curriculum extends BaseTimeEntity {
   @Column(name = "thumbnail", nullable = false)
   private String thumbnail;
 
+  @Column(name = "is_show", nullable = false)
+  private boolean show;
+
   @OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
   private IntroSection introSection;
 
