@@ -48,6 +48,12 @@ public class CurriculumService {
     return CurriculumSectionsResponseV2.toResponse(curriculum);
   }
 
+  @Transactional(readOnly = true)
+  public CurriculumSectionsResponseV2 getCoursesSectionsV2(final String courseSlug) {
+    final Curriculum curriculum = findBySlug(courseSlug);
+    return CurriculumSectionsResponseV2.toResponse(curriculum);
+  }
+
 
   private List<Curriculum> findAll() {
     return curriculumRepository.findAllCurriculums();
@@ -56,6 +62,11 @@ public class CurriculumService {
   private Curriculum findById(final long id) {
     return curriculumRepository.findById(id)
         .orElseThrow(() -> new CurriculumNotFoundException(id + "에 해당하는 커리큘럼이 없습니다."));
+  }
+
+  private Curriculum findBySlug(final String slug) {
+    return curriculumRepository.findByUrlSlug(slug)
+        .orElseThrow(() -> new CurriculumNotFoundException(slug + "에 해당하는 커리큘럼이 없습니다."));
   }
 
 }
