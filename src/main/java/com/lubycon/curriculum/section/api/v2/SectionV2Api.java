@@ -17,13 +17,20 @@ public class SectionV2Api {
   private final CurriculumService curriculumService;
   private final SectionService sectionService;
 
-
   @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections"})
   public ResponseEntity<CurriculumSectionsResponseV2> getAllSections(
       @PathVariable final long curriculumId) {
 
     return ResponseEntity.ok()
         .body(curriculumService.getCurriculumSectionsV2(curriculumId));
+  }
+
+  @GetMapping(value = {"/v2/courses/{courseSlug}/sections"})
+  public ResponseEntity<CurriculumSectionsResponseV2> getAllSectionsBySlug(
+      @PathVariable final String courseSlug) {
+
+    return ResponseEntity.ok()
+        .body(curriculumService.getCoursesSectionsV2(courseSlug));
   }
 
   @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections/{sectionId}"})
@@ -34,5 +41,12 @@ public class SectionV2Api {
         .body(sectionService.findSection(curriculumId, sectionId));
   }
 
+  @GetMapping(value = {"/v2/courses/{courseSlug}/sections/{sectionSlug}"})
+  public ResponseEntity<SectionResponse> getSectionBySlug(
+      @PathVariable final String courseSlug, @PathVariable final String sectionSlug) {
+
+    return ResponseEntity.ok()
+        .body(sectionService.findSectionBySlug(courseSlug, sectionSlug));
+  }
 
 }

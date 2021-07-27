@@ -25,9 +25,25 @@ public class SectionService {
     return SectionResponse.toResponse(section, prevSection, nextSection);
   }
 
+  @Transactional(readOnly = true)
+  public SectionResponse findSectionBySlug(final String curriculumSlug, final String sectionSlug) {
+    final Section section = findBySlug(curriculumSlug, sectionSlug);
+    final PrevSectionResponse prevSection = findPrevSection(section.getCurriculum().getId(),
+        section.getOrder());
+    final NextSectionResponse nextSection = findNextSection(section.getCurriculum().getId(),
+        section.getOrder());
+
+    return SectionResponse.toResponse(section, prevSection, nextSection);
+  }
+
   private Section findById(final long curriculumId, final long sectionId) {
     return sectionRepository.findByCurriculumIdAndId(curriculumId, sectionId)
         .orElseThrow(() -> new SectionNotFoundException(sectionId + "에 해당하는 섹션이 없습니다."));
+  }
+
+  private Section findBySlug(final String curriculumSlug, final String sectionSlug) {
+    return sectionRepository.findSectionBySlug(curriculumSlug, sectionSlug)
+        .orElseThrow(() -> new SectionNotFoundException(sectionSlug + "에 해당하는 섹션이 없습니다."));
   }
 
   private NextSectionResponse findNextSection(final long curriculumId, final int order) {
