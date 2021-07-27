@@ -46,4 +46,12 @@ class SectionRepositoryTest extends RepositoryTest {
     assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 3번 섹션입니다.");
   }
 
+  @Sql("/make-curriculum.sql")
+  @DisplayName("findSectionBySlug() 테스트")
+  @Test
+  public void findSectionBySlugTest() {
+    final Section findSection = sectionRepository.findSectionBySlug("curriculum-1", "one").get();
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션1");
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 1번 섹션입니다.");
+  }
 }
