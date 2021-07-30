@@ -71,6 +71,28 @@ class CurriculumServiceTest {
   }
 
   @Sql("/make-curriculum.sql")
+  @DisplayName("slug를 통해 특정 코스 정보를 가져온다.")
+  @Test
+  public void getCoursesBySlug() {
+    // when
+    final CurriculumSectionsResponseV2 response = curriculumService
+        .getCoursesSectionsV2("curriculum-1");
+
+    // then
+    final CurriculumInfoResponse curriculum = response.getCurriculum();
+    assertThat(curriculum.getTitle()).isEqualTo("1번 커리큘럼의 제목");
+
+    final IntroResponseV2 intro = response.getIntro();
+    assertThat(intro.getDescription().getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
+    assertThat(intro.getDescription().getFooter()).isEqualTo("푸터");
+
+    final SectionTitlesResponse section = response.getSections().get(2);
+    assertThat(section.getOrder()).isEqualTo(2);
+    assertThat(section.getId()).isEqualTo(300);
+    assertThat(section.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
+  }
+
+  @Sql("/make-curriculum.sql")
   @DisplayName("커리큘럼이 없으면 예외가 발생한다.")
   @Test
   public void curriculumNotFoundTest() {

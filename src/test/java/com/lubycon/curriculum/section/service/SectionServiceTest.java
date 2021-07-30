@@ -36,6 +36,22 @@ class SectionServiceTest {
   }
 
   @Sql("/make-curriculum.sql")
+  @DisplayName("slug를 통해 특정 섹션의 내용을 가져온다.")
+  @Test
+  public void getSectionBySlugTest() {
+    // when
+    final SectionResponse findSection = sectionService.findSectionBySlug("curriculum-1", "three");
+
+    // then
+    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
+    assertThat(findSection.getOrder()).isEqualTo(2);
+    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 3번 섹션입니다.");
+    assertThat(findSection.getBlogs().get(0).getTitle()).isEqualTo("3번 섹션의 블로그 제목1");
+    assertThat(findSection.getPrevSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
+    assertThat(findSection.getNextSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션4");
+  }
+
+  @Sql("/make-curriculum.sql")
   @DisplayName("섹션이 없으면 예외가 발생한다.")
   @Test
   public void curriculumNotFoundTest() {

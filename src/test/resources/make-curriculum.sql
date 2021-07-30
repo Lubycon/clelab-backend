@@ -1,9 +1,9 @@
-INSERT INTO curriculum (id, title, description, thumbnail, is_show) VALUES (1, '1번 커리큘럼의 제목', '1번 커리큘럼의 설명', '1번 커리큘럼의 썸네일', 1)
+INSERT INTO curriculum (id, title, description, thumbnail, is_show, url_slug) VALUES (1, '1번 커리큘럼의 제목', '1번 커리큘럼의 설명', '1번 커리큘럼의 썸네일', 1, 'curriculum-1')
 
-INSERT INTO section (id, curriculum_id, order_by, title, description) VALUES (1, 1, 0, '1번 커리큘럼의 섹션1', '1번 커리큘럼의 1번 섹션입니다.')
-INSERT INTO section (id, curriculum_id, order_by, title, description) VALUES (2, 1, 1, '1번 커리큘럼의 섹션2', '1번 커리큘럼의 2번 섹션입니다.')
-INSERT INTO section (id, curriculum_id, order_by, title, description) VALUES (105, 1, 3, '1번 커리큘럼의 섹션4', '1번 커리큘럼의 4번 섹션입니다.')
-INSERT INTO section (id, curriculum_id, order_by, title, description) VALUES (300, 1, 2, '1번 커리큘럼의 섹션3', '1번 커리큘럼의 3번 섹션입니다.')
+INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (1, 1, 0, '1번 커리큘럼의 섹션1', '1번 커리큘럼의 1번 섹션입니다.', 'one')
+INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (2, 1, 1, '1번 커리큘럼의 섹션2', '1번 커리큘럼의 2번 섹션입니다.', 'two')
+INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (105, 1, 3, '1번 커리큘럼의 섹션4', '1번 커리큘럼의 4번 섹션입니다.', 'four')
+INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (300, 1, 2, '1번 커리큘럼의 섹션3', '1번 커리큘럼의 3번 섹션입니다.', 'three')
 
 INSERT INTO blog (id, section_id, title, link) VALUES (1, 1, '1번 섹션의 블로그 제목1', '1번 섹션의 블로그 링크1')
 INSERT INTO blog (id, section_id, title, link) VALUES (2, 1, '1번 섹션의 블로그 제목2', '1번 섹션의 블로그 링크2')

@@ -14,9 +14,12 @@ public class SectionTitlesResponse {
 
   private final int order;
 
+  private final String urlSlug;
+
   public SectionTitlesResponse(final Section section) {
     this.id = section.getId();
     this.title = section.getTitle();
     this.order = section.getOrder();
+    this.urlSlug = section.getUrlSlug();
   }
 }

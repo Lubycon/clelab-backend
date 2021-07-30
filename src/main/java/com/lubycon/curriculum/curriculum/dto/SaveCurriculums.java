@@ -14,6 +14,7 @@ public class SaveCurriculums {
   private String title;
   private String description;
   private String thumbnail;
+  private String urlSlug;
   private List<SaveSections> sections;
   private IntroSectionDto intro;
 
@@ -31,6 +32,7 @@ public class SaveCurriculums {
   public Curriculum toEntity() {
     return Curriculum.builder()
         .title(title)
+
         .description(description)
         .thumbnail(thumbnail)
         .introSection(intro == null ? null : intro.toEntity())

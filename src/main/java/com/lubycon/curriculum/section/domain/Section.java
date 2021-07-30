@@ -40,6 +40,9 @@ public class Section extends BaseTimeEntity {
   @Column(name = "is_hide", nullable = false, columnDefinition = "boolean default false")
   private boolean hide;
 
+  @Column(name = "url_slug")
+  private String urlSlug;
+
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
   private List<Blog> blogs;
 

@@ -19,10 +19,14 @@ public class CurriculumResponse {
   @NotNull
   private final String thumbnail;
 
+  @NotNull
+  private final String urlSlug;
+
   public CurriculumResponse(final Curriculum curriculum) {
     this.id = curriculum.getId();
     this.title = curriculum.getTitle();
     this.description = curriculum.getDescription();
     this.thumbnail = curriculum.getThumbnail();
+    this.urlSlug = curriculum.getUrlSlug();
   }
 }
