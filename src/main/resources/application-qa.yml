@@ -8,3 +8,8 @@ spring:
 aws:
   ses:
     greeting-url: https://elasticbeanstalk-ap-northeast-2-752764006166.s3.ap-northeast-2.amazonaws.com/resources/templates/greeting.html
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
