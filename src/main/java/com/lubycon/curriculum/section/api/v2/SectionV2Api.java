@@ -17,7 +17,8 @@ public class SectionV2Api {
   private final CurriculumService curriculumService;
   private final SectionService sectionService;
 
-  @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections"})
+  @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections",
+      "/curriculums/{curriculumId}/sections"})
   public ResponseEntity<CurriculumSectionsResponseV2> getAllSections(
       @PathVariable final long curriculumId) {
 
@@ -25,7 +26,7 @@ public class SectionV2Api {
         .body(curriculumService.getCurriculumSectionsV2(curriculumId));
   }
 
-  @GetMapping(value = {"/v2/courses/{courseSlug}/sections"})
+  @GetMapping(value = {"/v2/courses/{courseSlug}/sections", "/courses/{courseSlug}/sections"})
   public ResponseEntity<CurriculumSectionsResponseV2> getAllSectionsBySlug(
       @PathVariable final String courseSlug) {
 
@@ -33,7 +34,8 @@ public class SectionV2Api {
         .body(curriculumService.getCoursesSectionsV2(courseSlug));
   }
 
-  @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections/{sectionId}"})
+  @GetMapping(value = {"/v2/curriculums/{curriculumId}/sections/{sectionId}",
+      "/curriculums/{curriculumId}/sections/{sectionId}"})
   public ResponseEntity<SectionResponse> getSection(
       @PathVariable final long curriculumId, @PathVariable final long sectionId) {
 
@@ -41,7 +43,8 @@ public class SectionV2Api {
         .body(sectionService.findSection(curriculumId, sectionId));
   }
 
-  @GetMapping(value = {"/v2/courses/{courseSlug}/sections/{sectionSlug}"})
+  @GetMapping(value = {"/v2/courses/{courseSlug}/sections/{sectionSlug}",
+      "/courses/{courseSlug}/sections/{sectionSlug}"})
   public ResponseEntity<SectionResponse> getSectionBySlug(
       @PathVariable final String courseSlug, @PathVariable final String sectionSlug) {
 
