@@ -1,19 +1,17 @@
 package com.lubycon.curriculum.curriculum.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.lubycon.curriculum.blog.domain.Blog;
 import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.curriculum.dto.CurriculumInfoResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
+import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
+import com.lubycon.curriculum.curriculum.dto.IntroResponse;
 import com.lubycon.curriculum.curriculum.dto.SaveBlog;
 import com.lubycon.curriculum.curriculum.dto.SaveCurriculums;
 import com.lubycon.curriculum.curriculum.dto.SaveSections;
 import com.lubycon.curriculum.curriculum.dto.SectionTitlesResponse;
-import com.lubycon.curriculum.curriculum.dto.v2.CurriculumSectionsResponseV2;
-import com.lubycon.curriculum.curriculum.dto.v2.IntroResponseV2;
-import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import com.lubycon.curriculum.curriculum.repository.CurriculumRepository;
 import com.lubycon.curriculum.section.domain.Section;
 import java.util.Arrays;
@@ -49,40 +47,20 @@ class CurriculumServiceTest {
     assertThat(curriculums.get(0).getThumbnail()).isEqualTo("3번 커리큘럼의 썸네일");
   }
 
-  @Sql("/make-curriculum.sql")
-  @DisplayName("특정 커리큘럼의 정보를 가져온다.")
-  @Test
-  public void getCurriculumsTest() {
-    // when
-    final CurriculumSectionsResponseV2 response = curriculumService.getCurriculumSectionsV2(1);
-
-    // then
-    final CurriculumInfoResponse curriculum = response.getCurriculum();
-    assertThat(curriculum.getTitle()).isEqualTo("1번 커리큘럼의 제목");
-
-    final IntroResponseV2 intro = response.getIntro();
-    assertThat(intro.getDescription().getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
-    assertThat(intro.getDescription().getFooter()).isEqualTo("푸터");
-
-    final SectionTitlesResponse section = response.getSections().get(2);
-    assertThat(section.getOrder()).isEqualTo(2);
-    assertThat(section.getId()).isEqualTo(300);
-    assertThat(section.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
-  }
 
   @Sql("/make-curriculum.sql")
   @DisplayName("slug를 통해 특정 코스 정보를 가져온다.")
   @Test
   public void getCoursesBySlug() {
     // when
-    final CurriculumSectionsResponseV2 response = curriculumService
-        .getCoursesSectionsV2("curriculum-1");
+    final CurriculumSectionsResponse response = curriculumService
+        .getCoursesSections("curriculum-1");
 
     // then
     final CurriculumInfoResponse curriculum = response.getCurriculum();
     assertThat(curriculum.getTitle()).isEqualTo("1번 커리큘럼의 제목");
 
-    final IntroResponseV2 intro = response.getIntro();
+    final IntroResponse intro = response.getIntro();
     assertThat(intro.getDescription().getSummary()).isEqualTo("1번 커리큘럼의 핵심 설명");
     assertThat(intro.getDescription().getFooter()).isEqualTo("푸터");
 
@@ -92,18 +70,6 @@ class CurriculumServiceTest {
     assertThat(section.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
   }
 
-  @Sql("/make-curriculum.sql")
-  @DisplayName("커리큘럼이 없으면 예외가 발생한다.")
-  @Test
-  public void curriculumNotFoundTest() {
-    // given
-    final long notExistId = 1222;
-
-    // when
-    assertThatThrownBy(() -> curriculumService.getCurriculumSections(notExistId))
-        .isInstanceOf(CurriculumNotFoundException.class)
-        .hasMessageContaining(notExistId + "에 해당하는 커리큘럼이 없습니다."); // then
-  }
 
   @DisplayName("커리큘럼을 저장한다.")
   @Test

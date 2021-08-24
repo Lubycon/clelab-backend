@@ -24,7 +24,7 @@ class CurriculumApiTest extends ApiTest {
   @Test
   public void getCurriculumTest() throws Exception {
     // given
-    final String url = "/v2/curriculums";
+    final String url = "/curriculums";
 
     // when
     final ResultActions resultActions = mockMvc.perform(get(url));
@@ -41,7 +41,7 @@ class CurriculumApiTest extends ApiTest {
   @Test
   public void saveCurriculumTest() throws Exception {
     // given
-    final String url = "/v2/curriculums";
+    final String url = "/curriculums";
 
     final String curriculumTitle = "React";
     final String curriculumDescription = "React는 전 세계에서 가장 많이 사용하는 UI 라이브러리입니다.";
@@ -78,7 +78,7 @@ class CurriculumApiTest extends ApiTest {
   @Test
   public void saveCurriculum400Test() throws Exception {
     // given
-    final String url = "/v2/curriculums";
+    final String url = "/curriculums";
 
     final List<BlogRequest> blogs = Arrays.asList(new BlogRequest("제목1", "url1"));
 
