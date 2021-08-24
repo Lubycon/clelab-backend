@@ -8,3 +8,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+aws:
+  ses:
+    greeting-url: https://clelab-resource.s3.ap-northeast-2.amazonaws.com/templates/greeting.html
