@@ -20,11 +20,14 @@ public class SubscribeAuthEmailService {
 
   private final static String SUBJECT = "인증을 완료해주세요!";
 
-  public void sendSubscribeMail(final String email, final String authCode) {
-    final String content = httpRequestService.getBody(greetingUrl)
+  public String getGreetingMailBody(final String email, final String authCode) {
+    return httpRequestService.getBody(greetingUrl)
         .replace("{name}", email)
         .replace("{url}", domain + "/subscribe/regist/" + email + "/" + authCode);
+  }
 
+  public void sendSubscribeMail(final String email, final String authCode) {
+    final String content = getGreetingMailBody(email, authCode);
     emailSender.sendMail(email, SUBJECT, content);
   }
 

@@ -18,4 +18,9 @@ aws:
     access-key: acesss-key
     secret-key: secret-key
     custom-secret: secret
-    greeting-url: https://elasticbeanstalk-ap-northeast-2-752764006166.s3.ap-northeast-2.amazonaws.com/resources/templates/greeting.html
+    greeting-url: https://clelab-resource.s3.ap-northeast-2.amazonaws.com/templates/greeting.html
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
