@@ -59,6 +59,7 @@ class SectionApiTest extends ApiTest {
         .andExpect(jsonPath("$.order").value(2))
         .andExpect(jsonPath("$.description").value("1번 커리큘럼의 3번 섹션입니다."))
         .andExpect(jsonPath("$.blogs[0].title").value("3번 섹션의 블로그 제목1"))
+        .andExpect(jsonPath("$.blogs[1].title").value("3번 섹션의 블로그 제목2"))
         .andExpect(jsonPath("$.blogs[0].clelabPick").value(false))
         .andExpect(jsonPath("$.blogs[1].clelabPick").value(true))
         .andExpect(jsonPath("$.nextSection.title").value("1번 커리큘럼의 섹션4"))

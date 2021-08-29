@@ -33,6 +33,9 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "clelab_pick", nullable = false)
   private boolean clelabPick;
 
+  @Column(name = "order_by", nullable = false)
+  private Integer orderBy;
+
   @ManyToOne
   @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;
