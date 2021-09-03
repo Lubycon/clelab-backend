@@ -36,6 +36,9 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "order_by", nullable = false)
   private Integer orderBy;
 
+  @Column(name = "writer")
+  private String writer;
+
   @ManyToOne
   @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;
