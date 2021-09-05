@@ -10,8 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(final CorsRegistry registry) {
     registry.addMapping("/**")
-        .allowedOrigins("http://localhost:8080", "http://localhost:3000", "https://clelab.io",
-            "https://qa.clelab.io", "https://*.clelab.io", "https://www.clelab.io/",
-            "https://www.qa.clelab.io/");
+        .allowedOrigins("*");
   }
 }
