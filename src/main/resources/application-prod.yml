@@ -8,3 +8,8 @@ spring:
 aws:
   ses:
     greeting-url: https://clelab-resource.s3.ap-northeast-2.amazonaws.com/templates/greeting.html
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
