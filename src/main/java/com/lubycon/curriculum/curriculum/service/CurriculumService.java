@@ -4,7 +4,6 @@ import com.lubycon.curriculum.curriculum.domain.Curriculum;
 import com.lubycon.curriculum.curriculum.dto.CurriculumResponse;
 import com.lubycon.curriculum.curriculum.dto.CurriculumSectionsResponse;
 import com.lubycon.curriculum.curriculum.dto.SaveCurriculums;
-import com.lubycon.curriculum.curriculum.dto.v2.CurriculumSectionsResponseV2;
 import com.lubycon.curriculum.curriculum.exception.CurriculumNotFoundException;
 import com.lubycon.curriculum.curriculum.repository.CurriculumRepository;
 import java.util.List;
@@ -36,22 +35,11 @@ public class CurriculumService {
     return savedCurriculum.getId();
   }
 
-  @Transactional(readOnly = true)
-  public CurriculumSectionsResponse getCurriculumSections(final long curriculumId) {
-    final Curriculum curriculum = findById(curriculumId);
-    return CurriculumSectionsResponse.toResponse(curriculum);
-  }
 
   @Transactional(readOnly = true)
-  public CurriculumSectionsResponseV2 getCurriculumSectionsV2(final long curriculumId) {
-    final Curriculum curriculum = findById(curriculumId);
-    return CurriculumSectionsResponseV2.toResponse(curriculum);
-  }
-
-  @Transactional(readOnly = true)
-  public CurriculumSectionsResponseV2 getCoursesSectionsV2(final String courseSlug) {
+  public CurriculumSectionsResponse getCoursesSections(final String courseSlug) {
     final Curriculum curriculum = findBySlug(courseSlug);
-    return CurriculumSectionsResponseV2.toResponse(curriculum);
+    return CurriculumSectionsResponse.toResponse(curriculum);
   }
 
 

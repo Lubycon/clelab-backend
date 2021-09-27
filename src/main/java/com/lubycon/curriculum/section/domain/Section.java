@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,6 +45,7 @@ public class Section extends BaseTimeEntity {
   private String urlSlug;
 
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
+  @OrderBy("orderBy ASC")
   private List<Blog> blogs;
 
   @ManyToOne

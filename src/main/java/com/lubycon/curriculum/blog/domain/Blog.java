@@ -30,14 +30,25 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "link", nullable = false)
   private String link;
 
+  @Column(name = "clelab_pick", nullable = false)
+  private boolean clelabPick;
+
+  @Column(name = "order_by", nullable = false)
+  private Integer orderBy;
+
+  @Column(name = "writer")
+  private String writer;
+
   @ManyToOne
   @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;
 
   @Builder
-  public Blog(String title, String link, Section section) {
+  public Blog(final String title, final String link, final boolean clelabPick,
+      final Section section) {
     this.title = title;
     this.link = link;
+    this.clelabPick = clelabPick;
     this.section = section;
   }
 }

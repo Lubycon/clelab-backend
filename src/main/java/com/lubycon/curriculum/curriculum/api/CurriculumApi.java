@@ -19,14 +19,14 @@ public class CurriculumApi {
 
   private final CurriculumService curriculumService;
 
-  @GetMapping(value = {"/v2/curriculums", "/v1/curriculums", "/curriculums"})
+  @GetMapping("/curriculums")
   public ResponseEntity<List<CurriculumResponse>> getAllCurriculums() {
 
     return ResponseEntity.ok()
         .body(curriculumService.getCurriculums());
   }
 
-  @PostMapping(value = {"/v2/curriculums", "/v1/curriculums", "/curriculums"})
+  @PostMapping("/curriculums")
   public ResponseEntity<Long> addCurriculums(
       @RequestBody @Valid final AddCurriculumsRequest curriculumsRequest) {
     return ResponseEntity.status(HttpStatus.CREATED)

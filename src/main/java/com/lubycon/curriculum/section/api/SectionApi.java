@@ -14,26 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SectionApi {
 
-  private final SectionService sectionService;
   private final CurriculumService curriculumService;
+  private final SectionService sectionService;
 
-  @GetMapping(value = {"/v1/curriculums/{curriculumId}/sections/{sectionId}",
-      "curriculums/{curriculumId}/sections/{sectionId}"})
-  public ResponseEntity<SectionResponse> getSection(
-      @PathVariable final long curriculumId, @PathVariable final long sectionId) {
-
-    return ResponseEntity.ok()
-        .body(sectionService.findSection(curriculumId, sectionId));
-  }
-
-  @GetMapping(value = {"/v1/curriculums/{curriculumId}/sections",
-      "/curriculums/{curriculumId}/sections"})
-  public ResponseEntity<CurriculumSectionsResponse> getAllSections(
-      @PathVariable final long curriculumId) {
+  @GetMapping("/courses/{courseSlug}/sections")
+  public ResponseEntity<CurriculumSectionsResponse> getAllSectionsBySlug(
+      @PathVariable final String courseSlug) {
 
     return ResponseEntity.ok()
-        .body(curriculumService.getCurriculumSections(curriculumId));
+        .body(curriculumService.getCoursesSections(courseSlug));
   }
 
+  @GetMapping("/courses/{courseSlug}/sections/{sectionSlug}")
+  public ResponseEntity<SectionResponse> getSectionBySlug(
+      @PathVariable final String courseSlug, @PathVariable final String sectionSlug) {
+
+    return ResponseEntity.ok()
+        .body(sectionService.findSectionBySlug(courseSlug, sectionSlug));
+  }
 
 }

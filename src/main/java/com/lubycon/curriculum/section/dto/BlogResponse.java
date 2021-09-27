@@ -13,8 +13,14 @@ public class BlogResponse {
   @NotNull
   private final String link;
 
-  public BlogResponse(Blog blog) {
+  private final boolean clelabPick;
+
+  private final String writer;
+
+  public BlogResponse(final Blog blog) {
     this.title = blog.getTitle();
     this.link = blog.getLink();
+    this.clelabPick = blog.isClelabPick();
+    this.writer = blog.getWriter();
   }
 }
