@@ -39,6 +39,9 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "writer")
   private String writer;
 
+  @Column(name = "clap_count")
+  private int clapCount;
+
   @ManyToOne
   @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;

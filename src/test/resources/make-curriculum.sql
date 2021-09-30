@@ -5,12 +5,12 @@ INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) 
 INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (105, 1, 3, '1번 커리큘럼의 섹션4', '1번 커리큘럼의 4번 섹션입니다.', 'four')
 INSERT INTO section (id, curriculum_id, order_by, title, description, url_slug) VALUES (300, 1, 2, '1번 커리큘럼의 섹션3', '1번 커리큘럼의 3번 섹션입니다.', 'three')
 
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (1, 1, '1번 섹션의 블로그 제목1', '1번 섹션의 블로그 링크1', 0, 1, 'a')
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (2, 1, '1번 섹션의 블로그 제목2', '1번 섹션의 블로그 링크2', 0, 2, 'b')
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (3, 2, '2번 섹션의 블로그 제목1', '2번 섹션의 블로그 링크1', 0, 1, 'c')
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (4, 300, '3번 섹션의 블로그 제목1', '3번 섹션의 블로그 링크1', 0, 1, 'a')
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (5, 300, '3번 섹션의 블로그 제목3', '3번 섹션의 블로그 링크3', 1, 3, 'a')
-INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer) VALUES (6, 300, '3번 섹션의 블로그 제목2', '3번 섹션의 블로그 링크2', 1, 2, 'a')
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (1, 1, '1번 섹션의 블로그 제목1', '1번 섹션의 블로그 링크1', 0, 1, 'a', 0)
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (2, 1, '1번 섹션의 블로그 제목2', '1번 섹션의 블로그 링크2', 0, 2, 'b', 0)
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (3, 2, '2번 섹션의 블로그 제목1', '2번 섹션의 블로그 링크1', 0, 1, 'c', 0)
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (4, 300, '3번 섹션의 블로그 제목1', '3번 섹션의 블로그 링크1', 0, 1, 'a', 0)
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (5, 300, '3번 섹션의 블로그 제목3', '3번 섹션의 블로그 링크3', 1, 3, 'a', 0)
+INSERT INTO blog (id, section_id, title, link, clelab_pick, order_by, writer, clap_count) VALUES (6, 300, '3번 섹션의 블로그 제목2', '3번 섹션의 블로그 링크2', 1, 2, 'a', 0)
 
 INSERT INTO major_company_frequency (id, title, naver, kakao, line, coupang, woowabros, toss, daangn, yanolja) VALUES (0, '메이저 회사는 React를 얼마나 사용하고 있을까요?', true, false, true, true, true, false, true, true)
 
