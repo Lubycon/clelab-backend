@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,6 +40,10 @@ public class Blog extends BaseTimeEntity {
   @Column(name = "writer")
   private String writer;
 
+  @Version
+  @Column(name = "clap_count")
+  private int clapCount;
+
   @ManyToOne
   @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;
@@ -50,5 +55,9 @@ public class Blog extends BaseTimeEntity {
     this.link = link;
     this.clelabPick = clelabPick;
     this.section = section;
+  }
+
+  public void clap() {
+    clapCount++;
   }
 }
