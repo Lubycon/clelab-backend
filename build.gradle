@@ -26,7 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-context'
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.1.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.0.1.RELEASE'
     implementation 'com.querydsl:querydsl-jpa'
     implementation "org.mariadb.jdbc:mariadb-java-client"
     implementation 'com.h2database:h2'
