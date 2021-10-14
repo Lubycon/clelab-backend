@@ -1,5 +1,7 @@
 domain: http://localhost:8080
 spring:
+  application:
+    name: clelab
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -14,12 +16,6 @@ spring:
         format_sql: true
     open-in-view: false
 aws:
-  secretsmanager:
-    name: clelab
-  cloud:
-    aws:
-      region:
-        static: ap-northeast-2
   ses:
     access-key: acesss-key
     secret-key: secret-key
