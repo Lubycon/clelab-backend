@@ -1,0 +1,9 @@
+domain: https://api.dev.clelab.io
+spring:
+  application:
+    name: clelab
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
