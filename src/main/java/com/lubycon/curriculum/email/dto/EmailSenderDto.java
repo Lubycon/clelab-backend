@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class EmailSenderDto {
 
-  public static final String FROM_EMAIL = "Team Clelab<admin@clelab.io>";
+  public static final String SENDER = "Team Clelab<admin@clelab.io>";
 
   private final String to;
   private final String subject;
@@ -35,7 +35,7 @@ public class EmailSenderDto {
             .withHtml(createContent(this.content)));
 
     return new SendEmailRequest()
-        .withSource(FROM_EMAIL)
+        .withSource(SENDER)
         .withDestination(destination)
         .withMessage(message);
   }

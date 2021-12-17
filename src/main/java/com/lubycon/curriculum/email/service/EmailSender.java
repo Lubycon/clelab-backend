@@ -29,12 +29,15 @@ public class EmailSender {
   }
 
 
-  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult,
-      final String receiver) {
-    if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
+  private void sendingResultMustSuccess(final SendEmailResult result, final String receiver) {
+    if (!successSendMail(result)) {
       log.error("메일 전송 실패 : {}", receiver);
-      log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
+      log.error("{}", result.getSdkResponseMetadata().toString());
     }
+  }
+
+  private boolean successSendMail(final SendEmailResult sendEmailResult) {
+    return sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() == 200;
   }
 
 }
