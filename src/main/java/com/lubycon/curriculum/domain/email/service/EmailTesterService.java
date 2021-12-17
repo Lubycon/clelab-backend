@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class EmailTesterService {
 
   private final TesterRepository testerRepository;
-  private final OpenCourseSendEmailService sendEmailService;
+  private final CourseSendEmailService sendEmailService;
   private final EmailTemplateService emailTemplateService;
 
   public void sendSpecificTemplateToTesters(final long templateId) {

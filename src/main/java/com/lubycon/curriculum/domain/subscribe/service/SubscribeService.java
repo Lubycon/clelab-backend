@@ -1,10 +1,11 @@
 package com.lubycon.curriculum.domain.subscribe.service;
 
+import static com.lubycon.curriculum.domain.subscribe.domain.Email.subscriberEmail;
+
 import com.lubycon.curriculum.domain.email.exception.EmailNotFoundException;
 import com.lubycon.curriculum.domain.email.service.SubscribeAuthEmailService;
 import com.lubycon.curriculum.domain.subscribe.domain.Email;
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeResponse;
-import com.lubycon.curriculum.domain.subscribe.exception.FailedCancelSubscribeException;
 import com.lubycon.curriculum.domain.subscribe.exception.FailedSubscribeException;
 import com.lubycon.curriculum.domain.subscribe.repository.EmailRepository;
 import java.util.Optional;
@@ -41,27 +42,14 @@ public class SubscribeService {
     subscriber.subscribe();
   }
 
-  public void cancelSubscribe(final String email, final Long id) {
-    final Email findEmail = getByEmail(email);
-
-    idMustBeSame(id, findEmail);
-    emailRepository.delete(findEmail);
-  }
-
   private void createEmailAndSendMail(final String email) {
     final String authCode = RandomStringUtils.randomAlphabetic(6);
-    emailRepository.save(new Email(email, authCode));
+    emailRepository.save(subscriberEmail(email, authCode));
     sendMail(email, authCode);
   }
 
   private void sendMail(final String email, final String authCode) {
     subscribeAuthEmailService.sendSubscribeMail(email, authCode);
-  }
-
-  private void idMustBeSame(final Long id, final Email findEmail) {
-    if (findEmail == null || !findEmail.getId().equals(id)) {
-      throw new FailedCancelSubscribeException();
-    }
   }
 
   private void authCodeMustBeSame(final String authCode, final Email findEmail) {

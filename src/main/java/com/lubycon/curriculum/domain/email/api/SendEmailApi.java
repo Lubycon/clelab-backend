@@ -1,8 +1,8 @@
 package com.lubycon.curriculum.domain.email.api;
 
 import com.lubycon.curriculum.domain.email.dto.SendMailToSubscribersRequest;
+import com.lubycon.curriculum.domain.email.service.CourseSendEmailService;
 import com.lubycon.curriculum.domain.email.service.EmailTesterService;
-import com.lubycon.curriculum.domain.email.service.OpenCourseSendEmailService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SendEmailApi {
 
-  private final OpenCourseSendEmailService openCourseSendEmailService;
+  private final CourseSendEmailService courseSendEmailService;
   private final EmailTesterService emailTesterService;
 
   @PostMapping("/mail/testers/{templateId}")
@@ -30,7 +30,7 @@ public class SendEmailApi {
   public ResponseEntity<Object> sendMailToSubscribers(
       @RequestBody @Valid final SendMailToSubscribersRequest request) {
 
-    openCourseSendEmailService.sendToAllSubscribers(request.getTemplateId());
+    courseSendEmailService.sendToAllSubscribers(request.getTemplateId());
 
     return ResponseEntity.ok().build();
   }

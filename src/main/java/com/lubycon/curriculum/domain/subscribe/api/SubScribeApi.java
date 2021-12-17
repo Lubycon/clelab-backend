@@ -5,6 +5,7 @@ import static com.lubycon.curriculum.base.util.JavascriptUtil.alertAndMove;
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeRequest;
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeResponse;
 import com.lubycon.curriculum.domain.subscribe.service.SubscribeService;
+import com.lubycon.curriculum.domain.subscribe.service.UnsubscribeService;
 import com.lubycon.curriculum.domain.subscribe.validation.SubscribeValidator;
 import java.io.IOException;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class SubScribeApi {
 
   public static final String CLELAB_HOME_URL = "https://clelab.io";
   private final SubscribeService subscribeService;
+  private final UnsubscribeService unsubscribeService;
 
   private final SubscribeValidator signUpValidator;
 
@@ -54,7 +56,7 @@ public class SubScribeApi {
   @GetMapping("/subscribe/cancel/{email}/{id}")
   public void cancelSubscribe(@PathVariable final String email, @PathVariable final Long id)
       throws IOException {
-    subscribeService.cancelSubscribe(email, id);
+    unsubscribeService.unsubscribe(email, id);
     alertAndMove("구독이 해지되었습니다.", CLELAB_HOME_URL);
 
   }

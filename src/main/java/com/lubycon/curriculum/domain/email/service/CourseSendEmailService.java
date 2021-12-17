@@ -1,5 +1,7 @@
 package com.lubycon.curriculum.domain.email.service;
 
+import static com.lubycon.curriculum.domain.subscribe.domain.Email.testerEmail;
+
 import com.lubycon.curriculum.base.service.HttpRequestService;
 import com.lubycon.curriculum.domain.email.domain.EmailTemplate;
 import com.lubycon.curriculum.domain.email.domain.Tester;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class OpenCourseSendEmailService {
+public class CourseSendEmailService {
 
   @Value("${domain}")
   private String domain;
@@ -31,7 +33,7 @@ public class OpenCourseSendEmailService {
 
   public void sendToTesters(final long templateId, final List<Tester> testers) {
     final List<Email> subscribers = testers.stream()
-        .map(e -> new Email(e.getEmail(), "test"))
+        .map(e -> testerEmail(e.getEmail()))
         .collect(Collectors.toList());
 
     sendToAllReceivers(templateId, subscribers);
