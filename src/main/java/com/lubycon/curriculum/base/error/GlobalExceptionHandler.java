@@ -1,6 +1,6 @@
 package com.lubycon.curriculum.base.error;
 
-import static com.lubycon.curriculum.base.util.HtmlResponseUtil.alertAndMove;
+import static com.lubycon.curriculum.base.util.JavascriptUtil.alertAndMove;
 
 import com.lubycon.curriculum.base.error.exception.BusinessException;
 import com.lubycon.curriculum.base.error.exception.HtmlBusinessException;

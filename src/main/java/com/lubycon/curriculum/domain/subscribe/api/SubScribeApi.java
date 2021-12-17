@@ -1,6 +1,6 @@
 package com.lubycon.curriculum.domain.subscribe.api;
 
-import static com.lubycon.curriculum.base.util.HtmlResponseUtil.alertAndMove;
+import static com.lubycon.curriculum.base.util.JavascriptUtil.alertAndMove;
 
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeRequest;
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeResponse;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SubScribeApi {
 
+  public static final String CLELAB_HOME_URL = "https://clelab.io";
   private final SubscribeService subscribeService;
 
   private final SubscribeValidator signUpValidator;
@@ -54,7 +55,7 @@ public class SubScribeApi {
   public void cancelSubscribe(@PathVariable final String email, @PathVariable final Long id)
       throws IOException {
     subscribeService.cancelSubscribe(email, id);
-    alertAndMove("구독이 해지되었습니다.", "https://clelab.io");
+    alertAndMove("구독이 해지되었습니다.", CLELAB_HOME_URL);
 
   }
 }
