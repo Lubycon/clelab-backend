@@ -3,7 +3,7 @@ package com.lubycon.curriculum.domain.subscribe.service;
 import static com.lubycon.curriculum.domain.subscribe.domain.Email.subscriberEmail;
 
 import com.lubycon.curriculum.domain.email.exception.EmailNotFoundException;
-import com.lubycon.curriculum.domain.email.service.SubscribeAuthEmailService;
+import com.lubycon.curriculum.domain.email.service.SubscribeAuthService;
 import com.lubycon.curriculum.domain.subscribe.domain.Email;
 import com.lubycon.curriculum.domain.subscribe.dto.SubscribeResponse;
 import com.lubycon.curriculum.domain.subscribe.exception.FailedSubscribeException;
@@ -20,7 +20,7 @@ public class SubscribeService {
 
   private final EmailRepository emailRepository;
 
-  private final SubscribeAuthEmailService subscribeAuthEmailService;
+  private final SubscribeAuthService subscribeAuthService;
 
   @Transactional
   public SubscribeResponse sendSubscribeMail(final String email) {
@@ -49,7 +49,7 @@ public class SubscribeService {
   }
 
   private void sendMail(final String email, final String authCode) {
-    subscribeAuthEmailService.sendSubscribeMail(email, authCode);
+    subscribeAuthService.sendSubscribeMail(email, authCode);
   }
 
   private void authCodeMustBeSame(final String authCode, final Email findEmail) {

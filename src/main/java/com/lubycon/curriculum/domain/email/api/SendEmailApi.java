@@ -21,7 +21,7 @@ public class SendEmailApi {
   @PostMapping("/mail/testers/{templateId}")
   public ResponseEntity<Object> sendMailToTester(@PathVariable final long templateId) {
 
-    emailTesterService.sendSpecificTemplateToTesters(templateId);
+    emailTesterService.sendMailToTestersByTemplateId(templateId);
 
     return ResponseEntity.ok().build();
   }

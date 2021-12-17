@@ -15,7 +15,7 @@ public class EmailTesterService {
   private final CourseSendEmailService sendEmailService;
   private final EmailTemplateService emailTemplateService;
 
-  public void sendSpecificTemplateToTesters(final long templateId) {
+  public void sendMailToTestersByTemplateId(final long templateId) {
     final List<Tester> testers = getTesters();
     final EmailTemplate emailTemplate = emailTemplateService.getEmailTemplateById(templateId);
 
