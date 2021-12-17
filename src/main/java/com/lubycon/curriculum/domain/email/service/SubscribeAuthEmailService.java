@@ -1,7 +1,6 @@
 package com.lubycon.curriculum.domain.email.service;
 
 import com.lubycon.curriculum.base.service.HttpRequestService;
-import com.lubycon.curriculum.infra.email.AWSEmailSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class SubscribeAuthEmailService {
   @Value("${domain}")
   private String domain;
 
-  private final AWSEmailSender AWSEmailSender;
+  private final EmailService emailService;
   private final HttpRequestService httpRequestService;
 
   private final static String SUBJECT = "인증을 완료해주세요!";
@@ -29,7 +28,7 @@ public class SubscribeAuthEmailService {
 
   public void sendSubscribeMail(final String email, final String authCode) {
     final String content = getGreetingMailBody(email, authCode);
-    AWSEmailSender.sendMail(email, SUBJECT, content);
+    emailService.sendMail(email, SUBJECT, content);
   }
 
 }

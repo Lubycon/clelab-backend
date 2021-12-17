@@ -5,7 +5,6 @@ import com.lubycon.curriculum.domain.email.domain.EmailTemplate;
 import com.lubycon.curriculum.domain.email.domain.Tester;
 import com.lubycon.curriculum.domain.subscribe.domain.Email;
 import com.lubycon.curriculum.domain.subscribe.repository.EmailRepository;
-import com.lubycon.curriculum.infra.email.AWSEmailSender;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +13,12 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CourseEmailService {
+public class OpenCourseSendEmailService {
 
   @Value("${domain}")
   private String domain;
 
-  private final AWSEmailSender AWSEmailSender;
+  private final EmailService emailService;
   private final EmailTemplateService emailTemplateService;
   private final HttpRequestService httpRequestService;
   private final EmailRepository emailRepository;
@@ -50,7 +49,7 @@ public class CourseEmailService {
       final String content = body.replace("{name}", name)
           .replace("{cancel_url}", domain + "/subscribe/cancel/" + email + "/" + receiver.getId());
 
-      AWSEmailSender.sendMail(email, emailTemplate.getSubject(), content);
+      emailService.sendMail(email, emailTemplate.getSubject(), content);
     }
   }
 
