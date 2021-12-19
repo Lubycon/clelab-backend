@@ -33,7 +33,7 @@ public class JavascriptUtil {
   }
 
   private static String getHtml(final String message, final String url) {
-    return String.format("location.replace('%s');</script>" +
-        "location.replace('%s');</script>", message, url);
+    return String.format("<script>alert('%s'); "
+        + "location.replace('%s');</script>", message, url);
   }
 }
