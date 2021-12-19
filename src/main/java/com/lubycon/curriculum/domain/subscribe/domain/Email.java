@@ -30,8 +30,8 @@ public class Email {
   private String authCode;
 
   private Email(final String email, final String authCode) {
-    Assert.notNull(email, "email must be not null");
-    Assert.notNull(authCode, "authCode must be not null");
+    Assert.notNull(email, "email은 null이 될 수 없습니다.");
+    Assert.notNull(authCode, "authCode는 null이 될 수 없습니다.");
     this.email = email;
     this.authCode = authCode;
   }
