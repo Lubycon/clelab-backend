@@ -8,7 +8,6 @@ plugins {
 group = 'com.lubycon'
 version = '1.0'
 sourceCompatibility = '1.8'
-ext['log4j2.version'] = '2.15.0'
 
 configurations {
     compileOnly {
