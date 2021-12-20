@@ -49,6 +49,7 @@ public class CourseSendEmailService {
       final String email = receiver.getEmail();
       final String name = email.substring(0, email.indexOf('@'));
       final String content = body.replace("{name}", name)
+          .replace("{id}", String.valueOf(receiver.getId()))
           .replace("{cancel_url}", domain + "/subscribe/cancel/" + email + "/" + receiver.getId());
 
       emailService.sendMail(email, emailTemplate.getSubject(), content);
