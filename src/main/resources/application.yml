@@ -1,5 +1,7 @@
 domain: http://localhost:8080
 spring:
+  application:
+    name: clelab
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
