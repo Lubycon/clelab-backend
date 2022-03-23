@@ -52,6 +52,9 @@ public class Section extends BaseTimeEntity {
   @JoinColumn(name = "curriculum_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Curriculum curriculum;
 
+  @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
+  private List<QuizData> quizData;
+
   @Builder
   public Section(final String title, final String description, final Integer order,
       final Curriculum curriculum, final List<Blog> blogs) {
