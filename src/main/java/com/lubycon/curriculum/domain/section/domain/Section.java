@@ -53,7 +53,7 @@ public class Section extends BaseTimeEntity {
   private Curriculum curriculum;
 
   @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
-  private List<QuizData> quizData;
+  private List<QuizQuestion> quiz;
 
   @Builder
   public Section(final String title, final String description, final Integer order,
