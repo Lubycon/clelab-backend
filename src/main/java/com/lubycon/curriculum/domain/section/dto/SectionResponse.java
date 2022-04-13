@@ -1,5 +1,6 @@
 package com.lubycon.curriculum.domain.section.dto;
 
+import com.lubycon.curriculum.domain.curriculum.dto.QuizResponse;
 import com.lubycon.curriculum.domain.section.domain.Section;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,11 +32,15 @@ public class SectionResponse {
   @Nullable
   private final PrevSectionResponse prevSection;
 
+  @Nullable
+  private final List<QuizResponse> quizzes;
+
   @Builder
   public SectionResponse(@NotNull final String title, @Nullable final String description,
       final int order,
       @NotNull final List<BlogResponse> blogs, @Nullable final NextSectionResponse nextSection,
-      @Nullable final PrevSectionResponse prevSection, @NotNull final String thumbnail) {
+      @Nullable final PrevSectionResponse prevSection, @NotNull final String thumbnail,
+      @Nullable final List<QuizResponse> quizzes) {
     this.title = title;
     this.description = description;
     this.order = order;
@@ -43,9 +48,11 @@ public class SectionResponse {
     this.nextSection = nextSection;
     this.prevSection = prevSection;
     this.thumbnail = thumbnail;
+    this.quizzes = quizzes;
   }
 
   public static SectionResponse toResponse(final Section section,
+      final List<QuizResponse> quizzes,
       final PrevSectionResponse prevSection,
       final NextSectionResponse nextSection) {
     return SectionResponse.builder()
@@ -58,6 +65,7 @@ public class SectionResponse {
         .prevSection(prevSection)
         .nextSection(nextSection)
         .thumbnail(section.getCurriculum().getThumbnail())
+        .quizzes(quizzes)
         .build();
   }
 }

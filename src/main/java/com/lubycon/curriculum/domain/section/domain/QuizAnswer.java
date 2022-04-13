@@ -28,7 +28,7 @@ public class QuizAnswer extends BaseTimeEntity {
   @Column(name = "is_answer", nullable = false)
   private boolean answer;
 
-  @Column(name = "order")
+  @Column(name = "order_by")
   private Integer order;
 
   @ManyToOne

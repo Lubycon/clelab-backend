@@ -30,10 +30,6 @@ public class QuizQuestion extends BaseTimeEntity {
   private Long id;
 
   @Enumerated(value = EnumType.STRING)
-  @Column(name = "type", nullable = false)
-  private String type;
-
-  @Enumerated(value = EnumType.STRING)
   @Column(name = "quiz_type", nullable = false)
   private QuizType quizType;
 
@@ -41,7 +37,7 @@ public class QuizQuestion extends BaseTimeEntity {
   private String message;
 
   @ManyToOne
-  @JoinColumn(name = "quiz_id", referencedColumnName = "id", insertable = false, updatable = false)
+  @JoinColumn(name = "section_id", referencedColumnName = "id", insertable = false, updatable = false)
   private Section section;
 
   @OrderBy("order asc")

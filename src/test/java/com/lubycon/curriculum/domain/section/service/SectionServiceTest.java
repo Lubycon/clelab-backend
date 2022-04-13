@@ -20,22 +20,6 @@ class SectionServiceTest {
   SectionService sectionService;
 
   @Sql("/make-curriculum.sql")
-  @DisplayName("특정 섹션의 내용을 가져온다.")
-  @Test
-  public void getSectionTest() {
-    // when
-    final SectionResponse findSection = sectionService.findSection(1, 300);
-
-    // then
-    assertThat(findSection.getTitle()).isEqualTo("1번 커리큘럼의 섹션3");
-    assertThat(findSection.getOrder()).isEqualTo(2);
-    assertThat(findSection.getDescription()).isEqualTo("1번 커리큘럼의 3번 섹션입니다.");
-    assertThat(findSection.getBlogs().get(0).getTitle()).isEqualTo("3번 섹션의 블로그 제목1");
-    assertThat(findSection.getPrevSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
-    assertThat(findSection.getNextSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션4");
-  }
-
-  @Sql("/make-curriculum.sql")
   @DisplayName("slug를 통해 특정 섹션의 내용을 가져온다.")
   @Test
   public void getSectionBySlugTest() {
@@ -49,6 +33,7 @@ class SectionServiceTest {
     assertThat(findSection.getBlogs().get(0).getTitle()).isEqualTo("3번 섹션의 블로그 제목1");
     assertThat(findSection.getPrevSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션2");
     assertThat(findSection.getNextSection().getTitle()).isEqualTo("1번 커리큘럼의 섹션4");
+
   }
 
   @Sql("/make-curriculum.sql")
@@ -56,12 +41,11 @@ class SectionServiceTest {
   @Test
   public void curriculumNotFoundTest() {
     // given
-    final long notExistId = 1222;
+    final String sectionSlug = "not found";
 
     // when
-    assertThatThrownBy(() -> sectionService.findSection(1, notExistId))
-        .isInstanceOf(SectionNotFoundException.class)
-        .hasMessageContaining(notExistId + "에 해당하는 섹션이 없습니다."); // then
+    assertThatThrownBy(() -> sectionService.findSectionBySlug("curriculum-1", sectionSlug))
+        .isInstanceOf(SectionNotFoundException.class); // then
   }
 
 }
