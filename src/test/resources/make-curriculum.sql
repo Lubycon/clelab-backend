@@ -25,3 +25,12 @@ INSERT INTO statistical_info (id, intro_section_id, title, description) VALUES (
 INSERT INTO statistical_value (id, statistical_info_id, keyword, value, course_topic) VALUES (0, 0, 'React', '220만', true)
 INSERT INTO statistical_value (id, statistical_info_id, keyword, value, course_topic) VALUES (1, 0, 'Angular', '77만', false)
 INSERT INTO statistical_value (id, statistical_info_id, keyword, value, course_topic) VALUES (2, 0, 'Vue', '55만', false)
+
+INSERT INTO quiz_question (id, section_id, quiz_type, message) VALUES (1, 300, 'MULTIPLE_CHOICE', '질문1')
+INSERT INTO quiz_question (id, section_id, quiz_type, message) VALUES (2, 300, 'MULTIPLE_CHOICE', '질문2')
+
+INSERT INTO quiz_answer (id, quiz_id, message, is_answer, order_by) VALUES (1, 1, '1보기 1', true, 1)
+INSERT INTO quiz_answer (id, quiz_id, message, is_answer, order_by) VALUES (2, 1, '1보기 2', false, 2)
+INSERT INTO quiz_answer (id, quiz_id, message, is_answer, order_by) VALUES (3, 1, '1보기 3', false, 3)
+INSERT INTO quiz_answer (id, quiz_id, message, is_answer, order_by) VALUES (4, 1, '1보기 4', false, 4)
+INSERT INTO quiz_answer (id, quiz_id, message, is_answer, order_by) VALUES (5, 2, '2보기 1', true, 1)
